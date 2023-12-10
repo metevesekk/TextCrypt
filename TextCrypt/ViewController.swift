@@ -54,7 +54,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 self?.tableView.reloadData()
             }
         }
-        present(noteDetailVC, animated: true)
+        let navigationController = UINavigationController(rootViewController: noteDetailVC)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -77,11 +79,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 self?.tableView.reloadData()
             }
         }
-        present(noteDetailVC, animated: true)
+        let navigationController = UINavigationController(rootViewController: noteDetailVC)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
 
     // ... [Diğer TableView DataSource ve Delegate metotları] ...
 }
-
-// NoteDetailViewController sınıfı ve diğer ilgili kodlar aynı kalacak.
-
