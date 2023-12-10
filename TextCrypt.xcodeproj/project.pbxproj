@@ -17,6 +17,7 @@
 		357FBB7C2B264F560090F785 /* TextCryptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357FBB7B2B264F560090F785 /* TextCryptTests.swift */; };
 		357FBB862B264F560090F785 /* TextCryptUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357FBB852B264F560090F785 /* TextCryptUITests.swift */; };
 		357FBB882B264F560090F785 /* TextCryptUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357FBB872B264F560090F785 /* TextCryptUITestsLaunchTests.swift */; };
+		357FBB952B264F820090F785 /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357FBB942B264F820090F785 /* NoteDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		357FBB812B264F560090F785 /* TextCryptUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TextCryptUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		357FBB852B264F560090F785 /* TextCryptUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCryptUITests.swift; sourceTree = "<group>"; };
 		357FBB872B264F560090F785 /* TextCryptUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCryptUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		357FBB942B264F820090F785 /* NoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				357FBB612B264F540090F785 /* AppDelegate.swift */,
 				357FBB632B264F540090F785 /* SceneDelegate.swift */,
 				357FBB652B264F540090F785 /* ViewController.swift */,
+				357FBB942B264F820090F785 /* NoteDetailViewController.swift */,
 				357FBB672B264F540090F785 /* Main.storyboard */,
 				357FBB6D2B264F560090F785 /* Assets.xcassets */,
 				357FBB6F2B264F560090F785 /* LaunchScreen.storyboard */,
@@ -263,6 +266,7 @@
 			files = (
 				357FBB662B264F540090F785 /* ViewController.swift in Sources */,
 				357FBB6C2B264F540090F785 /* TextCrypt.xcdatamodeld in Sources */,
+				357FBB952B264F820090F785 /* NoteDetailViewController.swift in Sources */,
 				357FBB622B264F540090F785 /* AppDelegate.swift in Sources */,
 				357FBB642B264F540090F785 /* SceneDelegate.swift in Sources */,
 			);

@@ -11,12 +11,27 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        // Pencereyi oluştur
+        window = UIWindow(frame: UIScreen.main.bounds)
+
+        // ViewController örneğini oluştur
+        let viewController = ViewController()
+
+        // Navigasyon kontrolörünü oluştur ve kök görünüm kontrolörü olarak ayarla
+        let navigationController = UINavigationController(rootViewController: viewController)
+
+        // Pencereye navigasyon kontrolörünü atayın
+        window?.rootViewController = navigationController
+
+        // Pencereyi görünür yap
+        window?.makeKeyAndVisible()
+
         return true
     }
+
 
     // MARK: UISceneSession Lifecycle
 
