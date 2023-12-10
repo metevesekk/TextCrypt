@@ -40,7 +40,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         textView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
         textView.backgroundColor = .black
         textView.textColor = .white
-        textView.font = UIFont.systemFont(ofSize: 18)
+        textView.font = UIFont.systemFont(ofSize: 22)
 
         // Klavye için "Done" tuşunu ayarla
         textView.returnKeyType = .done
@@ -53,7 +53,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
             buttonStackView.addArrangedSubview(doneButton)
 
             buttonStackView.axis = .horizontal
-            buttonStackView.distribution = .fillEqually
+            buttonStackView.distribution = .fill
             buttonStackView.spacing = 70
             buttonStackView.translatesAutoresizingMaskIntoConstraints = false
             buttonStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -13).isActive = true
@@ -91,9 +91,17 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         doneButton.setTitleColor(.systemYellow, for: .normal)
         doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
     }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        doneButton.isHidden = false    // Butonu tekrar göster
+        doneButton.isEnabled = true    // Butonu etkinleştir
+    }
+
 
       @objc func doneButtonTapped() {
           textView.resignFirstResponder() // Klavyeyi kapatır
+          doneButton.isHidden = true
+          doneButton.isEnabled = false
       }
 
     @objc func backButtonTapped() {

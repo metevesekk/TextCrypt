@@ -17,6 +17,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         setupTableView()
         setupCreateNoteButton()
+        view.backgroundColor = .black
+        tableView.backgroundColor = .black
     }
 
     func setupTableView() {
@@ -25,7 +27,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50), // Buton için yer bırak
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor)
@@ -35,13 +37,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     func setupCreateNoteButton() {
         view.addSubview(createNoteButton)
-        createNoteButton.setTitle("Not Oluştur", for: .normal)
+    //    createNoteButton.setTitle("Not Oluştur", for: .normal)
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 50, weight: .regular, scale: .default)
+        let openLockSymbol = UIImage(systemName: "plus", withConfiguration: symbolConfiguration)
+        createNoteButton.setImage(openLockSymbol, for: .normal)
+        createNoteButton.tintColor = .black
+        createNoteButton.backgroundColor = .systemYellow
+        createNoteButton.layer.cornerRadius = 35
         createNoteButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            createNoteButton.heightAnchor.constraint(equalToConstant: 40),
-            createNoteButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
-            createNoteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-            createNoteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+        createNoteButton.heightAnchor.constraint(equalToConstant: 70),
+        createNoteButton.widthAnchor.constraint(equalToConstant: 70),
+        createNoteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+        createNoteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -145)
         ])
         createNoteButton.addTarget(self, action: #selector(createNoteButtonTapped), for: .touchUpInside)
     }
@@ -66,6 +74,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = notes[indexPath.row]
+        cell.backgroundColor = .black
+        cell.textLabel?.textColor = .white
         return cell
     }
 
