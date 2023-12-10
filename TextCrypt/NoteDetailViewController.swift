@@ -11,20 +11,23 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
 
     var textView = UITextView()
     var decryptButton = UIButton()
-    var saveButton = UIButton()
-    var isEncrypted = true // Notun şu anki durumunu tutar
+    var isEncrypted = true
     var noteContent: String?
     var dismissAction: (() -> Void)?
+    var backButton = UIButton()
+    var doneButton = UIButton()
+    var buttonStackView = UIStackView()
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .black
 
         setupTextView()
         setupDecryptButton()
-        setupSaveButton() // Yeni butonu kur
+        setupButtonStackView()
     }
+    
     
 
     func setupTextView() {
@@ -32,27 +35,35 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         textView.delegate = self
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-        textView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 37).isActive = true
         textView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         textView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
-        textView.backgroundColor = UIColor(white: 0.95, alpha: 1) // Çok açık gri renk
+        textView.backgroundColor = .black
+        textView.textColor = .white
+        textView.font = UIFont.systemFont(ofSize: 18)
 
         // Klavye için "Done" tuşunu ayarla
         textView.returnKeyType = .done
     }
     
-    func setupSaveButton() {
-           view.addSubview(saveButton)
-           saveButton.translatesAutoresizingMaskIntoConstraints = false
-           saveButton.bottomAnchor.constraint(equalTo: decryptButton.topAnchor, constant: -10).isActive = true
-           saveButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-           saveButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
-           saveButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    func setupButtonStackView() {
+            view.addSubview(buttonStackView)
+            buttonStackView.addArrangedSubview(backButton)
+            buttonStackView.addArrangedSubview(UIView())
+            buttonStackView.addArrangedSubview(doneButton)
 
-           saveButton.setTitle("Kaydet", for: .normal)
-           saveButton.backgroundColor = .systemBlue
-           saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
-       }
+            buttonStackView.axis = .horizontal
+            buttonStackView.distribution = .fillEqually
+            buttonStackView.spacing = 70
+            buttonStackView.translatesAutoresizingMaskIntoConstraints = false
+            buttonStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -13).isActive = true
+            buttonStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+            buttonStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+            buttonStackView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+
+            setupBackButton()
+            setupDoneButton()
+        }
 
 
     func setupDecryptButton() {
@@ -63,9 +74,33 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         decryptButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         decryptButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
-        decryptButton.setTitle("Şifreyi Aç", for: .normal)
-        decryptButton.backgroundColor = .systemBlue
-        decryptButton.addTarget(self, action: #selector(decryptButtonTapped), for: .touchUpInside)
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 24, weight: .regular, scale: .default)
+        let openLockSymbol = UIImage(systemName: "lock.open", withConfiguration: symbolConfiguration)
+           decryptButton.setImage(openLockSymbol, for: .normal)
+           decryptButton.tintColor = .systemYellow // Sembolün rengini ayarla
+    }
+    
+    func setupBackButton() {
+        backButton.setTitle("Geri", for: .normal)
+        backButton.setTitleColor(.systemYellow, for: .normal)
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+    }
+
+    func setupDoneButton() {
+        doneButton.setTitle("Bitti", for: .normal)
+        doneButton.setTitleColor(.systemYellow, for: .normal)
+        doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
+    }
+
+      @objc func doneButtonTapped() {
+          textView.resignFirstResponder() // Klavyeyi kapatır
+      }
+
+    @objc func backButtonTapped() {
+        noteContent = textView.text
+        dismiss(animated: true) {
+            self.dismissAction?()
+        }
     }
     
     
@@ -76,13 +111,6 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
             encryptText()
         }
     }
-    
-    @objc func saveButtonTapped() {
-           noteContent = textView.text
-           dismiss(animated: true) {
-               self.dismissAction?()
-           }
-       }
 
 
     
@@ -111,8 +139,8 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
     // Klavyenin "Done" tuşuna basıldığında çağrılacak fonksiyon
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" { // "Done" tuşuna basıldı mı kontrol et
-            textView.resignFirstResponder() // Klavyeyi kapat
-            return false
+         //   textView.resignFirstResponder() // Klavyeyi kapat
+            return true
         }
         return true
     }
