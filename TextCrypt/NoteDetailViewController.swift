@@ -18,7 +18,6 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
     var doneButton = UIButton()
     var buttonStackView = UIStackView()
     var encryptButton = UIButton()
-    var isDone = false
 
 
     override func viewDidLoad() {
@@ -81,7 +80,6 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
     }
     
     func setupEncryptButton() {
-        if !isDone {
             view.addSubview(encryptButton)
             let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 24, weight: .regular, scale: .default)
             let openLockSymbol = UIImage(systemName: "lock.open", withConfiguration: symbolConfiguration)
@@ -92,7 +90,6 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
             encryptButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -13).isActive = true
             encryptButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
             encryptButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        }
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -107,7 +104,6 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         textView.resignFirstResponder() // Klavyeyi kapatır
         doneButton.isHidden = true
         doneButton.isEnabled = false
-        isDone = false
         encryptButton.isEnabled = true
         encryptButton.isHidden = false
       }
@@ -118,7 +114,6 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         } else {
             encryptText()
         }
-        isDone = true
     }
 
 
