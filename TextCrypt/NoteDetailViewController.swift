@@ -17,6 +17,8 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
     var backButton = UIButton()
     var doneButton = UIButton()
     var buttonStackView = UIStackView()
+    var encryptButton = UIButton()
+    var isDone = false
 
 
     override func viewDidLoad() {
@@ -24,8 +26,9 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         view.backgroundColor = .black
 
         setupTextView()
-        setupDecryptButton()
         setupButtonStackView()
+        setupEncryptButton()
+        doneButton.isHidden = true
     }
     
     
@@ -51,7 +54,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
             buttonStackView.addArrangedSubview(backButton)
             buttonStackView.addArrangedSubview(UIView())
             buttonStackView.addArrangedSubview(doneButton)
-
+        
             buttonStackView.axis = .horizontal
             buttonStackView.distribution = .fill
             buttonStackView.spacing = 70
@@ -64,21 +67,6 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
             setupBackButton()
             setupDoneButton()
         }
-
-
-    func setupDecryptButton() {
-        view.addSubview(decryptButton)
-        decryptButton.translatesAutoresizingMaskIntoConstraints = false
-        decryptButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
-        decryptButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-        decryptButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
-        decryptButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-
-        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 24, weight: .regular, scale: .default)
-        let openLockSymbol = UIImage(systemName: "lock.open", withConfiguration: symbolConfiguration)
-           decryptButton.setImage(openLockSymbol, for: .normal)
-           decryptButton.tintColor = .systemYellow // Sembolün rengini ayarla
-    }
     
     func setupBackButton() {
         backButton.setTitle("Geri", for: .normal)
@@ -92,31 +80,52 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
     }
     
+    func setupEncryptButton() {
+        if !isDone {
+            view.addSubview(encryptButton)
+            let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 24, weight: .regular, scale: .default)
+            let openLockSymbol = UIImage(systemName: "lock.open", withConfiguration: symbolConfiguration)
+            encryptButton.setImage(openLockSymbol, for: .normal)
+            encryptButton.translatesAutoresizingMaskIntoConstraints = false
+            encryptButton.tintColor = .systemYellow // Sembolün rengini ayarla
+            encryptButton.addTarget(self, action: #selector(encryptButtonTapped), for: .touchUpInside)
+            encryptButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -13).isActive = true
+            encryptButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+            encryptButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        }
+    }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         doneButton.isHidden = false    // Butonu tekrar göster
-        doneButton.isEnabled = true    // Butonu etkinleştir
+        doneButton.isEnabled = true    // Butonu etkinleştir,
+        encryptButton.isEnabled = false
+        encryptButton.isHidden = true
     }
 
 
       @objc func doneButtonTapped() {
-          textView.resignFirstResponder() // Klavyeyi kapatır
-          doneButton.isHidden = true
-          doneButton.isEnabled = false
+        textView.resignFirstResponder() // Klavyeyi kapatır
+        doneButton.isHidden = true
+        doneButton.isEnabled = false
+        isDone = false
+        encryptButton.isEnabled = true
+        encryptButton.isHidden = false
       }
+    
+    @objc func encryptButtonTapped() {
+        if isEncrypted {
+            presentPasswordAlert(for: .decrypt)
+        } else {
+            encryptText()
+        }
+        isDone = true
+    }
+
 
     @objc func backButtonTapped() {
         noteContent = textView.text
         dismiss(animated: true) {
             self.dismissAction?()
-        }
-    }
-    
-    
-    @objc func decryptButtonTapped() {
-        if isEncrypted {
-            presentPasswordAlert(for: .decrypt)
-        } else {
-            encryptText()
         }
     }
 

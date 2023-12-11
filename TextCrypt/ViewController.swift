@@ -38,7 +38,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func setupCreateNoteButton() {
         view.addSubview(createNoteButton)
     //    createNoteButton.setTitle("Not Oluştur", for: .normal)
-        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 50, weight: .regular, scale: .default)
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 45, weight: .regular, scale: .default)
         let openLockSymbol = UIImage(systemName: "plus", withConfiguration: symbolConfiguration)
         createNoteButton.setImage(openLockSymbol, for: .normal)
         createNoteButton.tintColor = .black
@@ -49,7 +49,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         createNoteButton.heightAnchor.constraint(equalToConstant: 70),
         createNoteButton.widthAnchor.constraint(equalToConstant: 70),
         createNoteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-        createNoteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -145)
+        createNoteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -55)
         ])
         createNoteButton.addTarget(self, action: #selector(createNoteButtonTapped), for: .touchUpInside)
     }
