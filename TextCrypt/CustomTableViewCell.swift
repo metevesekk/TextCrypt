@@ -2,7 +2,7 @@
 //  CustomTableViewCell.swift
 //  TextCrypt
 //
-//  Created by Mete Vesek on 11.12.2023.
+//  Created by Mete Vesek on 14.12.2023.
 //
 
 import UIKit
