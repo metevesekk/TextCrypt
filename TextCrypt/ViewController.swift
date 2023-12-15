@@ -11,7 +11,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     let tableView = UITableView()
     let createNoteButton = UIButton(type: .system) // Not Oluştur butonu
+    let cellSpacing : CGFloat = 8
     var notes = [String]() // Notları saklamak için dizi
+    var indexPath = IndexPath()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +22,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         view.backgroundColor = .black
         tableView.backgroundColor = .black
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData() // TableView'ı yenile
+    }
+
 
     func setupTableView() {
         view.addSubview(tableView)
@@ -79,10 +87,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         cell.textLabel?.text = notes[indexPath.section]
-       // cell.backgroundColor = .black
-        cell.textLabel?.textColor = .white
+        cell.textLabel?.textColor = .systemGray5
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 22)
+        cell.textLabel?.numberOfLines = 3
         cell.backgroundColor = UIColor(displayP3Red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
-       // cell.backgroundColor = UIColor.systemGray
         cell.layer.borderColor = UIColor.black.cgColor
         cell.layer.borderWidth = 1
         cell.layer.cornerRadius = 8
@@ -97,11 +105,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 8 // İstediğiniz boşluk büyüklüğü
+        return cellSpacing // İstediğiniz boşluk büyüklüğü
     }
 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.reloadRows(at: [indexPath], with: .none)
+        if let cell = tableView.cellForRow(at: indexPath) {
+                // Seçildiğinde gösterilecek arka plan rengi için özel UIView oluşturma
+                let selectionColor = UIView()
+                selectionColor.backgroundColor = UIColor(displayP3Red: 0.25, green: 0.25, blue: 0.25, alpha: 1) // İstediğiniz renk tonunu burada ayarlayabilirsiniz.
+                cell.selectedBackgroundView = selectionColor
+
+                // Diğer işlemler...
+            }
         let noteDetailVC = NoteDetailViewController()
         noteDetailVC.textView.text = notes[indexPath.row]
         noteDetailVC.noteContent = notes[indexPath.row]

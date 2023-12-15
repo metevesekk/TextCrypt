@@ -18,6 +18,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
     var doneButton = UIButton()
     var buttonStackView = UIStackView()
     var encryptButton = UIButton()
+    var viewController = ViewController()
 
 
     override func viewDidLoad() {
