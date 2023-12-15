@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let cellSpacing : CGFloat = 8
     var notes = [String]() // Notları saklamak için dizi
     var indexPath = IndexPath()
+    var noteTitles = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,6 +133,4 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }
-
-    // ... [Diğer TableView DataSource ve Delegate metotları] ...
 }

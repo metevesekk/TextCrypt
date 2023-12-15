@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NoteDetailViewController: UIViewController, UITextViewDelegate {
+class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate{
 
     var textView = UITextView()
     var decryptButton = UIButton()
@@ -19,15 +19,19 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
     var buttonStackView = UIStackView()
     var encryptButton = UIButton()
     var viewController = ViewController()
+    var titleTextField : UITextField?
+    var titleTextFieldHeight : CGFloat = 20
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
 
+        setupTitleTextField()
         setupTextView()
         setupButtonStackView()
         setupEncryptButton()
+        titleTextField?.delegate = self
         doneButton.isHidden = true
     }
     
@@ -73,6 +77,30 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         backButton.setTitleColor(.systemYellow, for: .normal)
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
+    
+    func setupTitleTextField() {
+        if titleTextField == nil {
+               titleTextField = createDefaultTextField()
+           }
+        view.addSubview(titleTextField!)
+
+        titleTextField?.translatesAutoresizingMaskIntoConstraints = false
+        titleTextField?.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        titleTextField?.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        titleTextField?.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+
+       // titleTextField?.text = "Başlık Burada"
+        titleTextField?.font = UIFont.systemFont(ofSize: 24)
+        titleTextField?.textColor = .white
+    }
+    
+    func createDefaultTextField() -> UITextField {
+        let textField = UITextField()
+        textField.text = "Başlık"
+        textField.textColor = UIColor(displayP3Red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+        // Diğer varsayılan ayarlarınız burada yer alabilir.
+        return textField
+    }
 
     func setupDoneButton() {
         doneButton.setTitle("Bitti", for: .normal)
@@ -98,6 +126,19 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
         doneButton.isEnabled = true    // Butonu etkinleştir,
         encryptButton.isEnabled = false
         encryptButton.isHidden = true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if let textField = titleTextField, ((titleTextField?.text = "Başlık") != nil){
+            titleTextField?.text = ""
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let titleTextField = titleTextField{
+            textView.becomeFirstResponder()
+        }
+        return true
     }
 
 
