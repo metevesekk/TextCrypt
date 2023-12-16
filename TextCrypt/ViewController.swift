@@ -10,11 +10,14 @@ import UIKit
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     let tableView = UITableView()
-    let createNoteButton = UIButton(type: .system) // Not Oluştur butonu
+    let createNoteButton = UIButton()
     let cellSpacing : CGFloat = 8
-    var notes = [String]() // Notları saklamak için dizi
+    var notes = [String]()
     var indexPath = IndexPath()
     var titles = [String]()
+    var selectedIndexPath: IndexPath?
+    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +25,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         setupCreateNoteButton()
         view.backgroundColor = .black
         tableView.backgroundColor = .black
+        
+        let longPressGestureButton = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressCell))
+        let longPressGestureCell = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressButton))
+        longPressGestureCell.minimumPressDuration = 0.05
+        longPressGestureButton.minimumPressDuration = 0.05
+        
+        tableView.addGestureRecognizer(longPressGestureButton)
+        createNoteButton.addGestureRecognizer(longPressGestureCell)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,6 +88,50 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }
+    
+    @objc func handleLongPressButton(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            UIView.animate(withDuration: 0.025) {
+                self.createNoteButton.transform = CGAffineTransform(scaleX: 0.90, y: 0.90)
+            }
+        } else if gesture.state == .ended || gesture.state == .cancelled {
+            resetButtonSize()
+        }
+    }
+    
+    @objc func handleLongPressCell(gesture: UILongPressGestureRecognizer) {
+        let point = gesture.location(in: tableView)
+        if let indexPath = tableView.indexPathForRow(at: point) {
+            switch gesture.state {
+            case .began:
+                if let cell = tableView.cellForRow(at: indexPath) {
+                    UIView.animate(withDuration: 0.1) {
+                        cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+                    }
+                }
+            case .ended, .changed:
+                resetCellSize(at: indexPath)
+            default:
+                break
+            }
+        }
+    }
+
+    private func resetCellSize(at indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            UIView.animate(withDuration: 0.2) {
+                cell.transform = CGAffineTransform.identity
+            }
+        }
+    }
+    
+    private func resetButtonSize(){
+        UIView.animate(withDuration: 0.025) {
+            self.createNoteButton.transform = CGAffineTransform.identity
+        }
+    }
+
+
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -89,7 +144,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        cell.textLabel?.text = "\(titles[indexPath.section]) \n \(notes[indexPath.section]) "
+        cell.textLabel?.text = "\(titles[indexPath.section]) \n \(notes[indexPath.section])"
         cell.textLabel?.textColor = .systemGray5
         cell.textLabel?.font = UIFont.systemFont(ofSize: 22)
         cell.textLabel?.numberOfLines = 3
@@ -114,14 +169,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.reloadRows(at: [indexPath], with: .none)
-        if let cell = tableView.cellForRow(at: indexPath) {
-                // Seçildiğinde gösterilecek arka plan rengi için özel UIView oluşturma
-                let selectionColor = UIView()
-                selectionColor.backgroundColor = UIColor(displayP3Red: 0.25, green: 0.25, blue: 0.25, alpha: 1) // İstediğiniz renk tonunu burada ayarlayabilirsiniz.
-                cell.selectedBackgroundView = selectionColor
-
-                // Diğer işlemler...
-            }
         let noteDetailVC = NoteDetailViewController()
         noteDetailVC.textView.text = notes[indexPath.row]
         noteDetailVC.textField.text = titles[indexPath.row]
@@ -137,5 +184,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let navigationController = UINavigationController(rootViewController: noteDetailVC)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.backgroundColor = UIColor.darkGray // Daha koyu bir renk
+        }
     }
+/*    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        // Hücrenin seçimi kaldırıldığında orijinal rengine dön
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.backgroundColor = UIColor(displayP3Red: 0.15, green: 0.15, blue: 0.15, alpha: 1) // Orijinal renk
+        }
+    } */
 }
