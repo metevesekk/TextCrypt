@@ -18,8 +18,6 @@
 		357FBB862B264F560090F785 /* TextCryptUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357FBB852B264F560090F785 /* TextCryptUITests.swift */; };
 		357FBB882B264F560090F785 /* TextCryptUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357FBB872B264F560090F785 /* TextCryptUITestsLaunchTests.swift */; };
 		357FBB952B264F820090F785 /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357FBB942B264F820090F785 /* NoteDetailViewController.swift */; };
-		35F92E662B2CC3E500A82975 /* NoteText+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F92E642B2CC3E500A82975 /* NoteText+CoreDataClass.swift */; };
-		35F92E672B2CC3E500A82975 /* NoteText+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F92E652B2CC3E500A82975 /* NoteText+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,8 +53,6 @@
 		357FBB852B264F560090F785 /* TextCryptUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCryptUITests.swift; sourceTree = "<group>"; };
 		357FBB872B264F560090F785 /* TextCryptUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCryptUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		357FBB942B264F820090F785 /* NoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
-		35F92E642B2CC3E500A82975 /* NoteText+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteText+CoreDataClass.swift"; sourceTree = "<group>"; };
-		35F92E652B2CC3E500A82975 /* NoteText+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteText+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +103,6 @@
 		357FBB602B264F540090F785 /* TextCrypt */ = {
 			isa = PBXGroup;
 			children = (
-				35F92E682B2CC45200A82975 /* CD */,
 				357FBB612B264F540090F785 /* AppDelegate.swift */,
 				357FBB632B264F540090F785 /* SceneDelegate.swift */,
 				357FBB652B264F540090F785 /* ViewController.swift */,
@@ -136,15 +131,6 @@
 				357FBB872B264F560090F785 /* TextCryptUITestsLaunchTests.swift */,
 			);
 			path = TextCryptUITests;
-			sourceTree = "<group>";
-		};
-		35F92E682B2CC45200A82975 /* CD */ = {
-			isa = PBXGroup;
-			children = (
-				35F92E642B2CC3E500A82975 /* NoteText+CoreDataClass.swift */,
-				35F92E652B2CC3E500A82975 /* NoteText+CoreDataProperties.swift */,
-			);
-			path = CD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,11 +266,9 @@
 			files = (
 				357FBB662B264F540090F785 /* ViewController.swift in Sources */,
 				357FBB6C2B264F540090F785 /* TextCrypt.xcdatamodeld in Sources */,
-				35F92E662B2CC3E500A82975 /* NoteText+CoreDataClass.swift in Sources */,
 				357FBB952B264F820090F785 /* NoteDetailViewController.swift in Sources */,
 				357FBB622B264F540090F785 /* AppDelegate.swift in Sources */,
 				357FBB642B264F540090F785 /* SceneDelegate.swift in Sources */,
-				35F92E672B2CC3E500A82975 /* NoteText+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

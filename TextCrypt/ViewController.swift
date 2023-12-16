@@ -14,7 +14,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let cellSpacing : CGFloat = 8
     var notes = [String]() // Notları saklamak için dizi
     var indexPath = IndexPath()
-    var noteTitles = [String]()
+    var titles = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,12 +65,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @objc func createNoteButtonTapped() {
         let noteDetailVC = NoteDetailViewController()
-        noteDetailVC.dismissAction = { [weak self] in
-            if let newNote = noteDetailVC.noteContent, !newNote.isEmpty {
-                self?.notes.append(newNote) // Yeni notu ekliyoruz
-                self?.tableView.reloadData()
+            noteDetailVC.dismissAction = { [weak self] in
+                if let newNote = noteDetailVC.noteContent, !newNote.isEmpty,
+                   let newTitle = noteDetailVC.titleContent, !newTitle.isEmpty {
+                    self?.notes.append(newNote)
+                    self?.titles.append(newTitle)
+                    self?.tableView.reloadData()
+                }
             }
-        }
         let navigationController = UINavigationController(rootViewController: noteDetailVC)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
@@ -81,13 +83,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return notes.count
+        return min(notes.count, titles.count)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        cell.textLabel?.text = notes[indexPath.section]
+        cell.textLabel?.text = "\(titles[indexPath.section]) \n \(notes[indexPath.section]) "
         cell.textLabel?.textColor = .systemGray5
         cell.textLabel?.font = UIFont.systemFont(ofSize: 22)
         cell.textLabel?.numberOfLines = 3
@@ -122,10 +124,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         let noteDetailVC = NoteDetailViewController()
         noteDetailVC.textView.text = notes[indexPath.row]
+        noteDetailVC.textField.text = titles[indexPath.row]
         noteDetailVC.noteContent = notes[indexPath.row]
+        noteDetailVC.titleContent = titles[indexPath.row]
         noteDetailVC.dismissAction = { [weak self] in
-            if let updatedNote = noteDetailVC.noteContent {
+            if let updatedNote = noteDetailVC.noteContent, let updatedTitle = noteDetailVC.titleContent {
                 self?.notes[indexPath.row] = updatedNote
+                self?.titles[indexPath.row] = updatedTitle
                 self?.tableView.reloadData()
             }
         }

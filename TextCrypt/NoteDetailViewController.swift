@@ -13,14 +13,14 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     var decryptButton = UIButton()
     var isEncrypted = true
     var noteContent: String?
+    var titleContent : String?
     var dismissAction: (() -> Void)?
     var backButton = UIButton()
     var doneButton = UIButton()
     var buttonStackView = UIStackView()
     var encryptButton = UIButton()
     var viewController = ViewController()
-    var titleTextField : UITextField?
-    var titleTextFieldHeight : CGFloat = 20
+    var textField = UITextField()
 
 
     override func viewDidLoad() {
@@ -31,7 +31,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         setupTextView()
         setupButtonStackView()
         setupEncryptButton()
-        titleTextField?.delegate = self
+        textField.delegate = self
         doneButton.isHidden = true
     }
     
@@ -42,7 +42,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         textView.delegate = self
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-        textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 37).isActive = true
+        textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 57).isActive = true
         textView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         textView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
         textView.backgroundColor = .black
@@ -79,19 +79,19 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     }
     
     func setupTitleTextField() {
-        if titleTextField == nil {
-               titleTextField = createDefaultTextField()
-           }
-        view.addSubview(titleTextField!)
+        
+        if textField.text == ""{
+            textField = createDefaultTextField()
+        }
+        
+        view.addSubview(textField)
 
-        titleTextField?.translatesAutoresizingMaskIntoConstraints = false
-        titleTextField?.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        titleTextField?.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-        titleTextField?.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
-
-       // titleTextField?.text = "Başlık Burada"
-        titleTextField?.font = UIFont.systemFont(ofSize: 24)
-        titleTextField?.textColor = .white
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
+        textField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        textField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        textField.font = UIFont.systemFont(ofSize: 24)
+        textField.textColor = .darkGray
     }
     
     func createDefaultTextField() -> UITextField {
@@ -129,13 +129,13 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if let textField = titleTextField, ((titleTextField?.text = "Başlık") != nil){
-            titleTextField?.text = ""
+        if textField.text == "Başlık"{
+            textField.text = ""
         }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let titleTextField = titleTextField{
+        if textField == textField{
             textView.becomeFirstResponder()
         }
         return true
@@ -161,6 +161,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
 
     @objc func backButtonTapped() {
         noteContent = textView.text
+        titleContent = textField.text
         dismiss(animated: true) {
             self.dismissAction?()
         }
