@@ -57,9 +57,9 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         dateLabel.font = .systemFont(ofSize: 17)
         timeLabel.font = .systemFont(ofSize: 17)
         bookMark.font = .systemFont(ofSize: 17)
-        dateLabel.textColor = .darkGray
-        timeLabel.textColor = .darkGray
-        bookMark.textColor = .darkGray
+        dateLabel.textColor = .systemGray2
+        timeLabel.textColor = .systemGray2
+        bookMark.textColor = .systemGray2
         
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -152,7 +152,6 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         titleLabel.text = "Not Al"
         titleLabel.font = UIFont.systemFont(ofSize: 25)
         titleLabel.textColor = .white
-     //   titleLabel.sizeToFit()
         navigationItem.titleView = titleLabel
     }
 

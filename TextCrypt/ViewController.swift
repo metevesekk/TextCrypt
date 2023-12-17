@@ -168,6 +168,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.reloadRows(at: [indexPath], with: .none)
+
+        if let cell = tableView.cellForRow(at: indexPath) {
+            let animation = CABasicAnimation(keyPath: "transform.scale")
+            animation.fromValue = 1.0  // Başlangıç ölçeği (normal boyut)
+            animation.toValue = 0.92   // Bitiş ölçeği (biraz büyütülmüş)
+            animation.duration = 0.1
+            animation.autoreverses = true  // Animasyonun tersine çevrilmesi (küçülmesi)
+            animation.repeatCount = 1      // Tekrar sayısı
+
+            cell.layer.add(animation, forKey: "bounce")
+        }
+        
         let noteDetailVC = NoteDetailViewController()
         noteDetailVC.textView.text = notes[indexPath.row]
         noteDetailVC.textField.text = titles[indexPath.row]
