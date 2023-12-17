@@ -22,13 +22,16 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     var viewController = ViewController()
     var textField = UITextField()
     var titleLabel = UILabel()
-
+    var timeLabel = UILabel()
+    var dateLabel = UILabel()
+    var bookMark = UILabel ()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
 
         setupTitleTextField()
+        setupTimeAndDateLabel()
         setupTitleLabel()
         setupTextView()
         setupButtonStackView()
@@ -37,14 +40,52 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         doneButton.isHidden = true
     }
     
-    
+    func setupTimeAndDateLabel() {
+        view.addSubview(dateLabel)
+        view.addSubview(timeLabel)
+        view.addSubview(bookMark)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "HH:mm"
+        
+        let currenDate = Date()
+        dateLabel.text = dateFormatter.string(from: currenDate)
+        timeLabel.text = timeFormatter.string(from: currenDate)
+        bookMark.text = "|"
+        
+        dateLabel.font = .systemFont(ofSize: 17)
+        timeLabel.font = .systemFont(ofSize: 17)
+        bookMark.font = .systemFont(ofSize: 17)
+        dateLabel.textColor = .darkGray
+        timeLabel.textColor = .darkGray
+        bookMark.textColor = .darkGray
+        
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        bookMark.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            dateLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
+            dateLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 62),
+          //  dateLabel.rightAnchor.constraint(equalTo: timeLabel.leftAnchor, constant: -20),
+            
+            bookMark.leftAnchor.constraint(equalTo: dateLabel.rightAnchor, constant: 10),
+            bookMark.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 62),
+            
+            timeLabel.leftAnchor.constraint(equalTo: dateLabel.rightAnchor, constant: 22),
+            timeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 62),
+
+            
+        ])
+    }
 
     func setupTextView() {
         view.addSubview(textView)
         textView.delegate = self
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-        textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 57).isActive = true
+        textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 82).isActive = true
         textView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         textView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
         textView.backgroundColor = .black

@@ -31,8 +31,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let longPressGestureButton = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressCell))
         let longPressGestureCell = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressButton))
-        longPressGestureCell.minimumPressDuration = 0.05
-        longPressGestureButton.minimumPressDuration = 0.05
+        longPressGestureCell.minimumPressDuration = 0.2
+        longPressGestureButton.minimumPressDuration = 0.2
         
         tableView.addGestureRecognizer(longPressGestureButton)
         createNoteButton.addGestureRecognizer(longPressGestureCell)
