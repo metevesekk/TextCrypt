@@ -11,6 +11,8 @@ class TableViewCell: UITableViewCell {
 
     let titleLabel = UILabel()
     let noteLabel = UILabel()
+    let dateLabel = UILabel()
+    
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

@@ -17,14 +17,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var titles = [String]()
     var selectedIndexPath: IndexPath?
     
+    
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+
         setupCreateNoteButton()
         view.backgroundColor = .black
         tableView.backgroundColor = .black
+        navigationController?.navigationBar.backgroundColor = .systemYellow
         
         let longPressGestureButton = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressCell))
         let longPressGestureCell = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressButton))
@@ -37,7 +40,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData() // TableView'ı yenile
+        tableView.reloadData()
     }
 
 
@@ -54,6 +57,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         ])
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
     }
+
 
     func setupCreateNoteButton() {
         view.addSubview(createNoteButton)
@@ -93,7 +97,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             UIView.animate(withDuration: 0.025) {
                 self.createNoteButton.transform = CGAffineTransform(scaleX: 0.90, y: 0.90)
             }
-        } else if gesture.state == .ended || gesture.state == .cancelled {
+        } else if gesture.state == .ended || gesture.state == .cancelled{
             resetButtonSize()
         }
     }
@@ -179,8 +183,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let navigationController = UINavigationController(rootViewController: noteDetailVC)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
-        if let cell = tableView.cellForRow(at: indexPath) {
-            cell.backgroundColor = UIColor.darkGray
-        }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+       
     }
 }

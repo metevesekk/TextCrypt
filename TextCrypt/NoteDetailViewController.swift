@@ -21,6 +21,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     var encryptButton = UIButton()
     var viewController = ViewController()
     var textField = UITextField()
+    var titleLabel = UILabel()
 
 
     override func viewDidLoad() {
@@ -28,6 +29,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         view.backgroundColor = .black
 
         setupTitleTextField()
+        setupTitleLabel()
         setupTextView()
         setupButtonStackView()
         setupEncryptButton()
@@ -103,6 +105,14 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         textField.textColor = UIColor(displayP3Red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
         // Diğer varsayılan ayarlarınız burada yer alabilir.
         return textField
+    }
+    
+    func setupTitleLabel() {
+        titleLabel.text = "Not Al"
+        titleLabel.font = UIFont.systemFont(ofSize: 25)
+        titleLabel.textColor = .white
+     //   titleLabel.sizeToFit()
+        navigationItem.titleView = titleLabel
     }
 
     func setupDoneButton() {
