@@ -49,15 +49,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50), // Buton için yer bırak
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
     }
 
     func setupCreateNoteButton() {
         view.addSubview(createNoteButton)
-    //    createNoteButton.setTitle("Not Oluştur", for: .normal)
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 45, weight: .regular, scale: .default)
         let openLockSymbol = UIImage(systemName: "plus", withConfiguration: symbolConfiguration)
         createNoteButton.setImage(openLockSymbol, for: .normal)
@@ -142,17 +141,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as? TableViewCell else {
+               return UITableViewCell()
+           }
         
-        cell.textLabel?.text = "\(titles[indexPath.section]) \n \(notes[indexPath.section])"
-        cell.textLabel?.textColor = .systemGray5
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 22)
-        cell.textLabel?.numberOfLines = 3
-        cell.backgroundColor = UIColor(displayP3Red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
-        cell.layer.borderColor = UIColor.black.cgColor
-        cell.layer.borderWidth = 1
-        cell.layer.cornerRadius = 8
-        cell.clipsToBounds = true
+        let title = titles[indexPath.section]
+        let note = notes[indexPath.section]
+        cell.configure(withTitle: title, note: note)
         return cell
     }
     
@@ -163,7 +158,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return cellSpacing // İstediğiniz boşluk büyüklüğü
+        return cellSpacing
     }
 
 
@@ -185,13 +180,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
         if let cell = tableView.cellForRow(at: indexPath) {
-            cell.backgroundColor = UIColor.darkGray // Daha koyu bir renk
+            cell.backgroundColor = UIColor.darkGray
         }
     }
-/*    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        // Hücrenin seçimi kaldırıldığında orijinal rengine dön
-        if let cell = tableView.cellForRow(at: indexPath) {
-            cell.backgroundColor = UIColor(displayP3Red: 0.15, green: 0.15, blue: 0.15, alpha: 1) // Orijinal renk
-        }
-    } */
 }
