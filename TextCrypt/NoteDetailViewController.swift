@@ -73,8 +73,11 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         }
     
     func setupBackButton() {
-        backButton.setTitle("Geri", for: .normal)
-        backButton.setTitleColor(.systemYellow, for: .normal)
+       // view.addSubview(backButton)
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 24, weight: .regular, scale: .default)
+        let openLockSymbol = UIImage(systemName: "arrow.left", withConfiguration: symbolConfiguration)
+        backButton.setImage(openLockSymbol, for: .normal)
+        backButton.tintColor = .systemYellow
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     
@@ -103,8 +106,10 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     }
 
     func setupDoneButton() {
-        doneButton.setTitle("Bitti", for: .normal)
-        doneButton.setTitleColor(.systemYellow, for: .normal)
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 24, weight: .regular, scale: .default)
+        let openLockSymbol = UIImage(systemName: "checkmark", withConfiguration: symbolConfiguration)
+        doneButton.setImage(openLockSymbol, for: .normal)
+        doneButton.tintColor = .systemYellow
         doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
     }
     
@@ -122,8 +127,8 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        doneButton.isHidden = false    // Butonu tekrar göster
-        doneButton.isEnabled = true    // Butonu etkinleştir,
+        doneButton.isHidden = false
+        doneButton.isEnabled = true
         encryptButton.isEnabled = false
         encryptButton.isHidden = true
     }
@@ -132,6 +137,10 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         if textField.text == "Başlık"{
             textField.text = ""
         }
+        doneButton.isHidden = false
+        doneButton.isEnabled = true
+        encryptButton.isEnabled = false
+        encryptButton.isHidden = true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
