@@ -1,0 +1,6 @@
+framework module Pods_TextCrypt {
+  umbrella header "Pods-TextCrypt-umbrella.h"
+
+  export *
+  module * { export * }
+}

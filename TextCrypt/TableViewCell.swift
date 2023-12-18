@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import TheAnimation
 
 class TableViewCell: UITableViewCell {
 

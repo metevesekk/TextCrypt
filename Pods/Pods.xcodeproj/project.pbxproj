@@ -1,0 +1,1018 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		020AAF2B57043106CF3A782B7F2F870B /* TransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB644B4926B7AA20219A040B73E1EDEC /* TransitionAnimation.swift */; };
+		0825FC9DED556A238ECFB87169700CBE /* AnyAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD698C73A4AEDD58BED6BB7FFE57536 /* AnyAnimation.swift */; };
+		0892AB065DE22208B426DF6D4F348E2E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		112794758E22FFB3B8AB0BEE120B75DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		11673394EFDB43393E5EA73A8B54D10B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		1B2F5242808C15FAAC687E2D5C00CADD /* TheAnimation-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AEAEFC758AE5AAF5CB6FDFD6F9EFC /* TheAnimation-dummy.m */; };
+		1E023ECEE2838EB17174BB13A0C54193 /* PrimitiveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DB7F12E7189C8902E93D384F077FB /* PrimitiveAnimation.swift */; };
+		20AF25E29A9062DABC562CD4449F18B7 /* Pods-TextCrypt-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 081A7F46513550A41B28CB4CADCD2736 /* Pods-TextCrypt-dummy.m */; };
+		230E9342D590C318D5A2431076B6CB26 /* Pods-TextCrypt-TextCryptUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1624602A8A0423B13EFA0717BD2F44E2 /* Pods-TextCrypt-TextCryptUITests-dummy.m */; };
+		308E99772236A2368569C5328F714E46 /* Pods-TextCryptTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 798795C551FA6D669772684DB7250A9D /* Pods-TextCryptTests-dummy.m */; };
+		35926A7996EB845C66D8F4ADF2282AB7 /* CAAnimationDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890CEF916E10EDF187F4EFBB45F6EC5D /* CAAnimationDelegateProxy.swift */; };
+		527BAC673BA49DE913553B59BDD28F26 /* Pods-TextCrypt-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FD1E86B2B680E69A8C64AF1BFC54765 /* Pods-TextCrypt-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6E0D245B1E9B278C539F5798C15E6668 /* AnimationGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A20FBF42DE140406C2085B8003DB5B /* AnimationGroup.swift */; };
+		83416C52B7563E72EFFE22C788C9040E /* TheAnimation-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E11FD88D000E893C241FD851C6FEF9B9 /* TheAnimation-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8E52DB77A154E874C11F3DFD966170C3 /* Pods-TextCryptTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DE30194CD3DAF8C5F7ADFC4B6A9A3580 /* Pods-TextCryptTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9BCDA7C7E03BD6340375A81B89BCB241 /* KeyframeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A83A382DB5BCFBCEDAC43DE71A61056 /* KeyframeAnimation.swift */; };
+		9C8CB93EA3ABAB37EF13F14AD705517A /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965D6E0690BCDF0620D4F1B203913306 /* Animation.swift */; };
+		C85804CF5C9C01DDF45BE332E0627EAF /* AnimationKeyPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBA295320778AA5B9AD70BC06F870E3 /* AnimationKeyPaths.swift */; };
+		CC4D717A424FFDC811794E2D5723622E /* PropertyAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E3F5ADAA7CB48E590404B5A3C2325A /* PropertyAnimation.swift */; };
+		D7C0745A90193F6769EA5E498D46A3FD /* Pods-TextCrypt-TextCryptUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 13F754EAC7F69AF6157599E6BC211FD0 /* Pods-TextCrypt-TextCryptUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DE5582372FDE14FBCB8C32CF811F6DEE /* BasicAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210CB9BE7FA471A1611E306F12B5DDC2 /* BasicAnimation.swift */; };
+		E0EFD0BAAF0F3C6E9C707209A0D54B66 /* TimingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822CCC47E9B0330DB788D41418B05311 /* TimingFunction.swift */; };
+		E68E62CA2C4D95436FB1A504C14E7993 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		F7C0877CC9CE633AAB23901C31D51E98 /* SpringAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A54106062856FEF0A5002470D16CACE /* SpringAnimation.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7F984DDE503F1AE32CA017F0CCB62CB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E0F228C745074FC35FCF6B2AA969D97E;
+			remoteInfo = "Pods-TextCrypt";
+		};
+		B12CC9076489F7055497ED4E99D25BF3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25475D17375EE04671C722142A3D74C5;
+			remoteInfo = TheAnimation;
+		};
+		F97BA8868FC49072C0629AA0444D3017 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25475D17375EE04671C722142A3D74C5;
+			remoteInfo = TheAnimation;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		081A7F46513550A41B28CB4CADCD2736 /* Pods-TextCrypt-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TextCrypt-dummy.m"; sourceTree = "<group>"; };
+		0AB7F9B83CECD6617C8A1AE08C622D13 /* Pods-TextCrypt-TextCryptUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TextCrypt-TextCryptUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		13F754EAC7F69AF6157599E6BC211FD0 /* Pods-TextCrypt-TextCryptUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TextCrypt-TextCryptUITests-umbrella.h"; sourceTree = "<group>"; };
+		1624602A8A0423B13EFA0717BD2F44E2 /* Pods-TextCrypt-TextCryptUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TextCrypt-TextCryptUITests-dummy.m"; sourceTree = "<group>"; };
+		1AAF1315A72F00F99B4A65EE0EF9642B /* TheAnimation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TheAnimation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DD2D0AFED9CB37B5669FC10AE42D998 /* Pods-TextCrypt-TextCryptUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-TextCrypt-TextCryptUITests.modulemap"; sourceTree = "<group>"; };
+		210CB9BE7FA471A1611E306F12B5DDC2 /* BasicAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BasicAnimation.swift; path = TheAnimation/Source/BasicAnimation.swift; sourceTree = "<group>"; };
+		2FD1E86B2B680E69A8C64AF1BFC54765 /* Pods-TextCrypt-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TextCrypt-umbrella.h"; sourceTree = "<group>"; };
+		30F80CDC9FB32ADFD6E74436361E21AE /* Pods-TextCrypt-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TextCrypt-Info.plist"; sourceTree = "<group>"; };
+		3475E38E05BD11214C13CB34E07F92C6 /* Pods-TextCrypt-TextCryptUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TextCrypt-TextCryptUITests-acknowledgements.plist"; sourceTree = "<group>"; };
+		371C7F7A33C7C83E8518CFD546376B5F /* Pods-TextCryptTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TextCryptTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		42B78F26FAF62330B4A445B43B6D47E6 /* Pods_TextCrypt_TextCryptUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TextCrypt_TextCryptUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A54106062856FEF0A5002470D16CACE /* SpringAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SpringAnimation.swift; path = TheAnimation/Source/SpringAnimation.swift; sourceTree = "<group>"; };
+		4A83A382DB5BCFBCEDAC43DE71A61056 /* KeyframeAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeyframeAnimation.swift; path = TheAnimation/Source/KeyframeAnimation.swift; sourceTree = "<group>"; };
+		4D9AEAEFC758AE5AAF5CB6FDFD6F9EFC /* TheAnimation-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TheAnimation-dummy.m"; sourceTree = "<group>"; };
+		5C294942006443C02D67953AA34DC9FE /* Pods-TextCrypt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TextCrypt.release.xcconfig"; sourceTree = "<group>"; };
+		66A20FBF42DE140406C2085B8003DB5B /* AnimationGroup.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnimationGroup.swift; path = TheAnimation/Source/AnimationGroup.swift; sourceTree = "<group>"; };
+		6BBA295320778AA5B9AD70BC06F870E3 /* AnimationKeyPaths.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnimationKeyPaths.swift; path = TheAnimation/Source/AnimationKeyPaths.swift; sourceTree = "<group>"; };
+		6BD698C73A4AEDD58BED6BB7FFE57536 /* AnyAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnyAnimation.swift; path = TheAnimation/Source/AnyAnimation.swift; sourceTree = "<group>"; };
+		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		798795C551FA6D669772684DB7250A9D /* Pods-TextCryptTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TextCryptTests-dummy.m"; sourceTree = "<group>"; };
+		79D9AB282EB0DD5BC7D742B9CD03C260 /* Pods-TextCryptTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TextCryptTests.release.xcconfig"; sourceTree = "<group>"; };
+		7E5FC27ABF110D231D895A44517C0A74 /* Pods-TextCryptTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TextCryptTests.debug.xcconfig"; sourceTree = "<group>"; };
+		804A7EC995F2CCEA90BD6D00709CC3BB /* Pods-TextCrypt-TextCryptUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TextCrypt-TextCryptUITests.release.xcconfig"; sourceTree = "<group>"; };
+		822CCC47E9B0330DB788D41418B05311 /* TimingFunction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TimingFunction.swift; path = TheAnimation/Source/TimingFunction.swift; sourceTree = "<group>"; };
+		85C5FD56E44F3BDB1D144CF0EB949EC6 /* Pods-TextCryptTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TextCryptTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		890CEF916E10EDF187F4EFBB45F6EC5D /* CAAnimationDelegateProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CAAnimationDelegateProxy.swift; path = TheAnimation/Source/Internal/CAAnimationDelegateProxy.swift; sourceTree = "<group>"; };
+		89293F067DD436BB1FBAA3D6F7659996 /* Pods-TextCrypt-TextCryptUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TextCrypt-TextCryptUITests-frameworks.sh"; sourceTree = "<group>"; };
+		8E74696C4917A46A45C35A2A324E063C /* Pods-TextCrypt.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-TextCrypt.modulemap"; sourceTree = "<group>"; };
+		9507386E30A1B079BD865D9B96C9BF50 /* Pods-TextCrypt-TextCryptUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TextCrypt-TextCryptUITests-Info.plist"; sourceTree = "<group>"; };
+		960BEA104BF13C733CB6643E486E0088 /* Pods_TextCryptTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TextCryptTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		965D6E0690BCDF0620D4F1B203913306 /* Animation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Animation.swift; path = TheAnimation/Source/Animation.swift; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9E7FA8ADA024004F31D03EE2982191B1 /* TheAnimation-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "TheAnimation-Info.plist"; sourceTree = "<group>"; };
+		9EAAFEC98697A11C8F543C6A4BCFE515 /* Pods-TextCrypt-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TextCrypt-acknowledgements.plist"; sourceTree = "<group>"; };
+		A071E315D0FE87586DF11422F94F7B0A /* TheAnimation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TheAnimation.release.xcconfig; sourceTree = "<group>"; };
+		AB644B4926B7AA20219A040B73E1EDEC /* TransitionAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransitionAnimation.swift; path = TheAnimation/Source/TransitionAnimation.swift; sourceTree = "<group>"; };
+		ACEEDE39BD02FDE6CC0EBD7A6AB4F612 /* Pods-TextCryptTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TextCryptTests-Info.plist"; sourceTree = "<group>"; };
+		B12318F4FD0233F9F89A5B1F43EB6106 /* Pods-TextCrypt-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TextCrypt-acknowledgements.markdown"; sourceTree = "<group>"; };
+		B493F3B4684AF7D834587A0237A39DF3 /* TheAnimation.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = TheAnimation.modulemap; sourceTree = "<group>"; };
+		B8E3F5ADAA7CB48E590404B5A3C2325A /* PropertyAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PropertyAnimation.swift; path = TheAnimation/Source/PropertyAnimation.swift; sourceTree = "<group>"; };
+		BE7DB7F12E7189C8902E93D384F077FB /* PrimitiveAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PrimitiveAnimation.swift; path = TheAnimation/Source/PrimitiveAnimation.swift; sourceTree = "<group>"; };
+		C6FBBE1019F74328C1104FFA4D33B3FB /* Pods-TextCrypt-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TextCrypt-frameworks.sh"; sourceTree = "<group>"; };
+		C9AA66B29189F9A5DE31C7B0B18A7C94 /* Pods-TextCryptTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-TextCryptTests.modulemap"; sourceTree = "<group>"; };
+		DE30194CD3DAF8C5F7ADFC4B6A9A3580 /* Pods-TextCryptTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TextCryptTests-umbrella.h"; sourceTree = "<group>"; };
+		E11FD88D000E893C241FD851C6FEF9B9 /* TheAnimation-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TheAnimation-umbrella.h"; sourceTree = "<group>"; };
+		E65A6EAF2AE604415D965828C779FC27 /* TheAnimation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TheAnimation.debug.xcconfig; sourceTree = "<group>"; };
+		EDD926D74BD84E17DA99C03821B91D83 /* TheAnimation-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TheAnimation-prefix.pch"; sourceTree = "<group>"; };
+		F74BB45ABA9BECBBC8AE404FA6B6BDE8 /* Pods-TextCrypt-TextCryptUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TextCrypt-TextCryptUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		F94281FC3A9E89614FA2153552EF7906 /* Pods-TextCrypt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TextCrypt.debug.xcconfig"; sourceTree = "<group>"; };
+		FDD562E8C46726D67080AECC05AF14AB /* Pods_TextCrypt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TextCrypt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3B65CA028720B6A27493052CACE47736 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11673394EFDB43393E5EA73A8B54D10B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77E495BEB1211E5A5F657EE380FD367B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				112794758E22FFB3B8AB0BEE120B75DA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB093D326A1FBE581B88496DAE599FE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E68E62CA2C4D95436FB1A504C14E7993 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3E7DF5B773097BE408DCA9EB53601BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0892AB065DE22208B426DF6D4F348E2E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3033A4E648797029CC2A773648651311 /* Pods-TextCrypt */ = {
+			isa = PBXGroup;
+			children = (
+				8E74696C4917A46A45C35A2A324E063C /* Pods-TextCrypt.modulemap */,
+				B12318F4FD0233F9F89A5B1F43EB6106 /* Pods-TextCrypt-acknowledgements.markdown */,
+				9EAAFEC98697A11C8F543C6A4BCFE515 /* Pods-TextCrypt-acknowledgements.plist */,
+				081A7F46513550A41B28CB4CADCD2736 /* Pods-TextCrypt-dummy.m */,
+				C6FBBE1019F74328C1104FFA4D33B3FB /* Pods-TextCrypt-frameworks.sh */,
+				30F80CDC9FB32ADFD6E74436361E21AE /* Pods-TextCrypt-Info.plist */,
+				2FD1E86B2B680E69A8C64AF1BFC54765 /* Pods-TextCrypt-umbrella.h */,
+				F94281FC3A9E89614FA2153552EF7906 /* Pods-TextCrypt.debug.xcconfig */,
+				5C294942006443C02D67953AA34DC9FE /* Pods-TextCrypt.release.xcconfig */,
+			);
+			name = "Pods-TextCrypt";
+			path = "Target Support Files/Pods-TextCrypt";
+			sourceTree = "<group>";
+		};
+		357E22157A4289223A6835C7EF65FBB6 /* TheAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				965D6E0690BCDF0620D4F1B203913306 /* Animation.swift */,
+				66A20FBF42DE140406C2085B8003DB5B /* AnimationGroup.swift */,
+				6BBA295320778AA5B9AD70BC06F870E3 /* AnimationKeyPaths.swift */,
+				6BD698C73A4AEDD58BED6BB7FFE57536 /* AnyAnimation.swift */,
+				210CB9BE7FA471A1611E306F12B5DDC2 /* BasicAnimation.swift */,
+				890CEF916E10EDF187F4EFBB45F6EC5D /* CAAnimationDelegateProxy.swift */,
+				4A83A382DB5BCFBCEDAC43DE71A61056 /* KeyframeAnimation.swift */,
+				BE7DB7F12E7189C8902E93D384F077FB /* PrimitiveAnimation.swift */,
+				B8E3F5ADAA7CB48E590404B5A3C2325A /* PropertyAnimation.swift */,
+				4A54106062856FEF0A5002470D16CACE /* SpringAnimation.swift */,
+				822CCC47E9B0330DB788D41418B05311 /* TimingFunction.swift */,
+				AB644B4926B7AA20219A040B73E1EDEC /* TransitionAnimation.swift */,
+				C7F4C95E21F644C6BD5D08454050C192 /* Support Files */,
+			);
+			path = TheAnimation;
+			sourceTree = "<group>";
+		};
+		470D82ED926100E77B3BC958FEE93AF6 /* Pods-TextCrypt-TextCryptUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1DD2D0AFED9CB37B5669FC10AE42D998 /* Pods-TextCrypt-TextCryptUITests.modulemap */,
+				F74BB45ABA9BECBBC8AE404FA6B6BDE8 /* Pods-TextCrypt-TextCryptUITests-acknowledgements.markdown */,
+				3475E38E05BD11214C13CB34E07F92C6 /* Pods-TextCrypt-TextCryptUITests-acknowledgements.plist */,
+				1624602A8A0423B13EFA0717BD2F44E2 /* Pods-TextCrypt-TextCryptUITests-dummy.m */,
+				89293F067DD436BB1FBAA3D6F7659996 /* Pods-TextCrypt-TextCryptUITests-frameworks.sh */,
+				9507386E30A1B079BD865D9B96C9BF50 /* Pods-TextCrypt-TextCryptUITests-Info.plist */,
+				13F754EAC7F69AF6157599E6BC211FD0 /* Pods-TextCrypt-TextCryptUITests-umbrella.h */,
+				0AB7F9B83CECD6617C8A1AE08C622D13 /* Pods-TextCrypt-TextCryptUITests.debug.xcconfig */,
+				804A7EC995F2CCEA90BD6D00709CC3BB /* Pods-TextCrypt-TextCryptUITests.release.xcconfig */,
+			);
+			name = "Pods-TextCrypt-TextCryptUITests";
+			path = "Target Support Files/Pods-TextCrypt-TextCryptUITests";
+			sourceTree = "<group>";
+		};
+		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		6F742106E4EFE5792E5C7E8FE4BA225D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				357E22157A4289223A6835C7EF65FBB6 /* TheAnimation */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		70707265A787E9E7F5FEE6FF1ABCB5DC /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				3033A4E648797029CC2A773648651311 /* Pods-TextCrypt */,
+				470D82ED926100E77B3BC958FEE93AF6 /* Pods-TextCrypt-TextCryptUITests */,
+				9D13AA63B8EDEB2AE1572B8B3FAA162F /* Pods-TextCryptTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		9D13AA63B8EDEB2AE1572B8B3FAA162F /* Pods-TextCryptTests */ = {
+			isa = PBXGroup;
+			children = (
+				C9AA66B29189F9A5DE31C7B0B18A7C94 /* Pods-TextCryptTests.modulemap */,
+				371C7F7A33C7C83E8518CFD546376B5F /* Pods-TextCryptTests-acknowledgements.markdown */,
+				85C5FD56E44F3BDB1D144CF0EB949EC6 /* Pods-TextCryptTests-acknowledgements.plist */,
+				798795C551FA6D669772684DB7250A9D /* Pods-TextCryptTests-dummy.m */,
+				ACEEDE39BD02FDE6CC0EBD7A6AB4F612 /* Pods-TextCryptTests-Info.plist */,
+				DE30194CD3DAF8C5F7ADFC4B6A9A3580 /* Pods-TextCryptTests-umbrella.h */,
+				7E5FC27ABF110D231D895A44517C0A74 /* Pods-TextCryptTests.debug.xcconfig */,
+				79D9AB282EB0DD5BC7D742B9CD03C260 /* Pods-TextCryptTests.release.xcconfig */,
+			);
+			name = "Pods-TextCryptTests";
+			path = "Target Support Files/Pods-TextCryptTests";
+			sourceTree = "<group>";
+		};
+		C7F4C95E21F644C6BD5D08454050C192 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B493F3B4684AF7D834587A0237A39DF3 /* TheAnimation.modulemap */,
+				4D9AEAEFC758AE5AAF5CB6FDFD6F9EFC /* TheAnimation-dummy.m */,
+				9E7FA8ADA024004F31D03EE2982191B1 /* TheAnimation-Info.plist */,
+				EDD926D74BD84E17DA99C03821B91D83 /* TheAnimation-prefix.pch */,
+				E11FD88D000E893C241FD851C6FEF9B9 /* TheAnimation-umbrella.h */,
+				E65A6EAF2AE604415D965828C779FC27 /* TheAnimation.debug.xcconfig */,
+				A071E315D0FE87586DF11422F94F7B0A /* TheAnimation.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/TheAnimation";
+			sourceTree = "<group>";
+		};
+		CB687310EF6033C5A84DB5E06D314D97 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FDD562E8C46726D67080AECC05AF14AB /* Pods_TextCrypt.framework */,
+				42B78F26FAF62330B4A445B43B6D47E6 /* Pods_TextCrypt_TextCryptUITests.framework */,
+				960BEA104BF13C733CB6643E486E0088 /* Pods_TextCryptTests.framework */,
+				1AAF1315A72F00F99B4A65EE0EF9642B /* TheAnimation.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				6F742106E4EFE5792E5C7E8FE4BA225D /* Pods */,
+				CB687310EF6033C5A84DB5E06D314D97 /* Products */,
+				70707265A787E9E7F5FEE6FF1ABCB5DC /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				578452D2E740E91742655AC8F1636D1F /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6AAC370001B17AD57A7F364A358DCFD9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83416C52B7563E72EFFE22C788C9040E /* TheAnimation-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D49AB98B3ABDD9D82C876BD74B406AF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7C0745A90193F6769EA5E498D46A3FD /* Pods-TextCrypt-TextCryptUITests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B428426E3685B809DA98D723317819D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				527BAC673BA49DE913553B59BDD28F26 /* Pods-TextCrypt-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B3370AB6A96DEF544AA606CB8B6790B5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E52DB77A154E874C11F3DFD966170C3 /* Pods-TextCryptTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		1B40F462A8C0AAD20CED95307AE98660 /* Pods-TextCryptTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88C275BEC0D4575CCD8A7D804A3CA07A /* Build configuration list for PBXNativeTarget "Pods-TextCryptTests" */;
+			buildPhases = (
+				B3370AB6A96DEF544AA606CB8B6790B5 /* Headers */,
+				8CA31F5C012BE9BF99AF5C5388B0C3F4 /* Sources */,
+				C3E7DF5B773097BE408DCA9EB53601BA /* Frameworks */,
+				8EEC141A5BED4626A1CC7EC50CB641ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				72D4E025D6BB8D8CE8F79F1F2A7C18BF /* PBXTargetDependency */,
+			);
+			name = "Pods-TextCryptTests";
+			productName = Pods_TextCryptTests;
+			productReference = 960BEA104BF13C733CB6643E486E0088 /* Pods_TextCryptTests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		25475D17375EE04671C722142A3D74C5 /* TheAnimation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07041FC991F346A39F621D0C6E79ADFE /* Build configuration list for PBXNativeTarget "TheAnimation" */;
+			buildPhases = (
+				6AAC370001B17AD57A7F364A358DCFD9 /* Headers */,
+				99A88D6A1CD7DBE8C437E0D9B530A973 /* Sources */,
+				3B65CA028720B6A27493052CACE47736 /* Frameworks */,
+				A9E5A93B58000293A7208E877FA55317 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TheAnimation;
+			productName = TheAnimation;
+			productReference = 1AAF1315A72F00F99B4A65EE0EF9642B /* TheAnimation.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4CF4CAD0AF85509F0CAE7F055447DFE6 /* Pods-TextCrypt-TextCryptUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4FCEA6B8F05D5BAD0226F9FCC909DB58 /* Build configuration list for PBXNativeTarget "Pods-TextCrypt-TextCryptUITests" */;
+			buildPhases = (
+				6D49AB98B3ABDD9D82C876BD74B406AF /* Headers */,
+				8F405396C16E78684249C35553AAAACB /* Sources */,
+				77E495BEB1211E5A5F657EE380FD367B /* Frameworks */,
+				8289CDC5979C497A5CBA9E458BE0B17C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EE73DE86BE264B99ABA7922739D35AB3 /* PBXTargetDependency */,
+			);
+			name = "Pods-TextCrypt-TextCryptUITests";
+			productName = Pods_TextCrypt_TextCryptUITests;
+			productReference = 42B78F26FAF62330B4A445B43B6D47E6 /* Pods_TextCrypt_TextCryptUITests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E0F228C745074FC35FCF6B2AA969D97E /* Pods-TextCrypt */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0B89BF1A474C88C57F6ACEC2CCCD71BB /* Build configuration list for PBXNativeTarget "Pods-TextCrypt" */;
+			buildPhases = (
+				7B428426E3685B809DA98D723317819D /* Headers */,
+				2C7746CF93689FAA853915E0D8F02905 /* Sources */,
+				AB093D326A1FBE581B88496DAE599FE0 /* Frameworks */,
+				162DB269F463D5F0834EA3E3A558FDDE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				49D32D2A39B774C16862F430001DD42E /* PBXTargetDependency */,
+			);
+			name = "Pods-TextCrypt";
+			productName = Pods_TextCrypt;
+			productReference = FDD562E8C46726D67080AECC05AF14AB /* Pods_TextCrypt.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1510;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = CB687310EF6033C5A84DB5E06D314D97 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E0F228C745074FC35FCF6B2AA969D97E /* Pods-TextCrypt */,
+				4CF4CAD0AF85509F0CAE7F055447DFE6 /* Pods-TextCrypt-TextCryptUITests */,
+				1B40F462A8C0AAD20CED95307AE98660 /* Pods-TextCryptTests */,
+				25475D17375EE04671C722142A3D74C5 /* TheAnimation */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		162DB269F463D5F0834EA3E3A558FDDE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8289CDC5979C497A5CBA9E458BE0B17C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8EEC141A5BED4626A1CC7EC50CB641ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E5A93B58000293A7208E877FA55317 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2C7746CF93689FAA853915E0D8F02905 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20AF25E29A9062DABC562CD4449F18B7 /* Pods-TextCrypt-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CA31F5C012BE9BF99AF5C5388B0C3F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				308E99772236A2368569C5328F714E46 /* Pods-TextCryptTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F405396C16E78684249C35553AAAACB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				230E9342D590C318D5A2431076B6CB26 /* Pods-TextCrypt-TextCryptUITests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99A88D6A1CD7DBE8C437E0D9B530A973 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C8CB93EA3ABAB37EF13F14AD705517A /* Animation.swift in Sources */,
+				6E0D245B1E9B278C539F5798C15E6668 /* AnimationGroup.swift in Sources */,
+				C85804CF5C9C01DDF45BE332E0627EAF /* AnimationKeyPaths.swift in Sources */,
+				0825FC9DED556A238ECFB87169700CBE /* AnyAnimation.swift in Sources */,
+				DE5582372FDE14FBCB8C32CF811F6DEE /* BasicAnimation.swift in Sources */,
+				35926A7996EB845C66D8F4ADF2282AB7 /* CAAnimationDelegateProxy.swift in Sources */,
+				9BCDA7C7E03BD6340375A81B89BCB241 /* KeyframeAnimation.swift in Sources */,
+				1E023ECEE2838EB17174BB13A0C54193 /* PrimitiveAnimation.swift in Sources */,
+				CC4D717A424FFDC811794E2D5723622E /* PropertyAnimation.swift in Sources */,
+				F7C0877CC9CE633AAB23901C31D51E98 /* SpringAnimation.swift in Sources */,
+				1B2F5242808C15FAAC687E2D5C00CADD /* TheAnimation-dummy.m in Sources */,
+				E0EFD0BAAF0F3C6E9C707209A0D54B66 /* TimingFunction.swift in Sources */,
+				020AAF2B57043106CF3A782B7F2F870B /* TransitionAnimation.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		49D32D2A39B774C16862F430001DD42E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TheAnimation;
+			target = 25475D17375EE04671C722142A3D74C5 /* TheAnimation */;
+			targetProxy = F97BA8868FC49072C0629AA0444D3017 /* PBXContainerItemProxy */;
+		};
+		72D4E025D6BB8D8CE8F79F1F2A7C18BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-TextCrypt";
+			target = E0F228C745074FC35FCF6B2AA969D97E /* Pods-TextCrypt */;
+			targetProxy = 7F984DDE503F1AE32CA017F0CCB62CB8 /* PBXContainerItemProxy */;
+		};
+		EE73DE86BE264B99ABA7922739D35AB3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TheAnimation;
+			target = 25475D17375EE04671C722142A3D74C5 /* TheAnimation */;
+			targetProxy = B12CC9076489F7055497ED4E99D25BF3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		07ACE9390CB998048CAEF795F01E9064 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C294942006443C02D67953AA34DC9FE /* Pods-TextCrypt.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-TextCrypt/Pods-TextCrypt-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TextCrypt/Pods-TextCrypt.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		2A586A34AD0A177AEF8CA4DC785CCD6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A071E315D0FE87586DF11422F94F7B0A /* TheAnimation.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/TheAnimation/TheAnimation-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TheAnimation/TheAnimation-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/TheAnimation/TheAnimation.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
+				PRODUCT_MODULE_NAME = TheAnimation;
+				PRODUCT_NAME = TheAnimation;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		36B659AC937DC60DA7214AC0998EF4AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79D9AB282EB0DD5BC7D742B9CD03C260 /* Pods-TextCryptTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-TextCryptTests/Pods-TextCryptTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TextCryptTests/Pods-TextCryptTests.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		54AEA9EBAC054FFB04A57845FA25E7B9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 804A7EC995F2CCEA90BD6D00709CC3BB /* Pods-TextCrypt-TextCryptUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-TextCrypt-TextCryptUITests/Pods-TextCrypt-TextCryptUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TextCrypt-TextCryptUITests/Pods-TextCrypt-TextCryptUITests.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6A5C026ED62BBFE3380CD257EEFAEB20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		73F9C582D5D69E79F47F0A8868D129E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F94281FC3A9E89614FA2153552EF7906 /* Pods-TextCrypt.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-TextCrypt/Pods-TextCrypt-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TextCrypt/Pods-TextCrypt.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		824158CC75E67A4D8964A1A9B5075F0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E65A6EAF2AE604415D965828C779FC27 /* TheAnimation.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/TheAnimation/TheAnimation-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TheAnimation/TheAnimation-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/TheAnimation/TheAnimation.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
+				PRODUCT_MODULE_NAME = TheAnimation;
+				PRODUCT_NAME = TheAnimation;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		99F038F0FE8DC429642368CCF30F4397 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E5FC27ABF110D231D895A44517C0A74 /* Pods-TextCryptTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-TextCryptTests/Pods-TextCryptTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TextCryptTests/Pods-TextCryptTests.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E856873EDC7D0CA9AC57DD2A5055E706 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AB7F9B83CECD6617C8A1AE08C622D13 /* Pods-TextCrypt-TextCryptUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-TextCrypt-TextCryptUITests/Pods-TextCrypt-TextCryptUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TextCrypt-TextCryptUITests/Pods-TextCrypt-TextCryptUITests.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E873CA97BD124B21839AF13C9BE1CD18 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		07041FC991F346A39F621D0C6E79ADFE /* Build configuration list for PBXNativeTarget "TheAnimation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				824158CC75E67A4D8964A1A9B5075F0C /* Debug */,
+				2A586A34AD0A177AEF8CA4DC785CCD6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0B89BF1A474C88C57F6ACEC2CCCD71BB /* Build configuration list for PBXNativeTarget "Pods-TextCrypt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73F9C582D5D69E79F47F0A8868D129E9 /* Debug */,
+				07ACE9390CB998048CAEF795F01E9064 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A5C026ED62BBFE3380CD257EEFAEB20 /* Debug */,
+				E873CA97BD124B21839AF13C9BE1CD18 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4FCEA6B8F05D5BAD0226F9FCC909DB58 /* Build configuration list for PBXNativeTarget "Pods-TextCrypt-TextCryptUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E856873EDC7D0CA9AC57DD2A5055E706 /* Debug */,
+				54AEA9EBAC054FFB04A57845FA25E7B9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		88C275BEC0D4575CCD8A7D804A3CA07A /* Build configuration list for PBXNativeTarget "Pods-TextCryptTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99F038F0FE8DC429642368CCF30F4397 /* Debug */,
+				36B659AC937DC60DA7214AC0998EF4AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

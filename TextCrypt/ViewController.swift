@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import TheAnimation
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -94,7 +95,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @objc func handleLongPressButton(gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
-            UIView.animate(withDuration: 0.025) {
+            UIView.animate(withDuration: 0.1) {
                 self.createNoteButton.transform = CGAffineTransform(scaleX: 0.90, y: 0.90)
             }
         } else if gesture.state == .ended || gesture.state == .cancelled{
@@ -129,7 +130,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     private func resetButtonSize(){
-        UIView.animate(withDuration: 0.025) {
+        UIView.animate(withDuration: 0.1) {
             self.createNoteButton.transform = CGAffineTransform.identity
         }
     }

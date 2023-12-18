@@ -19,6 +19,9 @@
 		357FBB882B264F560090F785 /* TextCryptUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357FBB872B264F560090F785 /* TextCryptUITestsLaunchTests.swift */; };
 		357FBB952B264F820090F785 /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357FBB942B264F820090F785 /* NoteDetailViewController.swift */; };
 		35AC3CE32B2F1EB500782A14 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AC3CE22B2F1EB500782A14 /* TableViewCell.swift */; };
+		B1297C674BCF7F0E0A9638C4 /* Pods_TextCrypt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 876CCF22B798567650E451F8 /* Pods_TextCrypt.framework */; };
+		D0F13F72CC90EFC374170E94 /* Pods_TextCryptTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61F72A217737416D6D14FAC2 /* Pods_TextCryptTests.framework */; };
+		E9F9F279DFA1E623BD49C4C2 /* Pods_TextCrypt_TextCryptUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF22FF1B4F33D558FBF15D32 /* Pods_TextCrypt_TextCryptUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B761E4A64D6863CEAF5BEB2 /* Pods-TextCryptTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextCryptTests.release.xcconfig"; path = "Target Support Files/Pods-TextCryptTests/Pods-TextCryptTests.release.xcconfig"; sourceTree = "<group>"; };
+		32A3B86FEA4D6C6B67C05F1C /* Pods-TextCrypt-TextCryptUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextCrypt-TextCryptUITests.debug.xcconfig"; path = "Target Support Files/Pods-TextCrypt-TextCryptUITests/Pods-TextCrypt-TextCryptUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		357FBB5E2B264F540090F785 /* TextCrypt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextCrypt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		357FBB612B264F540090F785 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		357FBB632B264F540090F785 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +60,13 @@
 		357FBB872B264F560090F785 /* TextCryptUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCryptUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		357FBB942B264F820090F785 /* NoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
 		35AC3CE22B2F1EB500782A14 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		5FEF9DC078D940D441F4F6BF /* Pods-TextCryptTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextCryptTests.debug.xcconfig"; path = "Target Support Files/Pods-TextCryptTests/Pods-TextCryptTests.debug.xcconfig"; sourceTree = "<group>"; };
+		61F72A217737416D6D14FAC2 /* Pods_TextCryptTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TextCryptTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		876CCF22B798567650E451F8 /* Pods_TextCrypt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TextCrypt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5B8927F2A8EEA05BE204A91 /* Pods-TextCrypt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextCrypt.release.xcconfig"; path = "Target Support Files/Pods-TextCrypt/Pods-TextCrypt.release.xcconfig"; sourceTree = "<group>"; };
+		ECD0C69F77C17F1ADAF5D487 /* Pods-TextCrypt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextCrypt.debug.xcconfig"; path = "Target Support Files/Pods-TextCrypt/Pods-TextCrypt.debug.xcconfig"; sourceTree = "<group>"; };
+		EF22FF1B4F33D558FBF15D32 /* Pods_TextCrypt_TextCryptUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TextCrypt_TextCryptUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FBA54DCF836ACBD9F71CF8DC /* Pods-TextCrypt-TextCryptUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextCrypt-TextCryptUITests.release.xcconfig"; path = "Target Support Files/Pods-TextCrypt-TextCryptUITests/Pods-TextCrypt-TextCryptUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1297C674BCF7F0E0A9638C4 /* Pods_TextCrypt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0F13F72CC90EFC374170E94 /* Pods_TextCryptTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,12 +90,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9F9F279DFA1E623BD49C4C2 /* Pods_TextCrypt_TextCryptUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		165DCF0BC2C0E032168924A2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ECD0C69F77C17F1ADAF5D487 /* Pods-TextCrypt.debug.xcconfig */,
+				C5B8927F2A8EEA05BE204A91 /* Pods-TextCrypt.release.xcconfig */,
+				32A3B86FEA4D6C6B67C05F1C /* Pods-TextCrypt-TextCryptUITests.debug.xcconfig */,
+				FBA54DCF836ACBD9F71CF8DC /* Pods-TextCrypt-TextCryptUITests.release.xcconfig */,
+				5FEF9DC078D940D441F4F6BF /* Pods-TextCryptTests.debug.xcconfig */,
+				2B761E4A64D6863CEAF5BEB2 /* Pods-TextCryptTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		357FBB552B264F540090F785 = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +117,8 @@
 				357FBB7A2B264F560090F785 /* TextCryptTests */,
 				357FBB842B264F560090F785 /* TextCryptUITests */,
 				357FBB5F2B264F540090F785 /* Products */,
+				165DCF0BC2C0E032168924A2 /* Pods */,
+				67859DE100505C5AD4EEBA0B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,6 +166,16 @@
 			path = TextCryptUITests;
 			sourceTree = "<group>";
 		};
+		67859DE100505C5AD4EEBA0B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				876CCF22B798567650E451F8 /* Pods_TextCrypt.framework */,
+				EF22FF1B4F33D558FBF15D32 /* Pods_TextCrypt_TextCryptUITests.framework */,
+				61F72A217737416D6D14FAC2 /* Pods_TextCryptTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,9 +183,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 357FBB8B2B264F560090F785 /* Build configuration list for PBXNativeTarget "TextCrypt" */;
 			buildPhases = (
+				DBB2AF4A5194805DC56A253A /* [CP] Check Pods Manifest.lock */,
 				357FBB5A2B264F540090F785 /* Sources */,
 				357FBB5B2B264F540090F785 /* Frameworks */,
 				357FBB5C2B264F540090F785 /* Resources */,
+				48CB922B7764F6E77B07E749 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -160,6 +202,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 357FBB8E2B264F560090F785 /* Build configuration list for PBXNativeTarget "TextCryptTests" */;
 			buildPhases = (
+				D3C9B2E54145914B4C734892 /* [CP] Check Pods Manifest.lock */,
 				357FBB732B264F560090F785 /* Sources */,
 				357FBB742B264F560090F785 /* Frameworks */,
 				357FBB752B264F560090F785 /* Resources */,
@@ -178,9 +221,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 357FBB912B264F560090F785 /* Build configuration list for PBXNativeTarget "TextCryptUITests" */;
 			buildPhases = (
+				D5E87B0AD586536D6B110BCC /* [CP] Check Pods Manifest.lock */,
 				357FBB7D2B264F560090F785 /* Sources */,
 				357FBB7E2B264F560090F785 /* Frameworks */,
 				357FBB7F2B264F560090F785 /* Resources */,
+				AA8B2EAA5F869965F8CBBB12 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -261,6 +306,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		48CB922B7764F6E77B07E749 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TextCrypt/Pods-TextCrypt-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TextCrypt/Pods-TextCrypt-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TextCrypt/Pods-TextCrypt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA8B2EAA5F869965F8CBBB12 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TextCrypt-TextCryptUITests/Pods-TextCrypt-TextCryptUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TextCrypt-TextCryptUITests/Pods-TextCrypt-TextCryptUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TextCrypt-TextCryptUITests/Pods-TextCrypt-TextCryptUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D3C9B2E54145914B4C734892 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TextCryptTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5E87B0AD586536D6B110BCC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TextCrypt-TextCryptUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DBB2AF4A5194805DC56A253A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TextCrypt-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		357FBB5A2B264F540090F785 /* Sources */ = {
@@ -449,12 +597,14 @@
 		};
 		357FBB8C2B264F560090F785 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ECD0C69F77C17F1ADAF5D487 /* Pods-TextCrypt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UZWFQJ3AAN;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TextCrypt/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -477,12 +627,14 @@
 		};
 		357FBB8D2B264F560090F785 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5B8927F2A8EEA05BE204A91 /* Pods-TextCrypt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UZWFQJ3AAN;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TextCrypt/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -505,6 +657,7 @@
 		};
 		357FBB8F2B264F560090F785 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5FEF9DC078D940D441F4F6BF /* Pods-TextCryptTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -525,6 +678,7 @@
 		};
 		357FBB902B264F560090F785 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B761E4A64D6863CEAF5BEB2 /* Pods-TextCryptTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -545,6 +699,7 @@
 		};
 		357FBB922B264F560090F785 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32A3B86FEA4D6C6B67C05F1C /* Pods-TextCrypt-TextCryptUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -563,6 +718,7 @@
 		};
 		357FBB932B264F560090F785 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FBA54DCF836ACBD9F71CF8DC /* Pods-TextCrypt-TextCryptUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

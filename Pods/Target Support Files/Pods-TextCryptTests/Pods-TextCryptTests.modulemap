@@ -1,0 +1,6 @@
+framework module Pods_TextCryptTests {
+  umbrella header "Pods-TextCryptTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

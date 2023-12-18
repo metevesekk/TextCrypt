@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import TheAnimation
 
 class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate{
 
@@ -136,13 +137,14 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
         textField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
         textField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
-        textField.font = UIFont.systemFont(ofSize: 24)
+        textField.font = UIFont.boldSystemFont(ofSize: 24)
         textField.textColor = .darkGray
     }
     
     func createDefaultTextField() -> UITextField {
         let textField = UITextField()
         textField.text = "Başlık"
+        textField.font = UIFont.boldSystemFont(ofSize: 24)
         textField.textColor = UIColor(displayP3Red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
         // Diğer varsayılan ayarlarınız burada yer alabilir.
         return textField
@@ -264,14 +266,14 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     // Şifre çözme ve şifreleme işlemleri için örnek fonksiyonlar
     func decryptText(with password: String) {
         // Burada şifre çözme işlemini gerçekleştirin
-        textView.text = "Şifre çözüldü: \(textView.text)"
+  //      textView.text = "Şifre çözüldü: \(textView.text)"
         isEncrypted = false
         decryptButton.setTitle("Şifrele", for: .normal)
     }
 
     func encryptText() {
         // Burada şifreleme işlemini gerçekleştirin
-        textView.text = "Şifreli: \(textView.text)"
+  //      textView.text = "Şifreli: \(textView.text)"
         isEncrypted = true
         decryptButton.setTitle("Şifreyi Aç", for: .normal)
     }
