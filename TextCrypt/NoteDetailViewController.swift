@@ -35,6 +35,12 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
             selector: #selector(keyboardWillShow),
             name: UIResponder.keyboardWillShowNotification,
             object: nil)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
 
         setupTitleTextField()
         setupTimeAndDateLabel()
@@ -223,7 +229,28 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
             let keyboardHeight = keyboardRectangle.height
             let keyboardOrigin = keyboardRectangle.origin
             
-            animateTextView(keyboardHeight: keyboardHeight)
+            animateTextView(toValue: keyboardHeight)
+        }
+        
+    }
+    
+    @objc func keyboardWillHide(notification : NSNotification){
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            let keyboardOrigin = keyboardRectangle.origin
+            
+            let animation = CABasicAnimation(keyPath: "transform.translation.y")
+            animation.fromValue = -keyboardHeight
+            animation.toValue = 0
+            animation.duration = 0.3
+            animation.fillMode = .forwards
+            animation.isRemovedOnCompletion = false
+         //   animation.autoreverses = true // Animasyonun tersine çevrilmesini sağlar
+            
+            // textView.layer'a animasyonu ekle
+            textView.layer.add(animation, forKey: "transform.translation.y")
+            
         }
         
     }
@@ -279,11 +306,11 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     
     //MARK: Animasyon fonksiyonları
     
-    func animateTextView(keyboardHeight: CGFloat) {
+    func animateTextView(toValue: CGFloat) {
         // Animasyonun başlangıç ve bitiş değerlerini ayarla
         let animation = CABasicAnimation(keyPath: "transform.translation.y")
         animation.fromValue = 0
-        animation.toValue = -keyboardHeight
+        animation.toValue = -toValue
         animation.duration = 0.3
         animation.fillMode = .forwards
         animation.isRemovedOnCompletion = false
