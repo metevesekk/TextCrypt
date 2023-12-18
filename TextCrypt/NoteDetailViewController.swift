@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import TheAnimation
 
 class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate{
 
@@ -30,6 +29,12 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
 
         setupTitleTextField()
         setupTimeAndDateLabel()
@@ -40,6 +45,14 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         textField.delegate = self
         doneButton.isHidden = true
     }
+    
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    
+    //MARK: setup fonksiyonları
     
     func setupTimeAndDateLabel() {
         view.addSubview(dateLabel)
@@ -202,6 +215,18 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         return true
     }
 
+    //MARK: @objc fonksiyonları
+    
+    @objc func keyboardWillShow(notification : NSNotification){
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            let keyboardOrigin = keyboardRectangle.origin
+            
+            animateTextView(keyboardHeight: keyboardHeight)
+        }
+        
+    }
 
       @objc func doneButtonTapped() {
         textView.resignFirstResponder() // Klavyeyi kapatır
@@ -228,6 +253,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         }
     }
 
+    //MARK: Şifreleme ile ilgili kodlar
 
     
     func presentPasswordAlert(for action: EncryptionAction) {
@@ -250,6 +276,25 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         alert.addAction(submitAction)
         present(alert, animated: true)
     }
+    
+    //MARK: Animasyon fonksiyonları
+    
+    func animateTextView(keyboardHeight: CGFloat) {
+        // Animasyonun başlangıç ve bitiş değerlerini ayarla
+        let animation = CABasicAnimation(keyPath: "transform.translation.y")
+        animation.fromValue = 0
+        animation.toValue = -keyboardHeight
+        animation.duration = 0.3
+        animation.fillMode = .forwards
+        animation.isRemovedOnCompletion = false
+        animation.autoreverses = true // Animasyonun tersine çevrilmesini sağlar
+        
+        // textView.layer'a animasyonu ekle
+        textView.layer.add(animation, forKey: "transform.translation.y")
+    }
+
+
+    
 
 
     // Klavyenin "Done" tuşuna basıldığında çağrılacak fonksiyon

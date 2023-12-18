@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import TheAnimation
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
