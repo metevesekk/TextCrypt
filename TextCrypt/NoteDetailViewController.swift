@@ -102,7 +102,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 82).isActive = true
         textView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         textView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
-        textView.backgroundColor = .black
+        textView.backgroundColor = .gray
         textView.textColor = .white
         textView.font = UIFont.systemFont(ofSize: 22)
 
@@ -287,7 +287,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         animation.duration = 0.3
         animation.fillMode = .forwards
         animation.isRemovedOnCompletion = false
-        animation.autoreverses = true // Animasyonun tersine çevrilmesini sağlar
+     //   animation.autoreverses = true // Animasyonun tersine çevrilmesini sağlar
         
         // textView.layer'a animasyonu ekle
         textView.layer.add(animation, forKey: "transform.translation.y")
