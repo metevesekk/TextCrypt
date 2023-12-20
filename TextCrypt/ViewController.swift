@@ -26,7 +26,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         setupCreateNoteButton()
         view.backgroundColor = .black
         tableView.backgroundColor = .black
-        navigationController?.navigationBar.backgroundColor = .systemYellow
         
         let longPressGestureButton = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressCell))
         let longPressGestureCell = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressButton))

@@ -34,7 +34,7 @@ class TableViewCell: UITableViewCell {
         // noteLabel ayarları
         noteLabel.textColor = .systemGray5
         noteLabel.font = UIFont.systemFont(ofSize: 18)
-        noteLabel.numberOfLines = 0
+        noteLabel.numberOfLines = 3
 
         // Subviews ekleme ve layout
         contentView.addSubview(titleLabel)

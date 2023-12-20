@@ -28,14 +28,17 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     
     lazy var checkMarkItem: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .plain, target: self, action: #selector(doneButtonTapped))
+        item.tintColor = .systemYellow
             return item
         }()
     lazy var encryptMarkItem: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(systemName: "lock.open"), style: .plain, target: self, action: #selector(encryptButtonTapped))
+        item.tintColor = .systemYellow
             return item
         }()
     lazy var backMarkItem: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backButtonTapped))
+        item.tintColor = .systemYellow
             return item
         }()
 
@@ -45,7 +48,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         super.viewDidLoad()
         navigationController?.navigationBar.isTranslucent = false
         view.backgroundColor = .black
-        self.navigationController?.navigationBar.backgroundColor = .black
+        self.navigationController?.navigationBar.backgroundColor = .clear
 
 
         
@@ -195,31 +198,34 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     }
 
     //MARK: @objc fonksiyonları
-    
+
+
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let userInfo = notification.userInfo,
               let keyboardFrame: CGRect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
 
-        let keyboardTopY = keyboardFrame.origin.y
-        let selectedRange = textView.selectedRange
-        let textRect = textView.layoutManager.boundingRect(forGlyphRange: selectedRange, in: textView.textContainer)
-        let textViewRect = textView.convert(textRect, to: view)
-        let textViewBottomY = textViewRect.origin.y + textViewRect.size.height
+        let keyboardHeight = keyboardFrame.height
+        var contentInset = textView.contentInset
+        contentInset.bottom = keyboardHeight - view.safeAreaInsets.bottom
 
-        if textViewBottomY > keyboardTopY {
-            let offset = textViewBottomY - keyboardTopY
-            textView.frame.origin.y -= offset
-            textView.contentInset.bottom = keyboardFrame.size.height
-            textView.scrollIndicatorInsets = textView.contentInset
+        UIView.animate(withDuration: 0.3) {
+            self.textView.contentInset = contentInset
+            self.textView.scrollIndicatorInsets = contentInset
+        }
+
+        // Optionally, scroll to the selected text
+        if let selectedRange = textView.selectedTextRange {
+            textView.scrollRangeToVisible(textView.selectedRange)
         }
     }
 
     @objc func keyboardWillHide(notification: NSNotification) {
-        textView.frame.origin.y = 82
-        textView.contentInset.bottom = 0
-        textView.scrollIndicatorInsets = textView.contentInset
+        UIView.animate(withDuration: 0.3) {
+            self.textView.contentInset = .zero
+            self.textView.scrollIndicatorInsets = .zero
+        }
     }
 
     
@@ -232,10 +238,6 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
       @objc func doneButtonTapped() {
         textField.resignFirstResponder()
         textView.resignFirstResponder() // Klavyeyi kapatır
-    /*    checkMarkItem.isHidden = true
-        checkMarkItem.isEnabled = false
-        encryptMarkItem.isEnabled = true
-        encryptMarkItem.isHidden = false */
       }
     
     @objc func encryptButtonTapped() {
@@ -282,25 +284,21 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     // Klavyenin "Done" tuşuna basıldığında çağrılacak fonksiyon
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" { // "Done" tuşuna basıldı mı kontrol et
-         //   textView.resignFirstResponder() // Klavyeyi kapat
             return true
         }
         return true
     }
-    
-    // Diğer fonksiyonlarınız burada yer alacak...
+
 
     // Şifre çözme ve şifreleme işlemleri için örnek fonksiyonlar
     func decryptText(with password: String) {
-        // Burada şifre çözme işlemini gerçekleştirin
-  //      textView.text = "Şifre çözüldü: \(textView.text)"
+
         isEncrypted = false
         decryptButton.setTitle("Şifrele", for: .normal)
     }
 
     func encryptText() {
-        // Burada şifreleme işlemini gerçekleştirin
-  //      textView.text = "Şifreli: \(textView.text)"
+
         isEncrypted = true
         decryptButton.setTitle("Şifreyi Aç", for: .normal)
     }
