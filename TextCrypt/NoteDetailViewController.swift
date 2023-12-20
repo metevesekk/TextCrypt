@@ -210,14 +210,14 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
 
         if textViewBottomY > keyboardTopY {
             let offset = textViewBottomY - keyboardTopY
-            view.frame.origin.y -= offset
+            textView.frame.origin.y -= offset
             textView.contentInset.bottom = keyboardFrame.size.height
             textView.scrollIndicatorInsets = textView.contentInset
         }
     }
 
     @objc func keyboardWillHide(notification: NSNotification) {
-        view.frame.origin.y = 0
+        textView.frame.origin.y = 82
         textView.contentInset.bottom = 0
         textView.scrollIndicatorInsets = textView.contentInset
     }
