@@ -25,10 +25,29 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     var timeLabel = UILabel()
     var dateLabel = UILabel()
     var bookMark = UILabel ()
+    
+    lazy var checkMarkItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .plain, target: self, action: #selector(doneButtonTapped))
+            return item
+        }()
+    lazy var encryptMarkItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(image: UIImage(systemName: "lock.open"), style: .plain, target: self, action: #selector(encryptButtonTapped))
+            return item
+        }()
+    lazy var backMarkItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backButtonTapped))
+            return item
+        }()
 
+    // MARK: ViewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isTranslucent = false
         view.backgroundColor = .black
+        self.navigationController?.navigationBar.backgroundColor = .black
+
+
         
         NotificationCenter.default.addObserver(
             self,
@@ -46,10 +65,13 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         setupTimeAndDateLabel()
         setupTitleLabel()
         setupTextView()
-        setupButtonStackView()
-        setupEncryptButton()
+        
+        navigationItem.rightBarButtonItem = encryptMarkItem
+        navigationItem.leftBarButtonItem = backMarkItem
+        
+        textView.delegate = self
         textField.delegate = self
-        doneButton.isHidden = true
+
     }
     
 
@@ -88,7 +110,6 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         NSLayoutConstraint.activate([
             dateLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
             dateLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 62),
-          //  dateLabel.rightAnchor.constraint(equalTo: timeLabel.leftAnchor, constant: -20),
             
             bookMark.leftAnchor.constraint(equalTo: dateLabel.rightAnchor, constant: 10),
             bookMark.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 62),
@@ -108,7 +129,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 82).isActive = true
         textView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         textView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
-        textView.backgroundColor = .gray
+        textView.backgroundColor = .black
         textView.textColor = .white
         textView.font = UIFont.systemFont(ofSize: 22)
 
@@ -116,33 +137,6 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         textView.returnKeyType = .done
     }
     
-    func setupButtonStackView() {
-            view.addSubview(buttonStackView)
-            buttonStackView.addArrangedSubview(backButton)
-            buttonStackView.addArrangedSubview(UIView())
-            buttonStackView.addArrangedSubview(doneButton)
-        
-            buttonStackView.axis = .horizontal
-            buttonStackView.distribution = .fill
-            buttonStackView.spacing = 70
-            buttonStackView.translatesAutoresizingMaskIntoConstraints = false
-            buttonStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -13).isActive = true
-            buttonStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-            buttonStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
-            buttonStackView.heightAnchor.constraint(equalToConstant: 40).isActive = true
-
-            setupBackButton()
-            setupDoneButton()
-        }
-    
-    func setupBackButton() {
-       // view.addSubview(backButton)
-        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 24, weight: .regular, scale: .default)
-        let openLockSymbol = UIImage(systemName: "arrow.left", withConfiguration: symbolConfiguration)
-        backButton.setImage(openLockSymbol, for: .normal)
-        backButton.tintColor = .systemYellow
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-    }
     
     func setupTitleTextField() {
         
@@ -165,7 +159,6 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         textField.text = "Başlık"
         textField.font = UIFont.boldSystemFont(ofSize: 24)
         textField.textColor = UIColor(displayP3Red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
-        // Diğer varsayılan ayarlarınız burada yer alabilir.
         return textField
     }
     
@@ -175,43 +168,23 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         titleLabel.textColor = .white
         navigationItem.titleView = titleLabel
     }
-
-    func setupDoneButton() {
-        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 24, weight: .regular, scale: .default)
-        let openLockSymbol = UIImage(systemName: "checkmark", withConfiguration: symbolConfiguration)
-        doneButton.setImage(openLockSymbol, for: .normal)
-        doneButton.tintColor = .systemYellow
-        doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
-    }
-    
-    func setupEncryptButton() {
-            view.addSubview(encryptButton)
-            let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 24, weight: .regular, scale: .default)
-            let openLockSymbol = UIImage(systemName: "lock.open", withConfiguration: symbolConfiguration)
-            encryptButton.setImage(openLockSymbol, for: .normal)
-            encryptButton.translatesAutoresizingMaskIntoConstraints = false
-            encryptButton.tintColor = .systemYellow // Sembolün rengini ayarla
-            encryptButton.addTarget(self, action: #selector(encryptButtonTapped), for: .touchUpInside)
-            encryptButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -13).isActive = true
-            encryptButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
-            encryptButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-    }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        doneButton.isHidden = false
-        doneButton.isEnabled = true
-        encryptButton.isEnabled = false
-        encryptButton.isHidden = true
+        navigationItem.rightBarButtonItem = checkMarkItem
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        navigationItem.rightBarButtonItem = encryptMarkItem
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.text == "Başlık"{
             textField.text = ""
         }
-        doneButton.isHidden = false
-        doneButton.isEnabled = true
-        encryptButton.isEnabled = false
-        encryptButton.isHidden = true
+        checkMarkItem.isHidden = false
+        checkMarkItem.isEnabled = true
+        encryptMarkItem.isEnabled = false
+        encryptMarkItem.isHidden = true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -259,10 +232,10 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
       @objc func doneButtonTapped() {
         textField.resignFirstResponder()
         textView.resignFirstResponder() // Klavyeyi kapatır
-        doneButton.isHidden = true
-        doneButton.isEnabled = false
-        encryptButton.isEnabled = true
-        encryptButton.isHidden = false
+    /*    checkMarkItem.isHidden = true
+        checkMarkItem.isEnabled = false
+        encryptMarkItem.isEnabled = true
+        encryptMarkItem.isHidden = false */
       }
     
     @objc func encryptButtonTapped() {
@@ -274,7 +247,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     }
 
 
-    @objc func backButtonTapped() {
+   @objc func backButtonTapped() {
         noteContent = textView.text
         titleContent = textField.text
         dismiss(animated: true) {

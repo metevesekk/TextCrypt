@@ -16,8 +16,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var indexPath = IndexPath()
     var titles = [String]()
     var selectedIndexPath: IndexPath?
-    
-    
+
 
 
     override func viewDidLoad() {
