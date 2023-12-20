@@ -223,39 +223,41 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
 
     //MARK: @objc fonksiyonları
     
-    @objc func keyboardWillShow(notification : NSNotification){
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            let keyboardOrigin = keyboardRectangle.origin
-            
-            animateTextView(toValue: keyboardHeight)
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame: CGRect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
         }
-        
-    }
-    
-    @objc func keyboardWillHide(notification : NSNotification){
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            let keyboardOrigin = keyboardRectangle.origin
-            
-            let animation = CABasicAnimation(keyPath: "transform.translation.y")
-            animation.fromValue = -keyboardHeight
-            animation.toValue = 0
-            animation.duration = 0.3
-            animation.fillMode = .forwards
-            animation.isRemovedOnCompletion = false
-         //   animation.autoreverses = true // Animasyonun tersine çevrilmesini sağlar
-            
-            // textView.layer'a animasyonu ekle
-            textView.layer.add(animation, forKey: "transform.translation.y")
-            
+
+        let keyboardTopY = keyboardFrame.origin.y
+        let selectedRange = textView.selectedRange
+        let textRect = textView.layoutManager.boundingRect(forGlyphRange: selectedRange, in: textView.textContainer)
+        let textViewRect = textView.convert(textRect, to: view)
+        let textViewBottomY = textViewRect.origin.y + textViewRect.size.height
+
+        if textViewBottomY > keyboardTopY {
+            let offset = textViewBottomY - keyboardTopY
+            view.frame.origin.y -= offset
+            textView.contentInset.bottom = keyboardFrame.size.height
+            textView.scrollIndicatorInsets = textView.contentInset
         }
-        
     }
 
+    @objc func keyboardWillHide(notification: NSNotification) {
+        view.frame.origin.y = 0
+        textView.contentInset.bottom = 0
+        textView.scrollIndicatorInsets = textView.contentInset
+    }
+
+    
+
+    
+    //MARK: Animasyon fonksiyonları
+    
+
+
       @objc func doneButtonTapped() {
+        textField.resignFirstResponder()
         textView.resignFirstResponder() // Klavyeyi kapatır
         doneButton.isHidden = true
         doneButton.isEnabled = false
@@ -303,26 +305,6 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         alert.addAction(submitAction)
         present(alert, animated: true)
     }
-    
-    //MARK: Animasyon fonksiyonları
-    
-    func animateTextView(toValue: CGFloat) {
-        // Animasyonun başlangıç ve bitiş değerlerini ayarla
-        let animation = CABasicAnimation(keyPath: "transform.translation.y")
-        animation.fromValue = 0
-        animation.toValue = -toValue
-        animation.duration = 0.3
-        animation.fillMode = .forwards
-        animation.isRemovedOnCompletion = false
-     //   animation.autoreverses = true // Animasyonun tersine çevrilmesini sağlar
-        
-        // textView.layer'a animasyonu ekle
-        textView.layer.add(animation, forKey: "transform.translation.y")
-    }
-
-
-    
-
 
     // Klavyenin "Done" tuşuna basıldığında çağrılacak fonksiyon
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
