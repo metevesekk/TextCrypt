@@ -45,13 +45,6 @@ class TableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-/*    override func setSelected(_ selected: Bool, animated: Bool) {
-            super.setSelected(selected, animated: animated)
-
-            // Hücrenin arka plan rengini burada ayarlayın
-            backgroundColor = selected ?  UIColor(displayP3Red: 0.15, green: 0.15, blue: 0.15, alpha: 1) :  UIColor(displayP3Red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
-        } */
 
     private func setupConstraints() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

@@ -48,7 +48,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         super.viewDidLoad()
         navigationController?.navigationBar.isTranslucent = false
         view.backgroundColor = .black
-        self.navigationController?.navigationBar.backgroundColor = .clear
+        self.navigationController?.navigationBar.backgroundColor = .black
 
 
         
@@ -112,13 +112,13 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         
         NSLayoutConstraint.activate([
             dateLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
-            dateLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 62),
+            dateLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 13),
             
             bookMark.leftAnchor.constraint(equalTo: dateLabel.rightAnchor, constant: 10),
-            bookMark.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 62),
+            bookMark.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 13),
             
             timeLabel.leftAnchor.constraint(equalTo: dateLabel.rightAnchor, constant: 22),
-            timeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 62),
+            timeLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 13),
 
             
         ])
@@ -129,9 +129,9 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         textView.delegate = self
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-        textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 82).isActive = true
+        textView.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 10).isActive = true
         textView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
-        textView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
+        textView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         textView.backgroundColor = .black
         textView.textColor = .white
         textView.font = UIFont.systemFont(ofSize: 22)
@@ -150,7 +150,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         view.addSubview(textField)
 
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
+        textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         textField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
         textField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         textField.font = UIFont.boldSystemFont(ofSize: 24)
@@ -208,7 +208,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
 
         let keyboardHeight = keyboardFrame.height
         var contentInset = textView.contentInset
-        contentInset.bottom = keyboardHeight - view.safeAreaInsets.bottom
+        contentInset.bottom = keyboardHeight - view.safeAreaInsets.bottom + 25
 
         UIView.animate(withDuration: 0.3) {
             self.textView.contentInset = contentInset
