@@ -162,7 +162,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         textField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
         textField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         textField.font = UIFont.boldSystemFont(ofSize: 24)
-        textField.textColor = .darkGray
+        textField.textColor = .white
     }
     
     func createDefaultTextField() -> UITextField {
