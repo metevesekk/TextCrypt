@@ -25,6 +25,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     var timeLabel = UILabel()
     var dateLabel = UILabel()
     var bookMark = UILabel ()
+    var charCountLabel = UILabel()
     
     lazy var checkMarkItem: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .plain, target: self, action: #selector(doneButtonTapped))
@@ -49,6 +50,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         navigationController?.navigationBar.isTranslucent = false
         view.backgroundColor = .black
         self.navigationController?.navigationBar.backgroundColor = .black
+        charCountLabel.text = "0 karakter"
 
 
         
@@ -89,6 +91,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         view.addSubview(dateLabel)
         view.addSubview(timeLabel)
         view.addSubview(bookMark)
+        view.addSubview(charCountLabel)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
         let timeFormatter = DateFormatter()
@@ -102,13 +105,16 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         dateLabel.font = .systemFont(ofSize: 17)
         timeLabel.font = .systemFont(ofSize: 17)
         bookMark.font = .systemFont(ofSize: 17)
+        charCountLabel.font = .systemFont(ofSize: 17)
         dateLabel.textColor = .systemGray2
         timeLabel.textColor = .systemGray2
         bookMark.textColor = .systemGray2
+        charCountLabel.textColor = .systemGray2
         
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         bookMark.translatesAutoresizingMaskIntoConstraints = false
+        charCountLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             dateLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
@@ -119,7 +125,9 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
             
             timeLabel.leftAnchor.constraint(equalTo: dateLabel.rightAnchor, constant: 22),
             timeLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 13),
-
+            
+            charCountLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
+            charCountLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 13)
             
         ])
     }
@@ -170,6 +178,12 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         titleLabel.font = UIFont.systemFont(ofSize: 25)
         titleLabel.textColor = .white
         navigationItem.titleView = titleLabel
+    }
+    
+    //MARK: Text View fonksiyonları
+    
+    func textViewDidChange(_ textView: UITextView) {
+        charCountLabel.text = "\(textView.text.count) karakter"
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
