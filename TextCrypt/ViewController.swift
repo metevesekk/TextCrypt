@@ -16,8 +16,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var indexPath = IndexPath()
     var titles = [String]()
     var selectedIndexPath: IndexPath?
-
-
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private var models = [NoteText]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +26,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         setupCreateNoteButton()
         view.backgroundColor = .black
         tableView.backgroundColor = .black
+        tableView.delegate = self
+        tableView.dataSource = self
         
         let longPressGestureButton = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressCell))
         let longPressGestureCell = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressButton))
@@ -44,19 +46,36 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //MARK: Core Data Fonksiyonları
     
     func getAllItems(){
-        
+        do{
+            models = try context.fetch(NoteText.fetchRequest())
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }catch{
+            //error
+        }
     }
     
     func createItem(title: String, text: String){
+        let newItem = NoteText(context: context)
+        newItem.title = title
+        newItem.text = text
         
+        do{
+            try context.save()
+        }catch{
+            
+        }
     }
     
     func deleteItem(item: NoteText){
+        context.delete(item)
         
-    }
-    
-    func updateItem(item: NoteText){
-        
+        do{
+            try context.save()
+        }catch{
+            
+        }
     }
     
     //MARK: setup Fonksiyonları
