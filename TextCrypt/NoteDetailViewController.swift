@@ -50,7 +50,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         navigationController?.navigationBar.isTranslucent = false
         view.backgroundColor = .black
         self.navigationController?.navigationBar.backgroundColor = .black
-        charCountLabel.text = "0 karakter"
+        charCountLabel.text = "\(textView.text.count) karakter"
 
 
         
@@ -162,7 +162,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         textField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
         textField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         textField.font = UIFont.boldSystemFont(ofSize: 24)
-        textField.textColor = .white
+        textField.textColor = .gray
     }
     
     func createDefaultTextField() -> UITextField {
@@ -197,11 +197,15 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.text == "Başlık"{
             textField.text = ""
+            navigationItem.rightBarButtonItem = encryptMarkItem
         }
-        checkMarkItem.isHidden = false
-        checkMarkItem.isEnabled = true
-        encryptMarkItem.isEnabled = false
-        encryptMarkItem.isHidden = true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+            if textField.text == ""{
+                textField.text = "Başlık"
+                textField.textColor = .gray
+            }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
