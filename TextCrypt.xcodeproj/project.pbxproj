@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3578AAEB2B35A6B9007AF937 /* NoteText+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3578AAE92B35A6B9007AF937 /* NoteText+CoreDataClass.swift */; };
+		3578AAEC2B35A6B9007AF937 /* NoteText+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3578AAEA2B35A6B9007AF937 /* NoteText+CoreDataProperties.swift */; };
 		357FBB622B264F540090F785 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357FBB612B264F540090F785 /* AppDelegate.swift */; };
 		357FBB642B264F540090F785 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357FBB632B264F540090F785 /* SceneDelegate.swift */; };
 		357FBB662B264F540090F785 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357FBB652B264F540090F785 /* ViewController.swift */; };
@@ -44,6 +46,8 @@
 /* Begin PBXFileReference section */
 		2B761E4A64D6863CEAF5BEB2 /* Pods-TextCryptTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextCryptTests.release.xcconfig"; path = "Target Support Files/Pods-TextCryptTests/Pods-TextCryptTests.release.xcconfig"; sourceTree = "<group>"; };
 		32A3B86FEA4D6C6B67C05F1C /* Pods-TextCrypt-TextCryptUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextCrypt-TextCryptUITests.debug.xcconfig"; path = "Target Support Files/Pods-TextCrypt-TextCryptUITests/Pods-TextCrypt-TextCryptUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		3578AAE92B35A6B9007AF937 /* NoteText+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteText+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3578AAEA2B35A6B9007AF937 /* NoteText+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteText+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		357FBB5E2B264F540090F785 /* TextCrypt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextCrypt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		357FBB612B264F540090F785 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		357FBB632B264F540090F785 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +114,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		3578AAED2B35A73B007AF937 /* NoteText */ = {
+			isa = PBXGroup;
+			children = (
+				3578AAE92B35A6B9007AF937 /* NoteText+CoreDataClass.swift */,
+				3578AAEA2B35A6B9007AF937 /* NoteText+CoreDataProperties.swift */,
+			);
+			path = NoteText;
+			sourceTree = "<group>";
+		};
 		357FBB552B264F540090F785 = {
 			isa = PBXGroup;
 			children = (
@@ -135,16 +148,17 @@
 		357FBB602B264F540090F785 /* TextCrypt */ = {
 			isa = PBXGroup;
 			children = (
-				357FBB612B264F540090F785 /* AppDelegate.swift */,
-				357FBB632B264F540090F785 /* SceneDelegate.swift */,
-				357FBB652B264F540090F785 /* ViewController.swift */,
+				3578AAED2B35A73B007AF937 /* NoteText */,
 				357FBB942B264F820090F785 /* NoteDetailViewController.swift */,
+				357FBB652B264F540090F785 /* ViewController.swift */,
 				35AC3CE22B2F1EB500782A14 /* TableViewCell.swift */,
-				357FBB672B264F540090F785 /* Main.storyboard */,
-				357FBB6D2B264F560090F785 /* Assets.xcassets */,
+				357FBB632B264F540090F785 /* SceneDelegate.swift */,
+				357FBB612B264F540090F785 /* AppDelegate.swift */,
 				357FBB6F2B264F560090F785 /* LaunchScreen.storyboard */,
+				357FBB672B264F540090F785 /* Main.storyboard */,
 				357FBB722B264F560090F785 /* Info.plist */,
 				357FBB6A2B264F540090F785 /* TextCrypt.xcdatamodeld */,
+				357FBB6D2B264F560090F785 /* Assets.xcassets */,
 			);
 			path = TextCrypt;
 			sourceTree = "<group>";
@@ -417,9 +431,11 @@
 			files = (
 				357FBB662B264F540090F785 /* ViewController.swift in Sources */,
 				357FBB6C2B264F540090F785 /* TextCrypt.xcdatamodeld in Sources */,
+				3578AAEB2B35A6B9007AF937 /* NoteText+CoreDataClass.swift in Sources */,
 				357FBB952B264F820090F785 /* NoteDetailViewController.swift in Sources */,
 				35AC3CE32B2F1EB500782A14 /* TableViewCell.swift in Sources */,
 				357FBB622B264F540090F785 /* AppDelegate.swift in Sources */,
+				3578AAEC2B35A6B9007AF937 /* NoteText+CoreDataProperties.swift in Sources */,
 				357FBB642B264F540090F785 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

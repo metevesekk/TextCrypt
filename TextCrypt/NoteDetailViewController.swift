@@ -234,7 +234,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         }
 
         // Optionally, scroll to the selected text
-        if let selectedRange = textView.selectedTextRange {
+        if textView.selectedTextRange != nil {
             textView.scrollRangeToVisible(textView.selectedRange)
         }
     }

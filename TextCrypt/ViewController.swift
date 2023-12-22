@@ -41,7 +41,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.reloadData()
     }
 
-
+    //MARK: Core Data Fonksiyonları
+    
+    func getAllItems(){
+        
+    }
+    
+    func createItem(title: String, text: String){
+        
+    }
+    
+    func deleteItem(item: NoteText){
+        
+    }
+    
+    func updateItem(item: NoteText){
+        
+    }
+    
+    //MARK: setup Fonksiyonları
+    
     func setupTableView() {
         view.addSubview(tableView)
         tableView.dataSource = self
@@ -74,7 +93,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         ])
         createNoteButton.addTarget(self, action: #selector(createNoteButtonTapped), for: .touchUpInside)
     }
-
+    
+    private func resetButtonSize(){
+        UIView.animate(withDuration: 0.1) {
+            self.createNoteButton.transform = CGAffineTransform.identity
+        }
+    }
+    
+    // MARK: @objc fonksiyonları
+    
     @objc func createNoteButtonTapped() {
         let noteDetailVC = NoteDetailViewController()
             noteDetailVC.dismissAction = { [weak self] in
@@ -126,13 +153,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    private func resetButtonSize(){
-        UIView.animate(withDuration: 0.1) {
-            self.createNoteButton.transform = CGAffineTransform.identity
-        }
-    }
 
-
+    // MARK: tavleView ayarları
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -163,17 +185,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cellSpacing
     }
 
+    // MARK: didSelectRowAt
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.reloadRows(at: [indexPath], with: .none)
 
         if let cell = tableView.cellForRow(at: indexPath) {
             let animation = CABasicAnimation(keyPath: "transform.scale")
-            animation.fromValue = 1.0  // Başlangıç ölçeği (normal boyut)
-            animation.toValue = 0.92   // Bitiş ölçeği (biraz büyütülmüş)
-            animation.duration = 0.1
-            animation.autoreverses = true  // Animasyonun tersine çevrilmesi (küçülmesi)
-            animation.repeatCount = 1      // Tekrar sayısı
+            animation.fromValue = 1.0 
+            animation.toValue = 0.92
+            animation.duration = 0.15
+            animation.autoreverses = true
+            animation.repeatCount = 1
 
             cell.layer.add(animation, forKey: "bounce")
         }
