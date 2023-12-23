@@ -119,7 +119,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    // MARK: @objc fonksiyonları
+    // MARK: @objc fonksiyonlarıı
     
     @objc func createNoteButtonTapped() {
         let noteDetailVC = NoteDetailViewController()
