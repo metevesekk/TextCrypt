@@ -1,11 +1,13 @@
 //
 //  NoteDetailViewController.swift
-//  TextCrypt
+//  NoteCrypt
 //
-//  Created by Mete Vesek on 10.12.2023.
+//  Created by Mete Vesek on 24.12.2023.
 //
 
+
 import UIKit
+import CoreData
 
 class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate{
 
@@ -26,6 +28,12 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     var dateLabel = UILabel()
     var bookMark = UILabel ()
     var charCountLabel = UILabel()
+    var managedObjectContext: NSManagedObjectContext!
+    var note: NoteText? // Eğer bir not düzenleniyorsa, bu not burada tutulur
+
+    // Kaydetme işlemini yönetecek closure
+    var ismissAction: (() -> Void)?
+
     
     lazy var checkMarkItem: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .plain, target: self, action: #selector(doneButtonTapped))
@@ -51,8 +59,13 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         view.backgroundColor = .black
         self.navigationController?.navigationBar.backgroundColor = .black
         charCountLabel.text = "\(textView.text.count) karakter"
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("Cannot retrieve app delegate")
+        }
+        managedObjectContext = appDelegate.persistentContainer.viewContext
 
-
+        loadNoteData()
         
         NotificationCenter.default.addObserver(
             self,
@@ -79,11 +92,44 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadNoteData()
+    }
+    
 
     deinit {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
+    
+    func saveNote() {
+           guard let context = managedObjectContext else {
+               print("Managed Object Context is not set.")
+               return
+           }
+           
+           // Eğer bir not varsa güncelle, yoksa yeni oluştur
+        let newNote = NoteText(context: managedObjectContext)
+        newNote.title = textField.text ?? ""
+        newNote.text = textView.text ?? ""
+
+           do {
+               try context.save()
+               dismissAction?()
+           } catch {
+               print("Could not save the note: \(error)")
+           }
+       }
+    
+    func loadNoteData() {
+        if let note = note {
+            textView.text = note.text
+            textField.text = note.title
+        }
+    }
+
+
     
     //MARK: setup fonksiyonları
     
@@ -267,13 +313,36 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     }
 
 
-   @objc func backButtonTapped() {
-        noteContent = textView.text
-        titleContent = textField.text
+ /*    @objc func backButtonTapped() {
+        // Notu kaydet veya güncelle
+        saveNote()
+        // ViewController'a geri dön
         dismiss(animated: true) {
             self.dismissAction?()
         }
+    } */
+    
+    @objc func backButtonTapped() {
+        if let text = textView.text, !text.isEmpty, let title = textField.text, !title.isEmpty {
+            // Notu kaydet veya güncelle
+            if note == nil {
+                // Yeni bir not oluştur
+                note = NoteText(context: managedObjectContext)
+            }
+            // Mevcut notu güncelle
+            note?.title = title
+            note?.text = text
+            do {
+                try managedObjectContext.save()
+            } catch {
+                print("Could not save the note: \(error)")
+            }
+        }
+        // ViewController'a geri dön
+        dismiss(animated: true, completion: dismissAction)
     }
+
+
 
     //MARK: Şifreleme ile ilgili kodlar
 
@@ -326,4 +395,3 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         case decrypt
     }
 }
-

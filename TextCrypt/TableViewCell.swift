@@ -1,17 +1,18 @@
 //
 //  TableViewCell.swift
-//  TextCrypt
+//  NoteCrypt
 //
-//  Created by Mete Vesek on 17.12.2023.
+//  Created by Mete Vesek on 24.12.2023.
 //
 
+
 import UIKit
+import CoreData
 
 class TableViewCell: UITableViewCell {
 
     let titleLabel = UILabel()
     let noteLabel = UILabel()
-    let dateLabel = UILabel()
     
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -62,8 +63,10 @@ class TableViewCell: UITableViewCell {
         ])
     }
 
-    func configure(withTitle title: String, note: String) {
-        titleLabel.text = title
-        noteLabel.text = note
-    }
+    func configure(with note: NoteText) {
+           titleLabel.text = note.title
+           noteLabel.text = note.text  // Örnek olarak tüm text'i gösteriyoruz, özet veya ilk birkaç kelime olabilir.
+           // ... Diğer konfigürasyonlar
+       }
 }
+

@@ -28,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Pencereyi görünür yap
         window?.makeKeyAndVisible()
+        
+       
+
 
         return true
     }

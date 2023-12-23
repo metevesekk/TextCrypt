@@ -1,33 +1,40 @@
 //
 //  ViewController.swift
-//  TextCrypt
+//  NoteCrypt
 //
-//  Created by Mete Vesek on 10.12.2023.
+//  Created by Mete Vesek on 24.12.2023.
 //
 
+
 import UIKit
+import CoreData
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    let tableView = UITableView()
-    let createNoteButton = UIButton()
-    let cellSpacing : CGFloat = 8
-    var notes = [String]()
-    var indexPath = IndexPath()
-    var titles = [String]()
-    var selectedIndexPath: IndexPath?
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    private var models = [NoteText]()
+    // Core Data context
+        var context: NSManagedObjectContext!
+
+        let tableView = UITableView()
+        let createNoteButton = UIButton()
+        let cellSpacing : CGFloat = 8
+        var fetchedNotes: [NoteText] = [] // Yeni dizi
+        var selectedIndexPath: IndexPath?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("Cannot retrieve app delegate")
+        }
+        context = appDelegate.persistentContainer.viewContext
 
         setupCreateNoteButton()
         view.backgroundColor = .black
         tableView.backgroundColor = .black
         tableView.delegate = self
         tableView.dataSource = self
+        fetchNotes()
         
         let longPressGestureButton = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressCell))
         let longPressGestureCell = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressButton))
@@ -40,43 +47,33 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        fetchNotes()
     }
 
     //MARK: Core Data Fonksiyonları
     
-    func getAllItems(){
-        do{
-            models = try context.fetch(NoteText.fetchRequest())
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+ 
+    func fetchNotes() {
+            let request: NSFetchRequest<NoteText> = NoteText.fetchRequest()
+            do {
+                fetchedNotes = try context.fetch(request)
+            } catch {
+                print("Not çekme hatası: \(error)")
             }
-        }catch{
-            //error
+            tableView.reloadData()
         }
-    }
     
-    func createItem(title: String, text: String){
-        let newItem = NoteText(context: context)
-        newItem.title = title
-        newItem.text = text
-        
-        do{
-            try context.save()
-        }catch{
-            
-        }
-    }
-    
-    func deleteItem(item: NoteText){
-        context.delete(item)
-        
-        do{
-            try context.save()
-        }catch{
-            
-        }
-    }
+    func addNoteWithTitle(_ title: String, text: String) {
+           let newNote = NoteText(context: context)
+           newNote.title = title
+           newNote.text = text
+           do {
+               try context.save()
+               fetchNotes() // Listeyi güncelle
+           } catch {
+               print("Not kaydetme hatası: \(error)")
+           }
+       }
     
     //MARK: setup Fonksiyonları
     
@@ -119,22 +116,31 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    // MARK: @objc fonksiyonlarıı
+    // MARK: @objc fonksiyonları
     
     @objc func createNoteButtonTapped() {
         let noteDetailVC = NoteDetailViewController()
-            noteDetailVC.dismissAction = { [weak self] in
-                if let newNote = noteDetailVC.noteContent, !newNote.isEmpty,
-                   let newTitle = noteDetailVC.titleContent, !newTitle.isEmpty {
-                    self?.notes.append(newNote)
-                    self?.titles.append(newTitle)
-                    self?.tableView.reloadData()
-                }
+        // İlk olarak managedObjectContext ve dismissAction'ı ayarla
+        noteDetailVC.managedObjectContext = self.context
+        noteDetailVC.dismissAction = { [weak self] in
+            // Kullanıcı arayüzünden gelen not bilgilerini al
+            if let newNote = noteDetailVC.noteContent, !newNote.isEmpty,
+               let newTitle = noteDetailVC.titleContent, !newTitle.isEmpty {
+                // Yeni bir Core Data nesnesi oluştur ve kaydet
+                self?.addNoteWithTitle(newTitle, text: newNote)
             }
+            // Notları tekrar çekmek için fetchNotes çağrılabilir
+            self?.fetchNotes()
+        }
+
+        // Not detayı için bir navigation controller oluştur
         let navigationController = UINavigationController(rootViewController: noteDetailVC)
         navigationController.modalPresentationStyle = .fullScreen
+
+        // Navigation controller'ı sun
         present(navigationController, animated: true)
     }
+
     
     @objc func handleLongPressButton(gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
@@ -180,19 +186,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return min(notes.count, titles.count)
+        return fetchedNotes.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as? TableViewCell else {
-               return UITableViewCell()
-           }
+            return UITableViewCell()
+        }
         
-        let title = titles[indexPath.section]
-        let note = notes[indexPath.section]
-        cell.configure(withTitle: title, note: note)
+        // Fetch edilen notları kullanarak hücreyi yapılandır
+        let note = fetchedNotes[indexPath.section]
+        cell.configure(with: note)
+        
         return cell
     }
+
+
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
@@ -207,37 +216,65 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: didSelectRowAt
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.reloadRows(at: [indexPath], with: .none)
-
         if let cell = tableView.cellForRow(at: indexPath) {
             let animation = CABasicAnimation(keyPath: "transform.scale")
-            animation.fromValue = 1.0 
+            animation.fromValue = 1.0
             animation.toValue = 0.92
             animation.duration = 0.15
             animation.autoreverses = true
             animation.repeatCount = 1
 
             cell.layer.add(animation, forKey: "bounce")
-        }
+            }
         
         let noteDetailVC = NoteDetailViewController()
-        noteDetailVC.textView.text = notes[indexPath.row]
-        noteDetailVC.textField.text = titles[indexPath.row]
-        noteDetailVC.noteContent = notes[indexPath.row]
-        noteDetailVC.titleContent = titles[indexPath.row]
+        // Seçilen notu NoteDetailViewController'a geçir
+        let selectedNote = fetchedNotes[indexPath.section]
+        noteDetailVC.note = selectedNote
+        noteDetailVC.noteContent = selectedNote.text
+        noteDetailVC.titleContent = selectedNote.title
         noteDetailVC.dismissAction = { [weak self] in
-            if let updatedNote = noteDetailVC.noteContent, let updatedTitle = noteDetailVC.titleContent {
-                self?.notes[indexPath.row] = updatedNote
-                self?.titles[indexPath.row] = updatedTitle
-                self?.tableView.reloadData()
+            noteDetailVC.dismissAction = { [weak self] in
+                // Kullanıcı arayüzünden gelen not bilgilerini al
+                if let newNote = noteDetailVC.noteContent, !newNote.isEmpty,
+                   let newTitle = noteDetailVC.titleContent, !newTitle.isEmpty {
+                    // Yeni bir Core Data nesnesi oluştur ve kaydet
+                }
+                // Notları tekrar çekmek için fetchNotes çağrılabilir
+                self?.fetchNotes()
             }
+
         }
         let navigationController = UINavigationController(rootViewController: noteDetailVC)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }
+
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-       
-    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            if editingStyle == .delete {
+                // Silme işlemini burada gerçekleştirin
+                deleteNoteAtIndexPath(indexPath)
+            }
+            // Diğer düzenleme stilleri için de burada kod ekleyebilirsiniz
+        }
+        
+        func deleteNoteAtIndexPath(_ indexPath: IndexPath) {
+            let noteToDelete = fetchedNotes[indexPath.section]
+            context.delete(noteToDelete)
+            fetchedNotes.remove(at: indexPath.section)
+            
+            do {
+                try context.save()
+                tableView.beginUpdates()
+                tableView.deleteSections([indexPath.section], with: .automatic)
+                tableView.endUpdates()
+            } catch {
+                print("Not silme hatası: \(error)")
+            }
+        }
 }
+
+
