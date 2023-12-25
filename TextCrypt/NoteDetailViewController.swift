@@ -94,6 +94,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        charCountLabel.text = "\(textView.text.count) karakter"
         loadNoteData()
     }
     
@@ -312,17 +313,9 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         }
     }
 
-
- /*    @objc func backButtonTapped() {
-        // Notu kaydet veya güncelle
-        saveNote()
-        // ViewController'a geri dön
-        dismiss(animated: true) {
-            self.dismissAction?()
-        }
-    } */
     
     @objc func backButtonTapped() {
+        
         if let text = textView.text, !text.isEmpty, let title = textField.text, !title.isEmpty {
             // Notu kaydet veya güncelle
             if note == nil {
@@ -338,9 +331,41 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
                 print("Could not save the note: \(error)")
             }
         }
-        // ViewController'a geri dön
-        dismiss(animated: true, completion: dismissAction)
+        
+        guard let note = self.note else {
+            dismiss(animated: true, completion: dismissAction)
+            return
+        }
+
+        // Notun başlığını ve içeriğini kontrol et
+        if let text = textView.text, let title = textField.text {
+            if text.isEmpty && title.isEmpty {
+                // Notun hem içeriği hem de başlığı boş ise, notu sil ve geri dön
+                managedObjectContext.delete(note)
+                do {
+                    try managedObjectContext.save()
+                } catch {
+                    print("Could not save after deleting the note: \(error)")
+                }
+                dismiss(animated: true, completion: dismissAction)
+            } else {
+                
+                // Notun içeriği veya başlığı varsa, güncelle veya kaydet
+                note.title = title
+                note.text = text
+                do {
+                    try managedObjectContext.save()
+                } catch {
+                    print("Could not save the note: \(error)")
+                }
+                dismiss(animated: true, completion: dismissAction)
+            }
+        } else {
+            // Eğer text veya title nil ise, direkt geri dön
+            dismiss(animated: true, completion: dismissAction)
+        }
     }
+
 
 
 

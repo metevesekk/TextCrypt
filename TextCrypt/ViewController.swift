@@ -11,15 +11,16 @@ import CoreData
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    // Core Data context
-        var context: NSManagedObjectContext!
 
+        var context: NSManagedObjectContext!
         let tableView = UITableView()
         let createNoteButton = UIButton()
         let cellSpacing : CGFloat = 8
         var fetchedNotes: [NoteText] = [] // Yeni dizi
         var selectedIndexPath: IndexPath?
 
+    //MARK: viewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
@@ -45,14 +46,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         createNoteButton.addGestureRecognizer(longPressGestureCell)
     }
     
+    // MARK: viewWillAppear
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchNotes()
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 
     //MARK: Core Data Fonksiyonları
     
- 
     func fetchNotes() {
             let request: NSFetchRequest<NoteText> = NoteText.fetchRequest()
             do {
@@ -74,6 +78,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                print("Not kaydetme hatası: \(error)")
            }
        }
+    
+    func deleteNoteAtIndexPath(_ indexPath: IndexPath) {
+        let noteToDelete = fetchedNotes[indexPath.section]
+        context.delete(noteToDelete)
+        fetchedNotes.remove(at: indexPath.section)
+        
+        do {
+            try context.save()
+            tableView.beginUpdates()
+            tableView.deleteSections([indexPath.section], with: .automatic)
+            tableView.endUpdates()
+        } catch {
+            print("Not silme hatası: \(error)")
+        }
+    }
     
     //MARK: setup Fonksiyonları
     
@@ -108,6 +127,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         createNoteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -55)
         ])
         createNoteButton.addTarget(self, action: #selector(createNoteButtonTapped), for: .touchUpInside)
+    }
+    
+    // MARK: reset fonksiyonları
+    
+    private func resetCellSize(at indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            UIView.animate(withDuration: 0.2) {
+                cell.transform = CGAffineTransform.identity
+            }
+        }
     }
     
     private func resetButtonSize(){
@@ -169,14 +198,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
     }
-
-    private func resetCellSize(at indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
-            UIView.animate(withDuration: 0.2) {
-                cell.transform = CGAffineTransform.identity
-            }
-        }
-    }
     
 
     // MARK: tavleView ayarları
@@ -200,8 +221,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         return cell
     }
-
-
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
@@ -216,8 +235,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: didSelectRowAt
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.reloadRows(at: [indexPath], with: .none)
+        
         if let cell = tableView.cellForRow(at: indexPath) {
             let animation = CABasicAnimation(keyPath: "transform.scale")
             animation.fromValue = 1.0
@@ -227,7 +246,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             animation.repeatCount = 1
 
             cell.layer.add(animation, forKey: "bounce")
-            }
+        }
         
         let noteDetailVC = NoteDetailViewController()
         // Seçilen notu NoteDetailViewController'a geçir
@@ -236,8 +255,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         noteDetailVC.noteContent = selectedNote.text
         noteDetailVC.titleContent = selectedNote.title
         noteDetailVC.dismissAction = { [weak self] in
-            noteDetailVC.dismissAction = { [weak self] in
-                // Kullanıcı arayüzünden gelen not bilgilerini al
+            // Kullanıcı notu tamamen silip geri döndüğünde ilgili notu sil
+            if let newNote = noteDetailVC.noteContent, newNote.isEmpty,
+               let newTitle = noteDetailVC.titleContent, newTitle.isEmpty {
+                // Not silme fonksiyonunu çağır
+                self?.deleteNoteAtIndexPath(indexPath)
+            } else {
+                // Not güncellendiyse veya değişiklik olmadıysa güncellemeleri kaydet
                 if let newNote = noteDetailVC.noteContent, !newNote.isEmpty,
                    let newTitle = noteDetailVC.titleContent, !newTitle.isEmpty {
                     // Yeni bir Core Data nesnesi oluştur ve kaydet
@@ -245,12 +269,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 // Notları tekrar çekmek için fetchNotes çağrılabilir
                 self?.fetchNotes()
             }
-
         }
+        
         let navigationController = UINavigationController(rootViewController: noteDetailVC)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }
+
 
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -259,21 +284,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 deleteNoteAtIndexPath(indexPath)
             }
             // Diğer düzenleme stilleri için de burada kod ekleyebilirsiniz
-        }
-        
-        func deleteNoteAtIndexPath(_ indexPath: IndexPath) {
-            let noteToDelete = fetchedNotes[indexPath.section]
-            context.delete(noteToDelete)
-            fetchedNotes.remove(at: indexPath.section)
-            
-            do {
-                try context.save()
-                tableView.beginUpdates()
-                tableView.deleteSections([indexPath.section], with: .automatic)
-                tableView.endUpdates()
-            } catch {
-                print("Not silme hatası: \(error)")
-            }
         }
 }
 
