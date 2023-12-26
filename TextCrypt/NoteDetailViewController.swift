@@ -29,10 +29,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     var bookMark = UILabel ()
     var charCountLabel = UILabel()
     var managedObjectContext: NSManagedObjectContext!
-    var note: NoteText? // Eğer bir not düzenleniyorsa, bu not burada tutulur
-
-    // Kaydetme işlemini yönetecek closure
-    var ismissAction: (() -> Void)?
+    var note: NoteText?
 
     
     lazy var checkMarkItem: UIBarButtonItem = {
@@ -41,7 +38,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
             return item
         }()
     lazy var encryptMarkItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(image: UIImage(systemName: "lock.open"), style: .plain, target: self, action: #selector(encryptButtonTapped))
+        let item = UIBarButtonItem(image: UIImage(systemName: "lock.fill"), style: .plain, target: self, action: #selector(encryptButtonTapped))
         item.tintColor = .systemYellow
             return item
         }()
@@ -205,7 +202,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         view.addSubview(textField)
 
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         textField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
         textField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         textField.font = UIFont.boldSystemFont(ofSize: 24)
@@ -261,6 +258,14 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         }
         return true
     }
+    
+    // Klavyenin "Done" tuşuna basıldığında çağrılacak fonksiyon
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            return true
+        }
+        return true
+    }
 
     //MARK: @objc fonksiyonları
 
@@ -293,12 +298,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         }
     }
 
-    
-
-    
-    //MARK: Animasyon fonksiyonları
-    
-
+    //MARK: tapped fonksiyonları
 
       @objc func doneButtonTapped() {
         textField.resignFirstResponder()
@@ -316,7 +316,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     
     @objc func backButtonTapped() {
         
-        if let text = textView.text, !text.isEmpty, let title = textField.text, !title.isEmpty {
+    /*    if let text = textView.text, !text.isEmpty, let title = textField.text, !title.isEmpty {
             // Notu kaydet veya güncelle
             if note == nil {
                 // Yeni bir not oluştur
@@ -330,8 +330,28 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
             } catch {
                 print("Could not save the note: \(error)")
             }
-        }
+        } */
         
+        if !(textView.text?.isEmpty ?? true) || (textField.text != "Başlık" && !(textField.text?.isEmpty ?? true)) {
+               // textView veya textField (veya her ikisi de) içerik içeriyorsa
+
+               // NoteText örneği oluştur veya mevcut notu güncelle
+               if note == nil {
+                   note = NoteText(context: managedObjectContext)
+               }
+
+               // Notun başlığını ve metnini güncelle
+               note?.title = textField.text
+               note?.text = textView.text
+
+               // Context'i kaydetmeyi dene
+               do {
+                   try managedObjectContext.save()
+               } catch {
+                   print("Notu kaydedemedim: \(error)")
+               }
+           }
+
         guard let note = self.note else {
             dismiss(animated: true, completion: dismissAction)
             return
@@ -393,13 +413,6 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         present(alert, animated: true)
     }
 
-    // Klavyenin "Done" tuşuna basıldığında çağrılacak fonksiyon
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n" { // "Done" tuşuna basıldı mı kontrol et
-            return true
-        }
-        return true
-    }
 
 
     // Şifre çözme ve şifreleme işlemleri için örnek fonksiyonlar

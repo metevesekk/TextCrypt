@@ -12,17 +12,25 @@ import CoreData
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
 
-        var context: NSManagedObjectContext!
-        let tableView = UITableView()
-        let createNoteButton = UIButton()
-        let cellSpacing : CGFloat = 8
-        var fetchedNotes: [NoteText] = [] // Yeni dizi
-        var selectedIndexPath: IndexPath?
+    var context: NSManagedObjectContext!
+    let tableView = UITableView()
+    let createNoteButton = UIButton()
+    let cellSpacing : CGFloat = 8
+    var fetchedNotes: [NoteText] = []
+    var titleLabel = UILabel()
+    var selectedIndexPath: IndexPath?
+    
+        lazy var optionsMarkItem : UIBarButtonItem = {
+        let item = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(optionButtonTapped))
+        item.tintColor = .systemYellow
+        return item
+    }()
 
     //MARK: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .black
         setupTableView()
 
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -31,11 +39,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         context = appDelegate.persistentContainer.viewContext
 
         setupCreateNoteButton()
-        view.backgroundColor = .black
+        setupTitleLabel()
         tableView.backgroundColor = .black
         tableView.delegate = self
         tableView.dataSource = self
         fetchNotes()
+        navigationItem.rightBarButtonItem = optionsMarkItem
         
         let longPressGestureButton = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressCell))
         let longPressGestureCell = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressButton))
@@ -102,7 +111,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor)
@@ -129,6 +138,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         createNoteButton.addTarget(self, action: #selector(createNoteButtonTapped), for: .touchUpInside)
     }
     
+    func setupTitleLabel() {
+        titleLabel.text = "TextCrypt"
+        titleLabel.font = UIFont(name: "TimesNewRomanPS-BoldMT", size: 27)
+        titleLabel.textColor = .white
+        navigationItem.titleView = titleLabel
+    }
+    
     // MARK: reset fonksiyonları
     
     private func resetCellSize(at indexPath: IndexPath) {
@@ -147,6 +163,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: @objc fonksiyonları
     
+    @objc func optionButtonTapped() {
+        
+        }
+    
     @objc func createNoteButtonTapped() {
         let noteDetailVC = NoteDetailViewController()
         // İlk olarak managedObjectContext ve dismissAction'ı ayarla
@@ -154,6 +174,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         noteDetailVC.dismissAction = { [weak self] in
             // Kullanıcı arayüzünden gelen not bilgilerini al
             if let newNote = noteDetailVC.noteContent, !newNote.isEmpty,
+               let newTitle = noteDetailVC.titleContent, !newTitle.isEmpty {
+                // Yeni bir Core Data nesnesi oluştur ve kaydet
+                self?.addNoteWithTitle(newTitle, text: newNote)
+            }
+            if let newNote = noteDetailVC.noteContent, newNote.isEmpty,
                let newTitle = noteDetailVC.titleContent, !newTitle.isEmpty {
                 // Yeni bir Core Data nesnesi oluştur ve kaydet
                 self?.addNoteWithTitle(newTitle, text: newNote)
