@@ -21,7 +21,6 @@
 		357FBB882B264F560090F785 /* TextCryptUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357FBB872B264F560090F785 /* TextCryptUITestsLaunchTests.swift */; };
 		357FBB952B264F820090F785 /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357FBB942B264F820090F785 /* NoteDetailViewController.swift */; };
 		35AC3CE32B2F1EB500782A14 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AC3CE22B2F1EB500782A14 /* TableViewCell.swift */; };
-		35BF07F92B3C5DC2003B25B9 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BF07F82B3C5DC2003B25B9 /* SettingsManager.swift */; };
 		35BF07FB2B3C6BD9003B25B9 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BF07FA2B3C6BD9003B25B9 /* SettingsController.swift */; };
 		B1297C674BCF7F0E0A9638C4 /* Pods_TextCrypt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 876CCF22B798567650E451F8 /* Pods_TextCrypt.framework */; };
 		D0F13F72CC90EFC374170E94 /* Pods_TextCryptTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61F72A217737416D6D14FAC2 /* Pods_TextCryptTests.framework */; };
@@ -66,7 +65,6 @@
 		357FBB872B264F560090F785 /* TextCryptUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCryptUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		357FBB942B264F820090F785 /* NoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
 		35AC3CE22B2F1EB500782A14 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
-		35BF07F82B3C5DC2003B25B9 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		35BF07FA2B3C6BD9003B25B9 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		5FEF9DC078D940D441F4F6BF /* Pods-TextCryptTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextCryptTests.debug.xcconfig"; path = "Target Support Files/Pods-TextCryptTests/Pods-TextCryptTests.debug.xcconfig"; sourceTree = "<group>"; };
 		61F72A217737416D6D14FAC2 /* Pods_TextCryptTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TextCryptTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,10 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				3578AAED2B35A73B007AF937 /* NoteText */,
-				357FBB942B264F820090F785 /* NoteDetailViewController.swift */,
-				35BF07F82B3C5DC2003B25B9 /* SettingsManager.swift */,
-				35BF07FA2B3C6BD9003B25B9 /* SettingsController.swift */,
-				357FBB652B264F540090F785 /* ViewController.swift */,
+				35BF07FC2B3CE1C1003B25B9 /* Controller */,
 				35AC3CE22B2F1EB500782A14 /* TableViewCell.swift */,
 				357FBB632B264F540090F785 /* SceneDelegate.swift */,
 				357FBB612B264F540090F785 /* AppDelegate.swift */,
@@ -184,6 +179,16 @@
 				357FBB872B264F560090F785 /* TextCryptUITestsLaunchTests.swift */,
 			);
 			path = TextCryptUITests;
+			sourceTree = "<group>";
+		};
+		35BF07FC2B3CE1C1003B25B9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				357FBB942B264F820090F785 /* NoteDetailViewController.swift */,
+				357FBB652B264F540090F785 /* ViewController.swift */,
+				35BF07FA2B3C6BD9003B25B9 /* SettingsController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		67859DE100505C5AD4EEBA0B /* Frameworks */ = {
@@ -440,7 +445,6 @@
 				3578AAEB2B35A6B9007AF937 /* NoteText+CoreDataClass.swift in Sources */,
 				357FBB952B264F820090F785 /* NoteDetailViewController.swift in Sources */,
 				35AC3CE32B2F1EB500782A14 /* TableViewCell.swift in Sources */,
-				35BF07F92B3C5DC2003B25B9 /* SettingsManager.swift in Sources */,
 				35BF07FB2B3C6BD9003B25B9 /* SettingsController.swift in Sources */,
 				357FBB622B264F540090F785 /* AppDelegate.swift in Sources */,
 				3578AAEC2B35A6B9007AF937 /* NoteText+CoreDataProperties.swift in Sources */,

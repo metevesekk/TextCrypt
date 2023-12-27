@@ -7,13 +7,15 @@
 
 import UIKit
 
-class SettingsController: UIViewController {
+class SettingsController: ViewController {
 
     var colorLabel = UILabel()
     var mySwitch = UISwitch()
     var dismissButton = UIButton()
     var dismissAction: (() -> Void)?
     var blurEffectView : UIVisualEffectView?
+    weak var mainVC : ViewController?
+    weak var tableViewCell : TableViewCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +38,7 @@ class SettingsController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissButtonTapped))
         blurEffectView?.addGestureRecognizer(tapGesture)
         blurEffectView?.isUserInteractionEnabled = true
-        contentView.isUserInteractionEnabled = false
+        contentView.isUserInteractionEnabled = true
         
         view.insertSubview(blurEffectView!, belowSubview: contentView)
         view.addSubview(contentView)
@@ -44,12 +46,16 @@ class SettingsController: UIViewController {
         setupFunctions()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let switchValue = UserDefaults.standard.bool(forKey: "mySwitchValue")
+        mySwitch.isOn = switchValue
+    }
     
     func setupFunctions(){
         setupMySwitch()
         setupColorLabel()
         setupDismissButton()
-    //    setupBlurTapGesture()
     }
     
     func setupColorLabel(){
@@ -67,7 +73,6 @@ class SettingsController: UIViewController {
     
     func setupMySwitch(){
         view.addSubview(mySwitch)
-        mySwitch.isOn = SettingsManager.shared.getSwitchStatus()
         mySwitch.isEnabled = true
         mySwitch.preferredStyle = .checkbox
         mySwitch.translatesAutoresizingMaskIntoConstraints = false
@@ -77,6 +82,7 @@ class SettingsController: UIViewController {
             mySwitch.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 90),
             mySwitch.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -200)
         ])
+        mySwitch.addTarget(self, action: #selector(mySwitchtapped), for: .touchUpInside)
     }
     
     func setupDismissButton(){
@@ -99,4 +105,26 @@ class SettingsController: UIViewController {
                 self.dismissAction?()
             }
         }
+    
+    @objc func mySwitchtapped(){
+        UserDefaults.standard.set(mySwitch.isOn, forKey: "mySwitchValue")
+        if mySwitch.isOn {
+            mainVC?.view.backgroundColor = .white
+            mainVC?.tableView.backgroundColor = .white
+            mainVC?.randomLabel.textColor = .black
+            mainVC?.titleLabel.textColor = .black
+            mainVC?.randomColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+            self.blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+        } else {
+            // Karanlık mod için renk ayarlamaları
+            mainVC?.view.backgroundColor = .black
+            mainVC?.tableView.backgroundColor = .black
+            mainVC?.randomLabel.textColor = .white
+            mainVC?.titleLabel.textColor = .white
+            mainVC?.randomColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
+            self.blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+        }
+
+    }
+
 }

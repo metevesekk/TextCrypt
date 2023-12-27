@@ -86,7 +86,6 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         
         textView.delegate = self
         textField.delegate = self
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -315,23 +314,6 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
 
     
     @objc func backButtonTapped() {
-        
-    /*    if let text = textView.text, !text.isEmpty, let title = textField.text, !title.isEmpty {
-            // Notu kaydet veya güncelle
-            if note == nil {
-                // Yeni bir not oluştur
-                note = NoteText(context: managedObjectContext)
-            }
-            // Mevcut notu güncelle
-            note?.title = title
-            note?.text = text
-            do {
-                try managedObjectContext.save()
-            } catch {
-                print("Could not save the note: \(error)")
-            }
-        } */
-        
         if !(textView.text?.isEmpty ?? true) || (textField.text != "Başlık" && !(textField.text?.isEmpty ?? true)) {
                // textView veya textField (veya her ikisi de) içerik içeriyorsa
 

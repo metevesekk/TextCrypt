@@ -19,6 +19,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var fetchedNotes: [NoteText] = []
     var titleLabel = UILabel()
     var selectedIndexPath: IndexPath?
+    var randomLabel = UILabel()
+    var randomColor = UIColor()
+    var randomBool = Bool()
     
     lazy var optionsMarkItem : UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(optionsButtonTapped))
@@ -39,6 +42,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         context = appDelegate.persistentContainer.viewContext
 
         setupCreateNoteButton()
+        randomLabel.isHidden = true
+   //   randomLabel.textColor = .white
+   //   randomColor = UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
         setupTitleLabel()
         tableView.backgroundColor = .black
         tableView.delegate = self
@@ -53,6 +59,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         tableView.addGestureRecognizer(longPressGestureButton)
         createNoteButton.addGestureRecognizer(longPressGestureCell)
+        
+        let switchValue = UserDefaults.standard.bool(forKey: "mySwitchValue")
+        setupUIBasedOnSwitch(switchValue: switchValue)
     }
     
     // MARK: viewWillAppear
@@ -62,6 +71,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         fetchNotes()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        let switchValue = UserDefaults.standard.bool(forKey: "mySwitchValue")
+        setupUIBasedOnSwitch(switchValue: switchValue)
     }
 
     //MARK: Core Data Fonksiyonları
@@ -112,9 +124,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 5),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor)
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -5)
         ])
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
     }
@@ -145,6 +157,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         navigationItem.titleView = titleLabel
     }
     
+    func setupUIBasedOnSwitch(switchValue: Bool) {
+        if switchValue {
+            view.backgroundColor = .white
+            tableView.backgroundColor = .white
+            randomLabel.textColor = .black
+            titleLabel.textColor = .black
+            randomColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+        } else {
+            view.backgroundColor = .black
+            tableView.backgroundColor = .black
+            randomLabel.textColor = .white
+            titleLabel.textColor = .white
+            randomColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
+        }
+    }
+    
     // MARK: reset fonksiyonları
     
     private func resetCellSize(at indexPath: IndexPath) {
@@ -162,27 +190,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     // MARK: @objc fonksiyonları
-    
-
-    
-    @objc func optionsButtonTapped(Myswitch: UISwitch) {
+        
+    @objc func optionsButtonTapped() {
         let settingsVC = SettingsController()
-        settingsVC.modalPresentationStyle = .overCurrentContext
-        settingsVC.modalTransitionStyle = .crossDissolve
+        settingsVC.modalPresentationStyle = .fullScreen
+        settingsVC.mainVC = self
+        present(settingsVC, animated: true)
+    //    settingsVC.dismissAction = { [weak self] in }
         
-        settingsVC.dismissAction = { [weak self] in
-                //self?.blurEffectView?.isHidden = true
-            }
-        
-        self.present(settingsVC, animated: true) {
-                //self.blurEffectView?.isHidden = false
-            }
         }
     
     @objc func createNoteButtonTapped() {
         let noteDetailVC = NoteDetailViewController()
         // İlk olarak managedObjectContext ve dismissAction'ı ayarla
         noteDetailVC.managedObjectContext = self.context
+        noteDetailVC.view.backgroundColor = self.view.backgroundColor
+        noteDetailVC.textView.backgroundColor = self.view.backgroundColor
+        noteDetailVC.titleLabel.textColor = self.randomLabel.textColor
+        noteDetailVC.textView.textColor = self.randomLabel.textColor
         noteDetailVC.dismissAction = { [weak self] in
             // Kullanıcı arayüzünden gelen not bilgilerini al
             if let newNote = noteDetailVC.noteContent, !newNote.isEmpty,
@@ -252,6 +277,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return UITableViewCell()
         }
         
+        cell.contentView.backgroundColor = self.randomColor
+        cell.titleLabel.textColor = self.randomLabel.textColor
+        cell.noteLabel.textColor = self.randomLabel.textColor
         // Fetch edilen notları kullanarak hücreyi yapılandır
         let note = fetchedNotes[indexPath.section]
         cell.configure(with: note)
@@ -278,7 +306,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let animation = CABasicAnimation(keyPath: "transform.scale")
             animation.fromValue = 1.0
             animation.toValue = 0.92
-            animation.duration = 0.15
+            animation.duration = 0.10
             animation.autoreverses = true
             animation.repeatCount = 1
 
@@ -291,6 +319,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         noteDetailVC.note = selectedNote
         noteDetailVC.noteContent = selectedNote.text
         noteDetailVC.titleContent = selectedNote.title
+        noteDetailVC.view.backgroundColor = self.view.backgroundColor
+        noteDetailVC.textView.backgroundColor = self.view.backgroundColor
+        noteDetailVC.titleLabel.textColor = self.randomLabel.textColor
+        noteDetailVC.textView.textColor = self.randomLabel.textColor
         noteDetailVC.dismissAction = { [weak self] in
             // Kullanıcı notu tamamen silip geri döndüğünde ilgili notu sil
             if let newNote = noteDetailVC.noteContent, newNote.isEmpty,
@@ -313,6 +345,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         present(navigationController, animated: true)
     }
     
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, completionHandler in
             // Silme işlemini burada gerçekleştirin
@@ -322,7 +355,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         deleteAction.backgroundColor = .systemYellow
 
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
-        configuration.performsFirstActionWithFullSwipe = true // Tam kaydırma ile otomatik silme işlemini etkinleştirir
+      //  configuration.performsFirstActionWithFullSwipe = true // Tam kaydırma ile otomatik silme işlemini etkinleştirir
 
         return configuration
     }
