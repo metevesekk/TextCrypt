@@ -20,8 +20,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var titleLabel = UILabel()
     var selectedIndexPath: IndexPath?
     
-        lazy var optionsMarkItem : UIBarButtonItem = {
-        let item = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(optionButtonTapped))
+    lazy var optionsMarkItem : UIBarButtonItem = {
+        let item = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(optionsButtonTapped))
         item.tintColor = .systemYellow
         return item
     }()
@@ -163,8 +163,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: @objc fonksiyonları
     
-    @objc func optionButtonTapped() {
+
+    
+    @objc func optionsButtonTapped(Myswitch: UISwitch) {
+        let settingsVC = SettingsController()
+        settingsVC.modalPresentationStyle = .overCurrentContext
+        settingsVC.modalTransitionStyle = .crossDissolve
         
+        settingsVC.dismissAction = { [weak self] in
+                //self?.blurEffectView?.isHidden = true
+            }
+        
+        self.present(settingsVC, animated: true) {
+                //self.blurEffectView?.isHidden = false
+            }
         }
     
     @objc func createNoteButtonTapped() {
