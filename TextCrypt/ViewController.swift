@@ -15,7 +15,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var context: NSManagedObjectContext!
     let tableView = UITableView()
     let createNoteButton = UIButton()
-    let cellSpacing : CGFloat = 8
+    let cellSpacing : CGFloat = 12
     var fetchedNotes: [NoteText] = []
     var titleLabel = UILabel()
     var selectedIndexPath: IndexPath?
@@ -312,16 +312,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }
-
-
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            if editingStyle == .delete {
-                // Silme işlemini burada gerçekleştirin
-                deleteNoteAtIndexPath(indexPath)
-            }
-            // Diğer düzenleme stilleri için de burada kod ekleyebilirsiniz
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, completionHandler in
+            // Silme işlemini burada gerçekleştirin
+            self.deleteNoteAtIndexPath(indexPath)
+            completionHandler(true)
         }
+        deleteAction.backgroundColor = .systemYellow
+
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        configuration.performsFirstActionWithFullSwipe = true // Tam kaydırma ile otomatik silme işlemini etkinleştirir
+
+        return configuration
+    }
+    
+
 }
 
 

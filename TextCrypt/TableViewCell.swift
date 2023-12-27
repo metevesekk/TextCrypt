@@ -20,24 +20,24 @@ class TableViewCell: UITableViewCell {
 
         selectionStyle = .none
         
-        // Hücrenin genel ayarları
-        backgroundColor = UIColor(displayP3Red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
-        layer.borderColor = UIColor.black.cgColor
-        layer.borderWidth = 1
-        layer.cornerRadius = 8
-        clipsToBounds = true
+        contentView.layer.cornerRadius = 10
+        contentView.layer.borderWidth = 1.2
+        contentView.layer.borderColor = UIColor.systemYellow.cgColor
+        contentView.backgroundColor = UIColor(displayP3Red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
+        contentView.clipsToBounds = true
+        
+        backgroundColor = UIColor.clear
+        backgroundView?.backgroundColor = UIColor.clear
+        selectedBackgroundView?.backgroundColor = UIColor.clear
 
-        // titleLabel ayarları
         titleLabel.textColor = .systemGray5
         titleLabel.font = UIFont.boldSystemFont(ofSize: 22)
         titleLabel.numberOfLines = 0
 
-        // noteLabel ayarları
         noteLabel.textColor = .systemGray5
         noteLabel.font = UIFont.systemFont(ofSize: 18)
         noteLabel.numberOfLines = 3
 
-        // Subviews ekleme ve layout
         contentView.addSubview(titleLabel)
         contentView.addSubview(noteLabel)
         setupConstraints()
@@ -46,6 +46,7 @@ class TableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 
     private func setupConstraints() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -65,8 +66,7 @@ class TableViewCell: UITableViewCell {
 
     func configure(with note: NoteText) {
            titleLabel.text = note.title
-           noteLabel.text = note.text  // Örnek olarak tüm text'i gösteriyoruz, özet veya ilk birkaç kelime olabilir.
-           // ... Diğer konfigürasyonlar
+           noteLabel.text = note.text
        }
 }
 
