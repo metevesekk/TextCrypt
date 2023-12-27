@@ -24,8 +24,7 @@ class SettingsController: UIViewController {
         let y = (view.bounds.height - height) / 2.3
         
         let contentView = UIView(frame: CGRect(x: x, y: y, width: width, height: height))
-        contentView.backgroundColor = .white  // Veya istediğiniz bir renk
-        contentView.backgroundColor = .black
+        contentView.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.7)
         contentView.layer.cornerRadius = 15
         
         let blurEffect = UIBlurEffect(style: .regular)
@@ -57,12 +56,26 @@ class SettingsController: UIViewController {
         view.addSubview(colorLabel)
         colorLabel.text = "Arkaplan Terichi"
         colorLabel.textColor = .white
-        colorLabel.font = UIFont(name: "TimesNewRomanPS-BoldMT", size: 20)
+        colorLabel.font = .systemFont(ofSize: 20)
         
         colorLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            colorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            colorLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -220)
+            colorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -60),
+            colorLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -200)
+        ])
+    }
+    
+    func setupMySwitch(){
+        view.addSubview(mySwitch)
+        mySwitch.isOn = SettingsManager.shared.getSwitchStatus()
+        mySwitch.isEnabled = true
+        mySwitch.preferredStyle = .checkbox
+        mySwitch.translatesAutoresizingMaskIntoConstraints = false
+        mySwitch.onTintColor = .systemYellow
+        mySwitch.thumbTintColor = .white
+        NSLayoutConstraint.activate([
+            mySwitch.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 90),
+            mySwitch.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -200)
         ])
     }
     
@@ -79,20 +92,6 @@ class SettingsController: UIViewController {
             dismissButton.widthAnchor.constraint(equalToConstant: 90)
         ])
         dismissButton.addTarget(self, action: #selector(dismissButtonTapped), for: .touchUpInside)
-    }
-    
-    func setupMySwitch(){
-        view.addSubview(mySwitch)
-        mySwitch.isOn = SettingsManager.shared.getSwitchStatus()
-        mySwitch.isEnabled = true
-        mySwitch.preferredStyle = .checkbox
-        mySwitch.translatesAutoresizingMaskIntoConstraints = false
-        mySwitch.onTintColor = .systemYellow
-        mySwitch.thumbTintColor = .white
-        NSLayoutConstraint.activate([
-            mySwitch.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            mySwitch.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -180)
-        ])
     }
     
     @objc func dismissButtonTapped(){
