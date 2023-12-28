@@ -114,15 +114,15 @@ class SettingsController: ViewController {
         UserDefaults.standard.set(isSwitchOn, forKey: "mySwitchValue")
 
         // mainVC UI Güncellemeleri
-        mainVC?.view.backgroundColor = isSwitchOn ? .white : .black
+    /*    mainVC?.view.backgroundColor = isSwitchOn ? .white : .black
         mainVC?.tableView.backgroundColor = isSwitchOn ? .white : .black
         mainVC?.randomLabel.textColor = isSwitchOn ? .black : .white
-        mainVC?.titleLabel.textColor = isSwitchOn ? .black : .white
+        mainVC?.titleLabel.textColor = isSwitchOn ? .black : .white */
         self.dismissButton.titleLabel?.textColor = isSwitchOn ? .black : .white
         self.colorLabel.textColor = isSwitchOn ? .black : .white
         self.dismissButton.backgroundColor = isSwitchOn ? .white : UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
         self.contentView.backgroundColor = isSwitchOn ? UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1) : UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
-        mainVC?.randomColor = isSwitchOn ? UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1) : UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
+   //     mainVC?.randomColor = isSwitchOn ? UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1) : UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
 
         // Blur Efekti Güncelleme
         let blurStyle: UIBlurEffect.Style = isSwitchOn ? .extraLight : .systemChromeMaterialDark

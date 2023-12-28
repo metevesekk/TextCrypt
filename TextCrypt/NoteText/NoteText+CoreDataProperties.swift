@@ -18,5 +18,7 @@ extension NoteText {
 
     @NSManaged public var title: String?
     @NSManaged public var text: String?
+    @NSManaged public var time: Date?
+    @NSManaged public var date: Date?
 
 }

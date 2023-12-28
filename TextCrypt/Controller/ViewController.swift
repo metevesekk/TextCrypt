@@ -22,6 +22,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var randomLabel = UILabel()
     var randomColor = UIColor()
     var randomBool = Bool()
+    let dateFormatter = DateFormatter()
+    let timeFormatter = DateFormatter()
     
     lazy var optionsMarkItem : UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(optionsButtonTapped))
@@ -43,8 +45,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         setupCreateNoteButton()
         randomLabel.isHidden = true
-   //   randomLabel.textColor = .white
-   //   randomColor = UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
         setupTitleLabel()
         tableView.backgroundColor = .black
         tableView.delegate = self
@@ -74,31 +74,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let switchValue = UserDefaults.standard.bool(forKey: "mySwitchValue")
         setupUIBasedOnSwitch(switchValue: switchValue)
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        timeFormatter.dateFormat = "HH:mm"
     }
 
     //MARK: Core Data Fonksiyonları
     
     func fetchNotes() {
-            let request: NSFetchRequest<NoteText> = NoteText.fetchRequest()
-            do {
-                fetchedNotes = try context.fetch(request)
-            } catch {
-                print("Not çekme hatası: \(error)")
-            }
-            tableView.reloadData()
+        let request: NSFetchRequest<NoteText> = NoteText.fetchRequest()
+        do {
+            fetchedNotes = try context.fetch(request)
+        } catch {
+            print("Not çekme hatası: \(error)")
         }
+        tableView.reloadData()
+    }
     
-    func addNoteWithTitle(_ title: String, text: String) {
-           let newNote = NoteText(context: context)
-           newNote.title = title
-           newNote.text = text
-           do {
-               try context.save()
-               fetchNotes() // Listeyi güncelle
-           } catch {
-               print("Not kaydetme hatası: \(error)")
-           }
-       }
+    func addNoteWithTitle(_ title: String, text: String, date: Date, time: Date) {
+        let newNote = NoteText(context: context)
+        newNote.title = title
+        newNote.text = text
+        newNote.date = date
+        newNote.time = date
+        do {
+            try context.save()
+            fetchNotes() // Listeyi güncelle
+        } catch {
+            print("Not kaydetme hatası: \(error)")
+        }
+    }
     
     func deleteNoteAtIndexPath(_ indexPath: IndexPath) {
         let noteToDelete = fetchedNotes[indexPath.section]
@@ -211,14 +215,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         noteDetailVC.dismissAction = { [weak self] in
             // Kullanıcı arayüzünden gelen not bilgilerini al
             if let newNote = noteDetailVC.noteContent, !newNote.isEmpty,
-               let newTitle = noteDetailVC.titleContent, !newTitle.isEmpty {
+               let newTitle = noteDetailVC.titleContent, !newTitle.isEmpty, let newDate = noteDetailVC.dateContent, let newTime = noteDetailVC.timeContent {
                 // Yeni bir Core Data nesnesi oluştur ve kaydet
-                self?.addNoteWithTitle(newTitle, text: newNote)
+                self?.addNoteWithTitle(newTitle, text: newNote, date: newDate, time: newTime)
             }
             if let newNote = noteDetailVC.noteContent, newNote.isEmpty,
-               let newTitle = noteDetailVC.titleContent, !newTitle.isEmpty {
+               let newTitle = noteDetailVC.titleContent, !newTitle.isEmpty, let newDate = noteDetailVC.dateContent, let newTime = noteDetailVC.timeContent {
                 // Yeni bir Core Data nesnesi oluştur ve kaydet
-                self?.addNoteWithTitle(newTitle, text: newNote)
+                self?.addNoteWithTitle(newTitle, text: newNote, date: newDate, time: newTime)
             }
             // Notları tekrar çekmek için fetchNotes çağrılabilir
             self?.fetchNotes()
@@ -319,6 +323,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         noteDetailVC.note = selectedNote
         noteDetailVC.noteContent = selectedNote.text
         noteDetailVC.titleContent = selectedNote.title
+        noteDetailVC.dateContent = selectedNote.date
+        noteDetailVC.timeContent = selectedNote.time
         noteDetailVC.view.backgroundColor = self.view.backgroundColor
         noteDetailVC.textView.backgroundColor = self.view.backgroundColor
         noteDetailVC.titleLabel.textColor = self.randomLabel.textColor

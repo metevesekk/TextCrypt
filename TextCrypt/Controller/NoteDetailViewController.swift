@@ -16,6 +16,8 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     var isEncrypted = true
     var noteContent: String?
     var titleContent : String?
+    var timeContent: Date?
+    var dateContent : Date?
     var dismissAction: (() -> Void)?
     var backButton = UIButton()
     var doneButton = UIButton()
@@ -30,6 +32,8 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     var charCountLabel = UILabel()
     var managedObjectContext: NSManagedObjectContext!
     var note: NoteText?
+    let dateFormatter = DateFormatter()
+    let timeFormatter = DateFormatter()
 
     
     lazy var checkMarkItem: UIBarButtonItem = {
@@ -86,12 +90,17 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         
         textView.delegate = self
         textField.delegate = self
+        
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        timeFormatter.dateFormat = "HH:mm"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         charCountLabel.text = "\(textView.text.count) karakter"
         loadNoteData()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        timeFormatter.dateFormat = "HH:mm"
     }
     
 
@@ -140,9 +149,9 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "HH:mm"
         
-        let currenDate = Date()
-        dateLabel.text = dateFormatter.string(from: currenDate)
-        timeLabel.text = timeFormatter.string(from: currenDate)
+        let currentDate = Date()
+        dateLabel.text = dateFormatter.string(from: currentDate)
+        timeLabel.text = timeFormatter.string(from: currentDate)
         bookMark.text = "|"
         
         dateLabel.font = .systemFont(ofSize: 17)
@@ -315,16 +324,38 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     
     @objc func backButtonTapped() {
         if !(textView.text?.isEmpty ?? true) || (textField.text != "Başlık" && !(textField.text?.isEmpty ?? true)) {
-               // textView veya textField (veya her ikisi de) içerik içeriyorsa
-
-               // NoteText örneği oluştur veya mevcut notu güncelle
-               if note == nil {
-                   note = NoteText(context: managedObjectContext)
-               }
+                if note == nil {
+                    note = NoteText(context: managedObjectContext)
+                }
 
                // Notun başlığını ve metnini güncelle
-               note?.title = textField.text
-               note?.text = textView.text
+                note?.title = textField.text
+                note?.text = textView.text
+            if let dateString = dateLabel.text, let date = dateFormatter.date(from: dateString) {
+                note?.date = date
+            } else {
+                // dateString uygun formatta değil veya nil, hata işleme
+            }
+
+            if let timeString = timeLabel.text, let time = timeFormatter.date(from: timeString) {
+                // Saat bilgisini de note?.date'e eklemek istiyorsanız, önce tarih ve saat bilgilerini birleştirmeniz gerekir.
+                // Bunun için önce tarih ve saat bilgilerini ayrı ayrı çevirin, sonra bu iki Date'i birleştirin.
+                if let date = note?.date {
+                    var dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
+                    let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: time)
+
+                    dateComponents.hour = timeComponents.hour
+                    dateComponents.minute = timeComponents.minute
+
+                    if let combinedDate = Calendar.current.date(from: dateComponents) {
+                        note?.date = combinedDate
+                    } else {
+                        // Kombine edilmiş tarih oluşturulamadı, hata işleme
+                    }
+                }
+            } else {
+                // timeString uygun formatta değil veya nil, hata işleme
+            }
 
                // Context'i kaydetmeyi dene
                do {
