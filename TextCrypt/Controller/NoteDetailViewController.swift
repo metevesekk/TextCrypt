@@ -34,22 +34,39 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     var note: NoteText?
     let dateFormatter = DateFormatter()
     let timeFormatter = DateFormatter()
+    
+    lazy var redoButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "arrow.uturn.right"), for: .normal)
+        button.tintColor = .systemYellow
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        return button
+    }()
+
+    
+    lazy var undoButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "arrow.uturn.left"), for: .normal)
+        button.tintColor = .systemYellow
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        return button
+    }()
 
     
     lazy var checkMarkItem: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .plain, target: self, action: #selector(doneButtonTapped))
         item.tintColor = .systemYellow
-            return item
+        return item
         }()
     lazy var encryptMarkItem: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(systemName: "lock.fill"), style: .plain, target: self, action: #selector(encryptButtonTapped))
         item.tintColor = .systemYellow
-            return item
+        return item
         }()
     lazy var backMarkItem: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backButtonTapped))
         item.tintColor = .systemYellow
-            return item
+        return item
         }()
 
     // MARK: ViewDidLoad
@@ -82,8 +99,8 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
 
         setupTitleTextField()
         setupTimeAndDateLabel()
-        setupTitleLabel()
         setupTextView()
+        setupStackView()
         
         navigationItem.rightBarButtonItem = encryptMarkItem
         navigationItem.leftBarButtonItem = backMarkItem
@@ -183,6 +200,14 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
             
         ])
     }
+    
+    func setupStackView(){
+        let stackView = UIStackView(arrangedSubviews: [undoButton, redoButton])
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 17
+        navigationItem.titleView = stackView
+    }
 
     func setupTextView() {
         view.addSubview(textView)
@@ -225,12 +250,6 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         return textField
     }
     
-    func setupTitleLabel() {
-        titleLabel.text = "Not Al"
-        titleLabel.font = UIFont.systemFont(ofSize: 25)
-        titleLabel.textColor = .white
-        navigationItem.titleView = titleLabel
-    }
     
     //MARK: Text View fonksiyonları
     

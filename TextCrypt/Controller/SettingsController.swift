@@ -9,6 +9,7 @@ import UIKit
 
 class SettingsController: ViewController {
 
+    var themeLabel = UILabel()
     var colorLabel = UILabel()
     var mySwitch = UISwitch()
     var dismissButton = UIButton()
@@ -17,6 +18,9 @@ class SettingsController: ViewController {
     weak var mainVC : ViewController?
     weak var tableViewCell : TableViewCell?
     var contentView = UIView()
+    var buttons = [UIButton]()
+    var colors : [UIColor] = [.white, .systemPink, .systemGray3, .systemBlue, .systemYellow, .black]
+    let buttonSize : CGFloat = 30
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +32,14 @@ class SettingsController: ViewController {
         
         contentView = UIView(frame: CGRect(x: x, y: y, width: width, height: height))
         contentView.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.7)
-        contentView.layer.cornerRadius = 15
+        contentView.layer.cornerRadius = 10
+        contentView.layer.borderWidth = 2
+        contentView.layer.borderColor = UIColor.systemYellow.cgColor
         
-        let blurEffect = UIBlurEffect(style: .regular)
-        blurEffectView = UIVisualEffectView(effect: blurEffect)
+        let switchValue = UserDefaults.standard.bool(forKey: "mySwitchValue")
+        let blurStyle: UIBlurEffect.Style = switchValue ? .systemThinMaterialLight : .systemThickMaterialDark
+        mySwitch.isOn = switchValue
+        blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: blurStyle))
         blurEffectView?.frame = view.bounds
         blurEffectView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectView?.isHidden = false
@@ -51,43 +59,86 @@ class SettingsController: ViewController {
         super.viewWillAppear(animated)
         let switchValue = UserDefaults.standard.bool(forKey: "mySwitchValue")
         mySwitch.isOn = switchValue
+        setupFunctions()
     }
+    
+    func setupButtons(){
+        for (index, color) in colors.enumerated() {
+            let button = UIButton()
+            // Auto Layout kullanılacağı için frame tanımlamasına gerek yok.
+            button.translatesAutoresizingMaskIntoConstraints = false // Auto Layout kullanacağımızı belirtiyoruz.
+            button.layer.cornerRadius = buttonSize / 4 // Daire butonlar için.
+            button.backgroundColor = color
+            button.tag = index
+            button.addTarget(self, action: #selector(buttonsTapped), for: .touchUpInside)
+            contentView.addSubview(button) // Butonları contentView içine ekliyoruz.
+            buttons.append(button)
+            
+            // Butonların constraintlerini tanımlıyoruz.
+            NSLayoutConstraint.activate([
+                button.widthAnchor.constraint(equalToConstant: buttonSize),
+                button.heightAnchor.constraint(equalToConstant: buttonSize),
+                button.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -110),
+                // İlk butonu merkezden başlatmak için, centerXAnchor ile belirli bir konumda ayarlıyoruz.
+                // Sonraki butonlar için bu noktadan itibaren her biri için 40 puanlık bir artışla x ekseninde yerleştiriyoruz.
+                button.centerXAnchor.constraint(equalTo: contentView.leadingAnchor, constant: CGFloat(110 + index * (5 + Int(buttonSize))))
+            ])
+        }
+    }
+
     
     func setupFunctions(){
         setupMySwitch()
-        setupColorLabel()
+        setupThemeLabel()
         setupDismissButton()
+        setupButtons()
+        setupThemeLabel()
+        setupColorLabel()
+    }
+    
+    func setupThemeLabel(){
+        contentView.addSubview(themeLabel)
+        themeLabel.text = "Tema"
+        themeLabel.textColor = .white
+        themeLabel.font = UIFont(name: "Times New Roman", size: 22)
+        
+        themeLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            themeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -130),
+            themeLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -170)
+        ])
     }
     
     func setupColorLabel(){
-        view.addSubview(colorLabel)
-        colorLabel.text = "Tema Terichi"
+        contentView.addSubview(colorLabel)
+        colorLabel.text = "Renk"
+        colorLabel.font = UIFont(name: "Times New Roman", size: 22)
         colorLabel.textColor = .white
-        colorLabel.font = .systemFont(ofSize: 20)
         
         colorLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            colorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -60),
-            colorLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -200)
+            colorLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -130),
+            colorLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -110)
+            
         ])
     }
     
     func setupMySwitch(){
-        view.addSubview(mySwitch)
+        contentView.addSubview(mySwitch)
         mySwitch.isEnabled = true
         mySwitch.preferredStyle = .checkbox
         mySwitch.translatesAutoresizingMaskIntoConstraints = false
         mySwitch.onTintColor = .systemYellow
         mySwitch.thumbTintColor = .white
         NSLayoutConstraint.activate([
-            mySwitch.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 90),
-            mySwitch.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -200)
+            mySwitch.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -50),
+            mySwitch.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -170)
         ])
         mySwitch.addTarget(self, action: #selector(mySwitchtapped), for: .touchUpInside)
     }
     
     func setupDismissButton(){
-        view.addSubview(dismissButton)
+        contentView.addSubview(dismissButton)
         dismissButton.setTitle("Close", for: .normal)
         dismissButton.setTitleColor(.black, for: .normal)
         dismissButton.backgroundColor = .white
@@ -109,25 +160,40 @@ class SettingsController: ViewController {
             }
         }
     
-    @objc func mySwitchtapped() {
-        let isSwitchOn = mySwitch.isOn
-        UserDefaults.standard.set(isSwitchOn, forKey: "mySwitchValue")
-
-        // mainVC UI Güncellemeleri
-    /*    mainVC?.view.backgroundColor = isSwitchOn ? .white : .black
-        mainVC?.tableView.backgroundColor = isSwitchOn ? .white : .black
-        mainVC?.randomLabel.textColor = isSwitchOn ? .black : .white
-        mainVC?.titleLabel.textColor = isSwitchOn ? .black : .white */
-        self.dismissButton.titleLabel?.textColor = isSwitchOn ? .black : .white
-        self.colorLabel.textColor = isSwitchOn ? .black : .white
-        self.dismissButton.backgroundColor = isSwitchOn ? .white : UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
-        self.contentView.backgroundColor = isSwitchOn ? UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1) : UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
-   //     mainVC?.randomColor = isSwitchOn ? UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1) : UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
-
-        // Blur Efekti Güncelleme
-        let blurStyle: UIBlurEffect.Style = isSwitchOn ? .extraLight : .systemChromeMaterialDark
-        blurEffectView?.effect = UIBlurEffect(style: blurStyle)
+    @objc func buttonsTapped(_ sender: UIButton) {
+        // Tüm butonların seçimini sıfırla
+        for button in buttons {
+            UIView.animate(withDuration: 0.3) {
+                button.layer.borderWidth = 0
+                button.transform = .identity  // Eğer bir önceki seçimde transform edildiyse, orijinal haline getir.
+            }
+        }
+        
+        // Seçili olanın etrafına çerçeve çiz ve küçültme/büyütme animasyonu ekle
+        UIView.animate(withDuration: 0.15) {
+            sender.layer.borderWidth = 4
+            sender.layer.borderColor = UIColor.darkGray.cgColor
+          //  sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9) // Küçült
+        } completion: { _ in
+            UIView.animate(withDuration: 0.01) {
+                sender.transform = .identity // Orijinal boyutuna dön
+            }
+        }
     }
 
-
+    
+    @objc func mySwitchtapped() {
+        UIView.animate(withDuration: 0.4) {
+            let isSwitchOn = self.mySwitch.isOn
+            UserDefaults.standard.set(isSwitchOn, forKey: "mySwitchValue")
+            self.dismissButton.titleLabel?.textColor = isSwitchOn ? .black : .white
+            self.themeLabel.textColor = isSwitchOn ? .black : .white
+            self.colorLabel.textColor = isSwitchOn ? .black : .white
+            self.dismissButton.backgroundColor = isSwitchOn ? .white : UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
+            self.contentView.backgroundColor = isSwitchOn ? UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1) : UIColor(red:   0.1, green: 0.1, blue: 0.1, alpha: 1)
+        
+            let blurStyle: UIBlurEffect.Style = isSwitchOn ? .light : .systemThickMaterialDark
+            self.blurEffectView?.effect = UIBlurEffect(style: blurStyle)
+        }
+    }
 }

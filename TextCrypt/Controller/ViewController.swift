@@ -37,6 +37,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         view.backgroundColor = .black
         setupTableView()
+        
+        for family in UIFont.familyNames.sorted() {
+            print("\(family)")
+            for name in UIFont.fontNames(forFamilyName: family).sorted() {
+                print("== \(name)")
+            }
+        }
 
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError("Cannot retrieve app delegate")
@@ -365,8 +372,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         return configuration
     }
-    
-
 }
 
 
