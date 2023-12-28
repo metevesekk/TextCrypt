@@ -20,7 +20,7 @@ class TableViewCell: UITableViewCell {
 
         selectionStyle = .none
         
-        contentView.layer.cornerRadius = 10
+        contentView.layer.cornerRadius = 8
         contentView.layer.borderWidth = 1.2
         contentView.layer.borderColor = UIColor.systemYellow.cgColor
         contentView.backgroundColor = UIColor(displayP3Red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
