@@ -16,6 +16,7 @@ class SettingsController: ViewController {
     var blurEffectView : UIVisualEffectView?
     weak var mainVC : ViewController?
     weak var tableViewCell : TableViewCell?
+    var contentView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +26,7 @@ class SettingsController: ViewController {
         let x = (view.bounds.width - width) / 2
         let y = (view.bounds.height - height) / 2.3
         
-        let contentView = UIView(frame: CGRect(x: x, y: y, width: width, height: height))
+        contentView = UIView(frame: CGRect(x: x, y: y, width: width, height: height))
         contentView.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.7)
         contentView.layer.cornerRadius = 15
         
@@ -60,7 +61,7 @@ class SettingsController: ViewController {
     
     func setupColorLabel(){
         view.addSubview(colorLabel)
-        colorLabel.text = "Arkaplan Terichi"
+        colorLabel.text = "Tema Terichi"
         colorLabel.textColor = .white
         colorLabel.font = .systemFont(ofSize: 20)
         
@@ -89,8 +90,10 @@ class SettingsController: ViewController {
         view.addSubview(dismissButton)
         dismissButton.setTitle("Close", for: .normal)
         dismissButton.setTitleColor(.black, for: .normal)
-        dismissButton.backgroundColor = .systemYellow
+        dismissButton.backgroundColor = .white
         dismissButton.layer.cornerRadius = 5
+        dismissButton.layer.borderWidth = 2
+        dismissButton.layer.borderColor = UIColor.systemYellow.cgColor
         dismissButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             dismissButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -106,25 +109,25 @@ class SettingsController: ViewController {
             }
         }
     
-    @objc func mySwitchtapped(){
-        UserDefaults.standard.set(mySwitch.isOn, forKey: "mySwitchValue")
-        if mySwitch.isOn {
-            mainVC?.view.backgroundColor = .white
-            mainVC?.tableView.backgroundColor = .white
-            mainVC?.randomLabel.textColor = .black
-            mainVC?.titleLabel.textColor = .black
-            mainVC?.randomColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
-            self.blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
-        } else {
-            // Karanlık mod için renk ayarlamaları
-            mainVC?.view.backgroundColor = .black
-            mainVC?.tableView.backgroundColor = .black
-            mainVC?.randomLabel.textColor = .white
-            mainVC?.titleLabel.textColor = .white
-            mainVC?.randomColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
-            self.blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-        }
+    @objc func mySwitchtapped() {
+        let isSwitchOn = mySwitch.isOn
+        UserDefaults.standard.set(isSwitchOn, forKey: "mySwitchValue")
 
+        // mainVC UI Güncellemeleri
+        mainVC?.view.backgroundColor = isSwitchOn ? .white : .black
+        mainVC?.tableView.backgroundColor = isSwitchOn ? .white : .black
+        mainVC?.randomLabel.textColor = isSwitchOn ? .black : .white
+        mainVC?.titleLabel.textColor = isSwitchOn ? .black : .white
+        self.dismissButton.titleLabel?.textColor = isSwitchOn ? .black : .white
+        self.colorLabel.textColor = isSwitchOn ? .black : .white
+        self.dismissButton.backgroundColor = isSwitchOn ? .white : UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
+        self.contentView.backgroundColor = isSwitchOn ? UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1) : UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
+        mainVC?.randomColor = isSwitchOn ? UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1) : UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
+
+        // Blur Efekti Güncelleme
+        let blurStyle: UIBlurEffect.Style = isSwitchOn ? .extraLight : .systemChromeMaterialDark
+        blurEffectView?.effect = UIBlurEffect(style: blurStyle)
     }
+
 
 }
