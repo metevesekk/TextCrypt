@@ -69,6 +69,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let switchValue = UserDefaults.standard.bool(forKey: "mySwitchValue")
         setupUIBasedOnSwitch(switchValue: switchValue)
+        
     }
     
     // MARK: viewWillAppear
@@ -83,6 +84,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         setupUIBasedOnSwitch(switchValue: switchValue)
         dateFormatter.dateFormat = "dd/MM/yyyy"
         timeFormatter.dateFormat = "HH:mm"
+    }
+    
+    // MARK: UserDefaults get functions
+    
+    func getIndexValue() -> Int{
+        let index = UserDefaults.standard.integer(forKey: "index")
+        return index
     }
 
     //MARK: Core Data Fonksiyonları
@@ -141,25 +149,32 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         ])
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
     }
-
-
+    
     func setupCreateNoteButton() {
         view.addSubview(createNoteButton)
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 45, weight: .regular, scale: .default)
-        let openLockSymbol = UIImage(systemName: "plus", withConfiguration: symbolConfiguration)
-        createNoteButton.setImage(openLockSymbol, for: .normal)
-        createNoteButton.tintColor = .black
-        createNoteButton.backgroundColor = .systemYellow
-        createNoteButton.layer.cornerRadius = 35
+        // "+" işaretini oluşturuyoruz ve konfigürasyonunu ekliyoruz
+        let plusSymbol = UIImage(systemName: "plus", withConfiguration: symbolConfiguration)
+        createNoteButton.setImage(plusSymbol, for: .normal)
+        createNoteButton.tintColor = .systemYellow // "+" işaretinin rengini sarı yapıyoruz
+        
+        // Buton için içi boş çember oluşturuyoruz
+        createNoteButton.backgroundColor = .clear // Butonun arka planını transparan yapıyoruz
+        createNoteButton.layer.cornerRadius = 35 // Butonun yarıçapını ayarlıyoruz
+        createNoteButton.layer.borderWidth = 2 // Çerçeve genişliği
+        createNoteButton.layer.borderColor = UIColor.systemYellow.cgColor
+        
         createNoteButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-        createNoteButton.heightAnchor.constraint(equalToConstant: 70),
-        createNoteButton.widthAnchor.constraint(equalToConstant: 70),
-        createNoteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-        createNoteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -55)
+            createNoteButton.heightAnchor.constraint(equalToConstant: 70),
+            createNoteButton.widthAnchor.constraint(equalToConstant: 70),
+            createNoteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            createNoteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -55)
         ])
         createNoteButton.addTarget(self, action: #selector(createNoteButtonTapped), for: .touchUpInside)
     }
+
+
     
     func setupTitleLabel() {
         titleLabel.text = "TextCrypt"
@@ -174,15 +189,36 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             tableView.backgroundColor = .white
             randomLabel.textColor = .black
             titleLabel.textColor = .black
-            randomColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+          //  randomColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+            randomColor = .white
         } else {
             view.backgroundColor = .black
             tableView.backgroundColor = .black
             randomLabel.textColor = .white
             titleLabel.textColor = .white
-            randomColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
+          //  randomColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
+            randomColor = .black
         }
     }
+    
+ /*   func setupBasedOnColors(index: Int){
+        switch index {
+        case 0:
+            createNoteButton.layer.borderColor = UIColor.white.cgColor
+        case 1:
+            createNoteButton.layer.borderColor = UIColor.systemPink.cgColor
+        case 2:
+            createNoteButton.layer.borderColor = UIColor.systemGray3.cgColor
+        case 3:
+            createNoteButton.layer.borderColor = UIColor.systemBlue.cgColor
+        case 4:
+            createNoteButton.layer.borderColor = UIColor.systemYellow.cgColor
+        case 5:
+            createNoteButton.layer.borderColor = UIColor.black.cgColor
+        default:
+            print("Renk Bulunamadı")
+        }
+    } */
     
     // MARK: reset fonksiyonları
     
