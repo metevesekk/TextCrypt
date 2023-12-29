@@ -70,7 +70,7 @@ class TableViewCell: UITableViewCell {
     func setupBasedOnColors(index: Int){
         switch index {
         case 0:
-            contentView.layer.borderColor = UIColor.white.cgColor
+            contentView.layer.borderColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1).cgColor
         case 1:
             contentView.layer.borderColor = UIColor.systemPink.cgColor
         case 2:
@@ -80,7 +80,7 @@ class TableViewCell: UITableViewCell {
         case 4:
             contentView.layer.borderColor = UIColor.systemYellow.cgColor
         case 5:
-            contentView.layer.borderColor = UIColor.black.cgColor
+            contentView.layer.borderColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1).cgColor
         default:
             print("Renk Bulunamadı")
         }

@@ -19,7 +19,7 @@ class SettingsController: ViewController {
     weak var tableViewCell : TableViewCell?
     var contentView = UIView()
     var buttons = [UIButton]()
-    var colors : [UIColor] = [.white, .systemPink, .systemGray3, .systemBlue, .systemYellow, .black]
+    var colors : [UIColor] = [ UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1), .systemPink, .systemGray3, .systemBlue, .systemYellow, UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)]
     let buttonSize : CGFloat = 30
     var indexPath = IndexPath()
     
@@ -40,9 +40,9 @@ class SettingsController: ViewController {
         
         switch getColorIndexValue() {
         case 0:
-            contentView.layer.borderColor = UIColor.white.cgColor
-            dismissButton.layer.borderColor = UIColor.white.cgColor
-            mySwitch.onTintColor = .white
+            contentView.layer.borderColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1).cgColor
+            dismissButton.layer.borderColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1).cgColor
+            mySwitch.onTintColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1)
         case 1:
             contentView.layer.borderColor = UIColor.systemPink.cgColor
             dismissButton.layer.borderColor = UIColor.systemPink.cgColor
@@ -60,9 +60,9 @@ class SettingsController: ViewController {
             dismissButton.layer.borderColor = UIColor.systemYellow.cgColor
             mySwitch.onTintColor = .systemYellow
         case 5:
-            contentView.layer.borderColor = UIColor.black.cgColor
-            dismissButton.layer.borderColor = UIColor.black.cgColor
-            mySwitch.onTintColor = .black
+            contentView.layer.borderColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1).cgColor
+            dismissButton.layer.borderColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1).cgColor
+            mySwitch.onTintColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         default:
             print("Renk Bulunamadı")
         }

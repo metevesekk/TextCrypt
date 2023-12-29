@@ -209,9 +209,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func setupBasedOnColors(index: Int){
         switch index {
         case 0:
-            optionsMarkItem.tintColor = .white
-            createNoteButton.tintColor = .white
-            createNoteButton.layer.borderColor = UIColor.white.cgColor
+            optionsMarkItem.tintColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1)
+            createNoteButton.tintColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1)
+            createNoteButton.layer.borderColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1).cgColor
         case 1:
             optionsMarkItem.tintColor = .systemPink
             createNoteButton.tintColor = .systemPink
@@ -229,9 +229,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             createNoteButton.tintColor = .systemYellow
             createNoteButton.layer.borderColor = UIColor.systemYellow.cgColor
         case 5:
-            optionsMarkItem.tintColor = .black
-            createNoteButton.tintColor = .black
-            createNoteButton.layer.borderColor = UIColor.black.cgColor
+            optionsMarkItem.tintColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
+            createNoteButton.tintColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
+            createNoteButton.layer.borderColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1).cgColor
         default:
             print("Renk Bulunamadı")
         }

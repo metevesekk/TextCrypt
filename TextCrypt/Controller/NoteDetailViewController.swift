@@ -110,6 +110,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         setupTextView()
         setupStackView()
         setupSpecialButton()
+        view.sendSubviewToBack(specialButton)
         
         navigationItem.rightBarButtonItem = encryptMarkItem
         navigationItem.leftBarButtonItem = backMarkItem
@@ -169,12 +170,17 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         view.addSubview(specialButton)
         specialButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            specialButton.centerYAnchor.constraint(equalTo: dateLabel.centerYAnchor, constant: 12),
+           // specialButton.centerYAnchor.constraint(equalTo: dateLabel.centerYAnchor, constant: 12),
             specialButton.widthAnchor.constraint(equalToConstant: view.bounds.width),
-            specialButton.heightAnchor.constraint(equalToConstant: 3)
+            //specialButton.heightAnchor.constraint(equalToConstant: )
+            specialButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 3),
+            specialButton.bottomAnchor.constraint(equalTo: textView.topAnchor),
+            specialButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
+            specialButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10)
         ])
         specialButton.isEnabled = false
         specialButton.isHidden = false
+        specialButton.layer.cornerRadius = 7
     }
     
     func setupTimeAndDateLabel() {
@@ -196,10 +202,10 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         timeLabel.font = .systemFont(ofSize: 17)
         bookMark.font = .systemFont(ofSize: 17)
         charCountLabel.font = .systemFont(ofSize: 17)
-        dateLabel.textColor = .systemGray2
-        timeLabel.textColor = .systemGray2
-        bookMark.textColor = .systemGray2
-        charCountLabel.textColor = .systemGray2
+        dateLabel.textColor = .white
+        timeLabel.textColor = .white
+        bookMark.textColor = .white
+        charCountLabel.textColor = .white
         
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -207,7 +213,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         charCountLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            dateLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
+            dateLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15),
             dateLabel.centerYAnchor.constraint(equalTo: textField.centerYAnchor, constant: 30),
             
             bookMark.leftAnchor.constraint(equalTo: dateLabel.rightAnchor, constant: 10),
@@ -216,7 +222,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
             timeLabel.leftAnchor.constraint(equalTo: dateLabel.rightAnchor, constant: 22),
             timeLabel.centerYAnchor.constraint(equalTo: dateLabel.centerYAnchor),
             
-            charCountLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
+            charCountLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15),
             charCountLabel.centerYAnchor.constraint(equalTo: dateLabel.centerYAnchor),
             
         ])
@@ -255,10 +261,10 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         view.addSubview(textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        textField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        textField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15).isActive = true
         textField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         textField.font = UIFont.boldSystemFont(ofSize: 24)
-        textField.textColor = .gray
+        textField.textColor = .white
     }
     
     func createDefaultTextField() -> UITextField {
