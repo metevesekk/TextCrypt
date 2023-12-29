@@ -35,6 +35,14 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     let dateFormatter = DateFormatter()
     let timeFormatter = DateFormatter()
     
+    lazy var specialButton: UIButton = {
+        let button = UIButton(type: .system)
+       // button.setImage(UIImage(systemName: "arrow.uturn.right"), for: .normal)
+        button.backgroundColor = .systemYellow
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     lazy var redoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "arrow.uturn.right"), for: .normal)
@@ -101,6 +109,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         setupTimeAndDateLabel()
         setupTextView()
         setupStackView()
+        setupSpecialButton()
         
         navigationItem.rightBarButtonItem = encryptMarkItem
         navigationItem.leftBarButtonItem = backMarkItem
@@ -156,6 +165,18 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     
     //MARK: setup fonksiyonları
     
+    func setupSpecialButton(){
+        view.addSubview(specialButton)
+        specialButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            specialButton.centerYAnchor.constraint(equalTo: dateLabel.centerYAnchor, constant: 12),
+            specialButton.widthAnchor.constraint(equalToConstant: view.bounds.width),
+            specialButton.heightAnchor.constraint(equalToConstant: 3)
+        ])
+        specialButton.isEnabled = false
+        specialButton.isHidden = false
+    }
+    
     func setupTimeAndDateLabel() {
         view.addSubview(dateLabel)
         view.addSubview(timeLabel)
@@ -187,16 +208,16 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         
         NSLayoutConstraint.activate([
             dateLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
-            dateLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 13),
+            dateLabel.centerYAnchor.constraint(equalTo: textField.centerYAnchor, constant: 30),
             
             bookMark.leftAnchor.constraint(equalTo: dateLabel.rightAnchor, constant: 10),
-            bookMark.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 13),
+            bookMark.centerYAnchor.constraint(equalTo: dateLabel.centerYAnchor),
             
             timeLabel.leftAnchor.constraint(equalTo: dateLabel.rightAnchor, constant: 22),
-            timeLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 13),
+            timeLabel.centerYAnchor.constraint(equalTo: dateLabel.centerYAnchor),
             
             charCountLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-            charCountLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 13)
+            charCountLabel.centerYAnchor.constraint(equalTo: dateLabel.centerYAnchor),
             
         ])
     }
@@ -215,7 +236,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         textView.delegate = self
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-        textView.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 10).isActive = true
+        textView.topAnchor.constraint(equalTo: dateLabel.centerYAnchor, constant: 17).isActive = true
         textView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         textView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         textView.backgroundColor = .black
@@ -228,13 +249,10 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     
     
     func setupTitleTextField() {
-        
         if textField.text == ""{
             textField = createDefaultTextField()
         }
-        
         view.addSubview(textField)
-
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         textField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true

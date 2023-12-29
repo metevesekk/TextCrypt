@@ -277,6 +277,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         noteDetailVC.redoButton.tintColor = createNoteButton.tintColor
         noteDetailVC.undoButton.tintColor = createNoteButton.tintColor
         noteDetailVC.encryptMarkItem.tintColor = createNoteButton.tintColor
+        noteDetailVC.specialButton.backgroundColor = createNoteButton.tintColor
         noteDetailVC.dismissAction = { [weak self] in
             // Kullanıcı arayüzünden gelen not bilgilerini al
             if let newNote = noteDetailVC.noteContent, !newNote.isEmpty,
@@ -400,6 +401,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         noteDetailVC.redoButton.tintColor = createNoteButton.tintColor
         noteDetailVC.undoButton.tintColor = createNoteButton.tintColor
         noteDetailVC.encryptMarkItem.tintColor = createNoteButton.tintColor
+        noteDetailVC.specialButton.backgroundColor = createNoteButton.tintColor
         noteDetailVC.dismissAction = { [weak self] in
             // Kullanıcı notu tamamen silip geri döndüğünde ilgili notu sil
             if let newNote = noteDetailVC.noteContent, newNote.isEmpty,
