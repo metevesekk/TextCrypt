@@ -180,17 +180,19 @@ class SettingsController: ViewController {
     }
     
     func setupThemeLabel(){
-        contentView.addSubview(themeLabel)
-        themeLabel.text = "Tema"
-        themeLabel.textColor = getSwitchValue() ? .black : .white
-        themeLabel.font = UIFont(name: "Times New Roman", size: 22)
-        
-        themeLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            themeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -130),
-            themeLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -170)
-        ])
-    }
+
+            contentView.addSubview(themeLabel)
+            themeLabel.text = "Tema"
+            themeLabel.textColor = getSwitchValue() ? .black : .white
+            themeLabel.font = UIFont(name: "Times New Roman", size: 22)
+            
+            themeLabel.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                themeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -130),
+                themeLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -170)
+            ])
+        }
+    
     
     func setupColorLabel(){
         contentView.addSubview(colorLabel)
@@ -252,14 +254,13 @@ class SettingsController: ViewController {
                 button.transform = .identity
             }
         }
-        UIView.animate(withDuration: 0.15) {
+        UIView.animate(withDuration: 0.4) {
             sender.layer.borderWidth = 3
             sender.layer.borderColor = UIColor.darkGray.cgColor
+            let buttonIndex = sender.tag
+            UserDefaults.standard.setValue(buttonIndex, forKey: "index")
+            self.setupColors(self.getColorIndexValue())
         }
-        
-        let buttonIndex = sender.tag
-        UserDefaults.standard.setValue(buttonIndex, forKey: "index")
-        self.setupColors(self.getColorIndexValue())
     }
 
     

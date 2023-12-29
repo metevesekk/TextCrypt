@@ -210,6 +210,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     }
 
     func setupTextView() {
+        
         view.addSubview(textView)
         textView.delegate = self
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -258,7 +259,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        navigationItem.rightBarButtonItem = checkMarkItem
+            navigationItem.rightBarButtonItem = checkMarkItem
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {

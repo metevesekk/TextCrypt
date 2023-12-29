@@ -27,10 +27,7 @@ class TableViewCell: UITableViewCell {
         selectionStyle = .none
         
         contentView.layer.cornerRadius = 15
-        contentView.layer.borderWidth = 1.2
-        contentView.layer.borderColor = UIColor.systemYellow.cgColor
-        contentView.backgroundColor = UIColor(displayP3Red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
-       // contentView.backgroundColor = .black
+        contentView.layer.borderWidth = 2
         contentView.clipsToBounds = true
         
         backgroundColor = UIColor.clear
@@ -58,13 +55,36 @@ class TableViewCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(noteLabel)
         
+       
         
+        let colorIndex = UserDefaults.standard.integer(forKey: "index")
+        setupBasedOnColors(index: colorIndex)
         
         setupConstraints()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupBasedOnColors(index: Int){
+        switch index {
+        case 0:
+            contentView.layer.borderColor = UIColor.white.cgColor
+        case 1:
+            contentView.layer.borderColor = UIColor.systemPink.cgColor
+        case 2:
+            contentView.layer.borderColor = UIColor.systemGray3.cgColor
+        case 3:
+            contentView.layer.borderColor = UIColor.systemBlue.cgColor
+        case 4:
+            contentView.layer.borderColor = UIColor.systemYellow.cgColor
+        case 5:
+            contentView.layer.borderColor = UIColor.black.cgColor
+        default:
+            print("Renk Bulunamadı")
+        }
+        contentView.setNeedsDisplay()
     }
     
 

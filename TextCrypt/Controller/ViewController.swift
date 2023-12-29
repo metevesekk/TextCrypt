@@ -84,6 +84,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         setupUIBasedOnSwitch(switchValue: switchValue)
         dateFormatter.dateFormat = "dd/MM/yyyy"
         timeFormatter.dateFormat = "HH:mm"
+        
+        let colorIndex = UserDefaults.standard.integer(forKey: "index")
+        setupBasedOnColors(index: colorIndex)
     }
     
     // MARK: UserDefaults get functions
@@ -201,24 +204,38 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
- /*   func setupBasedOnColors(index: Int){
+    
+    
+    func setupBasedOnColors(index: Int){
         switch index {
         case 0:
+            optionsMarkItem.tintColor = .white
+            createNoteButton.tintColor = .white
             createNoteButton.layer.borderColor = UIColor.white.cgColor
         case 1:
+            optionsMarkItem.tintColor = .systemPink
+            createNoteButton.tintColor = .systemPink
             createNoteButton.layer.borderColor = UIColor.systemPink.cgColor
         case 2:
+            optionsMarkItem.tintColor = .systemGray3
+            createNoteButton.tintColor = .systemGray3
             createNoteButton.layer.borderColor = UIColor.systemGray3.cgColor
         case 3:
+            optionsMarkItem.tintColor = .systemBlue
+            createNoteButton.tintColor = .systemBlue
             createNoteButton.layer.borderColor = UIColor.systemBlue.cgColor
         case 4:
+            optionsMarkItem.tintColor = .systemYellow
+            createNoteButton.tintColor = .systemYellow
             createNoteButton.layer.borderColor = UIColor.systemYellow.cgColor
         case 5:
+            optionsMarkItem.tintColor = .black
+            createNoteButton.tintColor = .black
             createNoteButton.layer.borderColor = UIColor.black.cgColor
         default:
             print("Renk Bulunamadı")
         }
-    } */
+    }
     
     // MARK: reset fonksiyonları
     
@@ -255,6 +272,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         noteDetailVC.textView.backgroundColor = self.view.backgroundColor
         noteDetailVC.titleLabel.textColor = self.randomLabel.textColor
         noteDetailVC.textView.textColor = self.randomLabel.textColor
+        noteDetailVC.backMarkItem.tintColor = createNoteButton.tintColor
+        noteDetailVC.checkMarkItem.tintColor = createNoteButton.tintColor
+        noteDetailVC.redoButton.tintColor = createNoteButton.tintColor
+        noteDetailVC.undoButton.tintColor = createNoteButton.tintColor
+        noteDetailVC.encryptMarkItem.tintColor = createNoteButton.tintColor
         noteDetailVC.dismissAction = { [weak self] in
             // Kullanıcı arayüzünden gelen not bilgilerini al
             if let newNote = noteDetailVC.noteContent, !newNote.isEmpty,
@@ -325,6 +347,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         cell.contentView.backgroundColor = self.randomColor
+        cell.contentView.layer.borderColor = self.createNoteButton.tintColor.cgColor
         cell.titleLabel.textColor = self.randomLabel.textColor
         cell.noteLabel.textColor = self.randomLabel.textColor
         // Fetch edilen notları kullanarak hücreyi yapılandır
@@ -372,6 +395,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         noteDetailVC.textView.backgroundColor = self.view.backgroundColor
         noteDetailVC.titleLabel.textColor = self.randomLabel.textColor
         noteDetailVC.textView.textColor = self.randomLabel.textColor
+        noteDetailVC.backMarkItem.tintColor = createNoteButton.tintColor
+        noteDetailVC.checkMarkItem.tintColor = createNoteButton.tintColor
+        noteDetailVC.redoButton.tintColor = createNoteButton.tintColor
+        noteDetailVC.undoButton.tintColor = createNoteButton.tintColor
+        noteDetailVC.encryptMarkItem.tintColor = createNoteButton.tintColor
         noteDetailVC.dismissAction = { [weak self] in
             // Kullanıcı notu tamamen silip geri döndüğünde ilgili notu sil
             if let newNote = noteDetailVC.noteContent, newNote.isEmpty,
@@ -396,12 +424,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, completionHandler in
+        let deleteAction = UIContextualAction(style: .destructive , title: "Delete") { action, view, completionHandler in
             // Silme işlemini burada gerçekleştirin
             self.deleteNoteAtIndexPath(indexPath)
             completionHandler(true)
         }
-        deleteAction.backgroundColor = .systemYellow
+        
+        deleteAction.image = .init(systemName: "trash")
+        deleteAction.backgroundColor = optionsMarkItem.tintColor
 
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
       //  configuration.performsFirstActionWithFullSwipe = true // Tam kaydırma ile otomatik silme işlemini etkinleştirir
