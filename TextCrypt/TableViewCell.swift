@@ -9,6 +9,10 @@
 import UIKit
 import CoreData
 
+protocol TableViewCellDelegate : AnyObject {
+    func didRequestDelete(_ cell: TableViewCell)
+}
+
 class TableViewCell: UITableViewCell {
 
     let titleLabel = UILabel()
@@ -18,6 +22,7 @@ class TableViewCell: UITableViewCell {
     let dateFormatter = DateFormatter()
     let timeFormatter = DateFormatter()
     let deleteButton = UIButton()
+    weak var delegate : TableViewCellDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -45,11 +50,27 @@ class TableViewCell: UITableViewCell {
         let colorIndex = UserDefaults.standard.integer(forKey: "index")
         setupBasedOnColors(index: colorIndex)
         setupConstraints()
+        
+        let leftSwipeGesture = UIPanGestureRecognizer(target: self, action: #selector(handleLeftSwipe(_:)))
+        
+        contentView.addGestureRecognizer(leftSwipeGesture)
+        contentView.clipsToBounds = false
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+           let pointForTargetView = deleteButton.convert(point, from: self)
+
+           if deleteButton.bounds.contains(pointForTargetView) {
+               return deleteButton
+           }
+
+           return super.hitTest(point, with: event)
+       }
+
     
     func setupBasedOnColors(index: Int){
         switch index {
@@ -76,11 +97,6 @@ class TableViewCell: UITableViewCell {
         deleteButton.setImage(UIImage(systemName: "trash"), for: .normal)
         deleteButton.layer.cornerRadius = 15
         deleteButton.tintColor = .white
-
-        let leftSwipeGesture = UIPanGestureRecognizer(target: self, action: #selector(handleLeftSwipe(_:)))
-        
-        contentView.addGestureRecognizer(leftSwipeGesture)
-        contentView.clipsToBounds = false
         
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -89,6 +105,8 @@ class TableViewCell: UITableViewCell {
             deleteButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             deleteButton.widthAnchor.constraint(equalToConstant: 100)
         ])
+        deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+        deleteButton.isUserInteractionEnabled = true
     }
     
     func setLabel(label: UILabel, textColor : UIColor, fontSize: CGFloat, numberOfLine: Int) -> UILabel {
@@ -178,6 +196,10 @@ class TableViewCell: UITableViewCell {
                 self.contentView.frame.origin.x = shouldRevealButton ? -self.deleteButton.frame.width : 0
             }
         }
+    }
+    
+    @objc func deleteButtonTapped(){
+        delegate?.didRequestDelete(self)
     }
 }
 

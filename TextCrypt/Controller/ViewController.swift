@@ -9,13 +9,14 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TableViewCellDelegate {
+    
 
 
     var context: NSManagedObjectContext!
     let tableView = UITableView()
     let createNoteButton = UIButton()
-    let cellSpacing : CGFloat = 12
+    let cellSpacing : CGFloat = 6
     var fetchedNotes: [NoteText] = []
     var titleLabel = UILabel()
     var selectedIndexPath: IndexPath?
@@ -341,18 +342,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func numberOfSections(in tableView: UITableView) -> Int {
         return fetchedNotes.count
     }
+    
+    func didRequestDelete(_ cell: TableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else {return}
+        self.deleteNoteAtIndexPath(indexPath)
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as? TableViewCell else {
             return UITableViewCell()
         }
-        
+        cell.delegate = self
         cell.contentView.backgroundColor = self.randomColor
         cell.contentView.layer.borderColor = self.createNoteButton.tintColor.cgColor
         cell.titleLabel.textColor = self.randomLabel.textColor
         cell.noteLabel.textColor = self.randomLabel.textColor
         cell.deleteButton.backgroundColor = self.createNoteButton.tintColor
-        // Fetch edilen notları kullanarak hücreyi yapılandır
+
         let note = fetchedNotes[indexPath.section]
         cell.configure(with: note)
         
