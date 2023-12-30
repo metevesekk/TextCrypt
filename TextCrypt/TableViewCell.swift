@@ -23,6 +23,9 @@ class TableViewCell: UITableViewCell {
     let timeFormatter = DateFormatter()
     let deleteButton = UIButton()
     weak var delegate : TableViewCellDelegate?
+    var isDeleteButtonVisible: Bool {
+        return self.contentView.frame.origin.x != 0
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -35,7 +38,7 @@ class TableViewCell: UITableViewCell {
         
         contentView.layer.cornerRadius = 15
         contentView.layer.borderWidth = 2
-        
+        contentView.clipsToBounds = false
         backgroundColor = UIColor.clear
         backgroundView?.backgroundColor = UIColor.clear
         selectedBackgroundView?.backgroundColor = UIColor.clear
@@ -52,9 +55,15 @@ class TableViewCell: UITableViewCell {
         setupConstraints()
         
         let leftSwipeGesture = UIPanGestureRecognizer(target: self, action: #selector(handleLeftSwipe(_:)))
-        
         contentView.addGestureRecognizer(leftSwipeGesture)
-        contentView.clipsToBounds = false
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCellTap(_:)))
+        tapGesture.delegate = self
+        contentView.addGestureRecognizer(tapGesture)
+        
+    /*    let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        contentView.addGestureRecognizer(longPressGesture) */
+
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -62,14 +71,13 @@ class TableViewCell: UITableViewCell {
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-           let pointForTargetView = deleteButton.convert(point, from: self)
-
-           if deleteButton.bounds.contains(pointForTargetView) {
-               return deleteButton
-           }
-
-           return super.hitTest(point, with: event)
-       }
+        let pointForTargetView = deleteButton.convert(point, from: self)
+        let contentTarget = contentView.frame.origin.x < 0
+        if deleteButton.bounds.contains(pointForTargetView) {
+            return deleteButton
+        }
+        return super.hitTest(point, with: event)
+    }
 
     
     func setupBasedOnColors(index: Int){
@@ -97,14 +105,6 @@ class TableViewCell: UITableViewCell {
         deleteButton.setImage(UIImage(systemName: "trash"), for: .normal)
         deleteButton.layer.cornerRadius = 15
         deleteButton.tintColor = .white
-        
-        deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            deleteButton.leadingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 6),
-            deleteButton.topAnchor.constraint(equalTo: contentView.topAnchor),
-            deleteButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            deleteButton.widthAnchor.constraint(equalToConstant: 100)
-        ])
         deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         deleteButton.isUserInteractionEnabled = true
     }
@@ -127,13 +127,18 @@ class TableViewCell: UITableViewCell {
         noteLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             
-
+            deleteButton.leadingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 6),
+            deleteButton.topAnchor.constraint(equalTo: contentView.topAnchor),
+            deleteButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            deleteButton.widthAnchor.constraint(equalToConstant: 100),
+            
             noteLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
             noteLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             noteLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
@@ -154,10 +159,8 @@ class TableViewCell: UITableViewCell {
         titleLabel.text = note.title
         noteLabel.text = note.text
         if let date = note.date {
-         //   dateLabel.text = dateFormatter.string(from: date)
             timeLabel.text = timeFormatter.string(from: date)
         } else {
-        //    dateLabel.text = "No date"
             timeLabel.text = "No time"
         }
         
@@ -165,39 +168,59 @@ class TableViewCell: UITableViewCell {
                configureCellDateLabel(with: date)
            } else {
                dateLabel.text = "No date"
-              // timeLabel.text = "No time"
            }
     }
     
     func configureCellDateLabel(with date: Date) {
         let calendar = Calendar.current
         if calendar.isDateInToday(date) {
-            // Eğer tarih bugünse, "Today" yaz
             dateLabel.text = "Today"
         } else {
-            // Değilse, tarihi formatla
             dateFormatter.dateFormat = "dd/MM/yyyy"
             dateLabel.text = dateFormatter.string(from: date)
         }
     }
     
     @objc func handleLeftSwipe(_ gesture: UIPanGestureRecognizer) {
-        let translation = gesture.translation(in: contentView) // Kaydırma mesafesini al
+        let translation = gesture.translation(in: contentView)
         if gesture.state == .changed {
-            // Sola kaydırma için pozisyonları güncelle
-            let newPosition = max(translation.x, -deleteButton.frame.width)
-            if newPosition <= 0 { // Yalnızca sol tarafa kaydırma izin ver
+            let newPosition = max(translation.x, -(deleteButton.frame.width + 7))
+            if newPosition <= 0 {
                 contentView.frame.origin.x = newPosition
             }
         } else if gesture.state == .ended {
-            // Animasyonla kaydırma sonrası konumu ayarla
             let shouldRevealButton = contentView.frame.origin.x < -deleteButton.frame.width / 2
             UIView.animate(withDuration: 0.3) {
-                self.contentView.frame.origin.x = shouldRevealButton ? -self.deleteButton.frame.width : 0
+                self.contentView.frame.origin.x = shouldRevealButton ? -(self.deleteButton.frame.width + 7) : 0
             }
         }
     }
     
+    @objc func handleCellTap(_ gesture: UITapGestureRecognizer) {
+        if contentView.frame.origin.x != 0 {
+            UIView.animate(withDuration: 0.3) {
+                self.contentView.frame.origin.x = 0
+            }
+        }
+    }
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return contentView.frame.origin.x != 0
+    }
+    
+  /*  @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
+        switch gesture.state {
+        case .ended, .cancelled:
+            // Basılı tutma bittiğinde veya iptal edildiğinde contentView'i animasyonlu bir şekilde geri getir.
+            if contentView.frame.origin.x != 0 {
+                UIView.animate(withDuration: 0.3) {
+                    self.contentView.frame.origin.x = 0
+                }
+            }
+        default:
+            break
+        }
+    } */
+
     @objc func deleteButtonTapped(){
         delegate?.didRequestDelete(self)
     }

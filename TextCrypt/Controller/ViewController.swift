@@ -31,6 +31,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         item.tintColor = .systemYellow
         return item
     }()
+    
+
 
     //MARK: viewDidLoad
     
@@ -320,8 +322,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             switch gesture.state {
             case .began:
                 if let cell = tableView.cellForRow(at: indexPath) {
-                    UIView.animate(withDuration: 0.1) {
-                        cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+                        UIView.animate(withDuration: 0.1) {
+                            cell.transform = CGAffineTransform(scaleX: 0.97, y: 0.97)
                     }
                 }
             case .ended, .changed:
@@ -331,6 +333,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
     }
+
     
 
     // MARK: tavleView ayarları
