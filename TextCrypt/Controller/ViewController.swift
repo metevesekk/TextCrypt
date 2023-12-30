@@ -351,6 +351,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.contentView.layer.borderColor = self.createNoteButton.tintColor.cgColor
         cell.titleLabel.textColor = self.randomLabel.textColor
         cell.noteLabel.textColor = self.randomLabel.textColor
+        cell.deleteButton.backgroundColor = self.createNoteButton.tintColor
         // Fetch edilen notları kullanarak hücreyi yapılandır
         let note = fetchedNotes[indexPath.section]
         cell.configure(with: note)
@@ -425,7 +426,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+ /*   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive , title: "Delete") { action, view, completionHandler in
             // Silme işlemini burada gerçekleştirin
             self.deleteNoteAtIndexPath(indexPath)
@@ -439,7 +440,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
       //  configuration.performsFirstActionWithFullSwipe = true // Tam kaydırma ile otomatik silme işlemini etkinleştirir
 
         return configuration
-    }
+    } */
 }
 
 

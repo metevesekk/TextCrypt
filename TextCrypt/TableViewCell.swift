@@ -17,49 +17,33 @@ class TableViewCell: UITableViewCell {
     let timeLabel = UILabel()
     let dateFormatter = DateFormatter()
     let timeFormatter = DateFormatter()
+    let deleteButton = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         dateFormatter.dateFormat = "dd/MM/yyyy"
         timeFormatter.dateFormat = "HH:mm"
 
         selectionStyle = .none
+        setupDeleteButton()
         
         contentView.layer.cornerRadius = 15
         contentView.layer.borderWidth = 2
-        contentView.clipsToBounds = true
         
         backgroundColor = UIColor.clear
         backgroundView?.backgroundColor = UIColor.clear
         selectedBackgroundView?.backgroundColor = UIColor.clear
-
-        titleLabel.textColor = .systemGray5
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 22)
-        titleLabel.numberOfLines = 0
-
-        noteLabel.textColor = .systemGray5
-        noteLabel.font = UIFont.systemFont(ofSize: 18)
-        noteLabel.numberOfLines = 3
         
-        dateLabel.textColor = .systemGray
-        dateLabel.font = UIFont.systemFont(ofSize: 14)
-        dateLabel.numberOfLines = 1
+        setLabel(label: titleLabel, textColor: .systemGray5, fontSize: 22, numberOfLine: 0).isEnabled = false
+        setLabel(label: noteLabel, textColor: .systemGray5, fontSize: 18, numberOfLine: 3).isHidden = false
+        setLabel(label: dateLabel, textColor: .systemGray, fontSize: 14, numberOfLine: 1).isHidden = false
+        setLabel(label: timeLabel, textColor: .systemGray, fontSize: 14, numberOfLine: 1).isHidden = false
         
-        timeLabel.textColor = .systemGray
-        timeLabel.font = UIFont.systemFont(ofSize: 14)
-        timeLabel.numberOfLines = 1
-
-        contentView.addSubview(timeLabel)
-        contentView.addSubview(dateLabel)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(noteLabel)
-        
+        addContentView(views: [titleLabel,noteLabel,dateLabel,timeLabel])
        
-        
         let colorIndex = UserDefaults.standard.integer(forKey: "index")
         setupBasedOnColors(index: colorIndex)
-        
         setupConstraints()
     }
 
@@ -87,6 +71,38 @@ class TableViewCell: UITableViewCell {
         contentView.setNeedsDisplay()
     }
     
+    func setupDeleteButton(){
+        contentView.addSubview(deleteButton)
+        deleteButton.setImage(UIImage(systemName: "trash"), for: .normal)
+        deleteButton.layer.cornerRadius = 15
+        deleteButton.tintColor = .white
+
+        let leftSwipeGesture = UIPanGestureRecognizer(target: self, action: #selector(handleLeftSwipe(_:)))
+        
+        contentView.addGestureRecognizer(leftSwipeGesture)
+        contentView.clipsToBounds = false
+        
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            deleteButton.leadingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 6),
+            deleteButton.topAnchor.constraint(equalTo: contentView.topAnchor),
+            deleteButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            deleteButton.widthAnchor.constraint(equalToConstant: 100)
+        ])
+    }
+    
+    func setLabel(label: UILabel, textColor : UIColor, fontSize: CGFloat, numberOfLine: Int) -> UILabel {
+        label.textColor = textColor
+        label.font = UIFont.systemFont(ofSize: fontSize)
+        label.numberOfLines = numberOfLine
+        return label
+    }
+    
+    func addContentView(views: [UILabel]){
+        views.forEach { view in
+            contentView.addSubview(view)
+        }
+    }
 
     private func setupConstraints() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -146,6 +162,22 @@ class TableViewCell: UITableViewCell {
             dateLabel.text = dateFormatter.string(from: date)
         }
     }
-
+    
+    @objc func handleLeftSwipe(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: contentView) // Kaydırma mesafesini al
+        if gesture.state == .changed {
+            // Sola kaydırma için pozisyonları güncelle
+            let newPosition = max(translation.x, -deleteButton.frame.width)
+            if newPosition <= 0 { // Yalnızca sol tarafa kaydırma izin ver
+                contentView.frame.origin.x = newPosition
+            }
+        } else if gesture.state == .ended {
+            // Animasyonla kaydırma sonrası konumu ayarla
+            let shouldRevealButton = contentView.frame.origin.x < -deleteButton.frame.width / 2
+            UIView.animate(withDuration: 0.3) {
+                self.contentView.frame.origin.x = shouldRevealButton ? -self.deleteButton.frame.width : 0
+            }
+        }
+    }
 }
 
