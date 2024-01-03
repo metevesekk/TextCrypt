@@ -34,10 +34,12 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     var note: NoteText?
     let dateFormatter = DateFormatter()
     let timeFormatter = DateFormatter()
+    var customUndoManager = UndoManager()
+    var previousText: String = ""
+
     
     lazy var specialButton: UIButton = {
         let button = UIButton(type: .system)
-       // button.setImage(UIImage(systemName: "arrow.uturn.right"), for: .normal)
         button.backgroundColor = .systemYellow
         button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         return button
@@ -47,7 +49,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "arrow.uturn.right"), for: .normal)
         button.tintColor = .systemYellow
-        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(redoButtonTapped), for: .touchUpInside)
         return button
     }()
 
@@ -56,7 +58,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "arrow.uturn.left"), for: .normal)
         button.tintColor = .systemYellow
-        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(undoButtonTapped), for: .touchUpInside)
         return button
     }()
 
@@ -80,7 +82,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     // MARK: ViewDidLoad
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        
         navigationController?.navigationBar.isTranslucent = false
         view.backgroundColor = .black
         self.navigationController?.navigationBar.backgroundColor = .black
@@ -162,7 +164,20 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
         }
     }
 
-
+    func addUndoAction(for text: String, withPreviousText previousText: String){
+        customUndoManager.registerUndo(withTarget: self) { targetSelf in
+            targetSelf.textView.text = previousText
+            targetSelf.addRedoAction(for: previousText, withPreviousText: text)
+            
+        }
+    }
+    
+    func addRedoAction(for text: String, withPreviousText previousText: String){
+        customUndoManager.registerUndo(withTarget: self) { targetSelf in
+            targetSelf.textView.text = text
+            targetSelf.addUndoAction(for: text, withPreviousText: previousText)
+        }
+    }
     
     //MARK: setup fonksiyonları
     
@@ -279,8 +294,19 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
     //MARK: Text View fonksiyonları
     
     func textViewDidChange(_ textView: UITextView) {
+        let currentText = textView.text ?? ""
+        if previousText != currentText {
+                addUndoAction(for: currentText, withPreviousText: previousText)
+                previousText = currentText
+            }
         charCountLabel.text = "\(textView.text.count) karakter"
     }
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        previousText = textView.text
+        return true
+    }
+
     
     func textViewDidBeginEditing(_ textView: UITextView) {
             navigationItem.rightBarButtonItem = checkMarkItem
@@ -362,6 +388,18 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFiel
             presentPasswordAlert(for: .decrypt)
         } else {
             encryptText()
+        }
+    }
+    
+    @objc func undoButtonTapped(){
+        if customUndoManager.canUndo{
+            customUndoManager.undo()
+        }
+    }
+    
+    @objc func redoButtonTapped(){
+        if customUndoManager.canRedo{
+            customUndoManager.redo()
         }
     }
 
