@@ -23,9 +23,8 @@ class TableViewCell: UITableViewCell {
     let timeFormatter = DateFormatter()
     let deleteButton = UIButton()
     weak var delegate : TableViewCellDelegate?
-    var isDeleteButtonVisible: Bool {
-        return self.contentView.frame.origin.x != 0
-    }
+    let containerView = UIView()
+    var isDeleteButtonVisible = Bool()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -35,34 +34,36 @@ class TableViewCell: UITableViewCell {
 
         selectionStyle = .none
         setupDeleteButton()
+        setupContainerView()
+   //     containerView.layer.borderColor = UIColor(.clear).cgColor
         
-        contentView.layer.cornerRadius = 15
-        contentView.layer.borderWidth = 2
-        contentView.clipsToBounds = false
+        containerView.layer.cornerRadius = 15
+        containerView.layer.borderWidth = 2
+        containerView.clipsToBounds = false
         backgroundColor = UIColor.clear
         backgroundView?.backgroundColor = UIColor.clear
         selectedBackgroundView?.backgroundColor = UIColor.clear
         
         setLabel(label: titleLabel, textColor: .systemGray5, fontSize: 22, numberOfLine: 0).isEnabled = false
-        setLabel(label: noteLabel, textColor: .systemGray5, fontSize: 18, numberOfLine: 3).isHidden = false
+        setLabel(label: noteLabel, textColor: .systemGray5, fontSize: 18, numberOfLine: 2).isHidden = false
         setLabel(label: dateLabel, textColor: .systemGray, fontSize: 14, numberOfLine: 1).isHidden = false
         setLabel(label: timeLabel, textColor: .systemGray, fontSize: 14, numberOfLine: 1).isHidden = false
         
-        addContentView(views: [titleLabel,noteLabel,dateLabel,timeLabel])
+        addcontainerView(views: [titleLabel,noteLabel,dateLabel,timeLabel])
        
         let colorIndex = UserDefaults.standard.integer(forKey: "index")
         setupBasedOnColors(index: colorIndex)
         setupConstraints()
         
         let leftSwipeGesture = UIPanGestureRecognizer(target: self, action: #selector(handleLeftSwipe(_:)))
-        contentView.addGestureRecognizer(leftSwipeGesture)
+        containerView.addGestureRecognizer(leftSwipeGesture)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCellTap(_:)))
         tapGesture.delegate = self
-        contentView.addGestureRecognizer(tapGesture)
+        containerView.addGestureRecognizer(tapGesture)
         
     /*    let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
-        contentView.addGestureRecognizer(longPressGesture) */
+        containerView.addGestureRecognizer(longPressGesture) */
 
     }
 
@@ -72,36 +73,39 @@ class TableViewCell: UITableViewCell {
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let pointForTargetView = deleteButton.convert(point, from: self)
-        let contentTarget = contentView.frame.origin.x < 0
         if deleteButton.bounds.contains(pointForTargetView) {
             return deleteButton
         }
         return super.hitTest(point, with: event)
+    }
+    
+    func setupContainerView(){
+        contentView.addSubview(containerView)
     }
 
     
     func setupBasedOnColors(index: Int){
         switch index {
         case 0:
-            contentView.layer.borderColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1).cgColor
+            containerView.layer.borderColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1).cgColor
         case 1:
-            contentView.layer.borderColor = UIColor.systemPink.cgColor
+            containerView.layer.borderColor = UIColor.systemPink.cgColor
         case 2:
-            contentView.layer.borderColor = UIColor.systemGray3.cgColor
+            containerView.layer.borderColor = UIColor.systemGray3.cgColor
         case 3:
-            contentView.layer.borderColor = UIColor.systemBlue.cgColor
+            containerView.layer.borderColor = UIColor.systemBlue.cgColor
         case 4:
-            contentView.layer.borderColor = UIColor.systemYellow.cgColor
+            containerView.layer.borderColor = UIColor.systemYellow.cgColor
         case 5:
-            contentView.layer.borderColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1).cgColor
+            containerView.layer.borderColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1).cgColor
         default:
             print("Renk Bulunamadı")
         }
-        contentView.setNeedsDisplay()
+        containerView.setNeedsDisplay()
     }
     
     func setupDeleteButton(){
-        contentView.addSubview(deleteButton)
+        containerView.addSubview(deleteButton)
         deleteButton.setImage(UIImage(systemName: "trash"), for: .normal)
         deleteButton.layer.cornerRadius = 15
         deleteButton.tintColor = .white
@@ -116,9 +120,9 @@ class TableViewCell: UITableViewCell {
         return label
     }
     
-    func addContentView(views: [UILabel]){
+    func addcontainerView(views: [UILabel]){
         views.forEach { view in
-            contentView.addSubview(view)
+            containerView.addSubview(view)
         }
     }
 
@@ -128,30 +132,37 @@ class TableViewCell: UITableViewCell {
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        containerView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
-            deleteButton.leadingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 6),
-            deleteButton.topAnchor.constraint(equalTo: contentView.topAnchor),
-            deleteButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
+            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
+            
+            deleteButton.leadingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 7),
+            deleteButton.topAnchor.constraint(equalTo: containerView.topAnchor),
+            deleteButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
             deleteButton.widthAnchor.constraint(equalToConstant: 100),
             
             noteLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
-            noteLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            noteLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            noteLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
+            noteLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
             noteLabel.bottomAnchor.constraint(equalTo: dateLabel.topAnchor, constant: -10),
             
             dateLabel.topAnchor.constraint(equalTo: noteLabel.bottomAnchor, constant: 10),
-            dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            dateLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
             dateLabel.trailingAnchor.constraint(equalTo: timeLabel.leadingAnchor, constant: -15),
-            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            dateLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10),
             
             timeLabel.topAnchor.constraint(equalTo: dateLabel.topAnchor),
             timeLabel.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 20),
-            timeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -9)
+            timeLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -9)
         ])
     }
 
@@ -182,44 +193,31 @@ class TableViewCell: UITableViewCell {
     }
     
     @objc func handleLeftSwipe(_ gesture: UIPanGestureRecognizer) {
-        let translation = gesture.translation(in: contentView)
+        let translation = gesture.translation(in: containerView)
         if gesture.state == .changed {
             let newPosition = max(translation.x, -(deleteButton.frame.width + 7))
             if newPosition <= 0 {
-                contentView.frame.origin.x = newPosition
+                containerView.frame.origin.x = newPosition
             }
         } else if gesture.state == .ended {
-            let shouldRevealButton = contentView.frame.origin.x < -deleteButton.frame.width / 2
+            let shouldRevealButton = containerView.frame.origin.x < -deleteButton.frame.width / 2
             UIView.animate(withDuration: 0.3) {
-                self.contentView.frame.origin.x = shouldRevealButton ? -(self.deleteButton.frame.width + 7) : 0
+                self.containerView.frame.origin.x = shouldRevealButton ? -(self.deleteButton.frame.width + 7) : 0
+                self.isDeleteButtonVisible = shouldRevealButton ? true : false
             }
         }
     }
     
     @objc func handleCellTap(_ gesture: UITapGestureRecognizer) {
-        if contentView.frame.origin.x != 0 {
+        if containerView.frame.origin.x != 0 {
             UIView.animate(withDuration: 0.3) {
-                self.contentView.frame.origin.x = 0
+                self.containerView.frame.origin.x = 0
             }
         }
     }
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return contentView.frame.origin.x != 0
+        return containerView.frame.origin.x != 0
     }
-    
-  /*  @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
-        switch gesture.state {
-        case .ended, .cancelled:
-            // Basılı tutma bittiğinde veya iptal edildiğinde contentView'i animasyonlu bir şekilde geri getir.
-            if contentView.frame.origin.x != 0 {
-                UIView.animate(withDuration: 0.3) {
-                    self.contentView.frame.origin.x = 0
-                }
-            }
-        default:
-            break
-        }
-    } */
 
     @objc func deleteButtonTapped(){
         delegate?.didRequestDelete(self)

@@ -356,8 +356,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return UITableViewCell()
         }
         cell.delegate = self
-        cell.contentView.backgroundColor = self.randomColor
-        cell.contentView.layer.borderColor = self.createNoteButton.tintColor.cgColor
+        cell.containerView.backgroundColor = self.randomColor
+        cell.containerView.layer.borderColor = self.createNoteButton.tintColor.cgColor
         cell.titleLabel.textColor = self.randomLabel.textColor
         cell.noteLabel.textColor = self.randomLabel.textColor
         cell.deleteButton.backgroundColor = self.createNoteButton.tintColor
@@ -370,13 +370,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = .clear
+        view.backgroundColor = self.randomColor
         return view
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return cellSpacing
     }
+
 
     // MARK: didSelectRowAt
 
@@ -433,23 +434,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }
-    
-    
- /*   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive , title: "Delete") { action, view, completionHandler in
-            // Silme işlemini burada gerçekleştirin
-            self.deleteNoteAtIndexPath(indexPath)
-            completionHandler(true)
-        }
-        
-        deleteAction.image = .init(systemName: "trash")
-        deleteAction.backgroundColor = optionsMarkItem.tintColor
-
-        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
-      //  configuration.performsFirstActionWithFullSwipe = true // Tam kaydırma ile otomatik silme işlemini etkinleştirir
-
-        return configuration
-    } */
 }
 
 
