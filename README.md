@@ -3,7 +3,7 @@
 
 NoteCrypt, kullanıcıların notlarını kolayca oluşturup yönetebileceği, iOS platformu için geliştirilmiş bir uygulamadır. Core Data kullanarak notların yerel olarak saklanmasını sağlar ve kullanıcı arayüzü açısından oldukça sezgisel bir deneyim sunar.
 
-![Note List](https://i.imgur.com/K2rBqzT.png)
+![Note List](https://i.imgur.com/yiVWicM.png)
 
 
 ## Özellikler
@@ -14,7 +14,7 @@ NoteCrypt, kullanıcıların notlarını kolayca oluşturup yönetebileceği, iO
 - **Kaydırarak Silme**: Kullanıcılar, notları kaydırarak kolayca silebilir. Bu özellik, modern mobil kullanıcı arayüzlerinde beklenen bir işlevselliktir.
 - **Şifreleme & Güvenlik**: Notlar, güvenlik amacıyla şifrelenebilir. Bu özellik, kullanıcıların özel bilgilerini korumalarına yardımcı olur.
 
-![Note List Delete](https://i.imgur.com/fX275Q3.png)
+![Note List Delete](https://i.imgur.com/hltzAsM.png)
 
 ## Mimari ve Kod Yapısı
 
@@ -25,7 +25,7 @@ NoteCrypt, kullanıcıların notlarını kolayca oluşturup yönetebileceği, iO
 - **NoteDetailViewController**: Bir notun detaylı görünümünü yönetir. Kullanıcıların not içeriğini düzenlemelerine izin verir.
 - **SettingsController**: Uygulamanın ayarlar ekranını yönetir. Tema ve renk seçeneklerinin ayarlanmasını sağlar.
 
-![Note Content](https://i.imgur.com/K2rBqzT.png)
+![Note Content](https://i.imgur.com/CnanW5A.png)
 
 ### İletişim ve Veri Akışı
 
@@ -37,7 +37,7 @@ NoteCrypt, kullanıcıların notlarını kolayca oluşturup yönetebileceği, iO
 
 Uygulamanın kullanıcı arayüzü, modern ve sezgisel bir tasarıma sahiptir. Ana ekran, kullanıcıların notlarını hızlıca görebileceği ve yönetebileceği bir liste sunar. Her bir not ögesi, notun başlığını, kısa içeriğini ve oluşturulma/zaman bilgisini gösterir. Kullanıcılar, notlarına dokunarak detaylı görünüme geçebilir ve düzenleyebilir. Ayarlar ekranı, uygulamanın genel görünümünü kişiselleştirmek için seçenekler sunar.
 
-![Settings](https://i.imgur.com/4CiL7j4.png)
+![Settings](https://i.imgur.com/RWLTnMi.png)
 
 ## Diyagramlar
 
