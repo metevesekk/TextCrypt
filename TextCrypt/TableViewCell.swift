@@ -61,9 +61,6 @@ class TableViewCell: UITableViewCell {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCellTap(_:)))
         tapGesture.delegate = self
         containerView.addGestureRecognizer(tapGesture)
-        
-    /*    let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
-        containerView.addGestureRecognizer(longPressGesture) */
 
     }
 
